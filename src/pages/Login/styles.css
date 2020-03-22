@@ -1,0 +1,110 @@
+.loginScreen form {
+  width: 35%;
+  height: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+form .logo {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #043f5f;
+}
+
+form .logo img {
+  min-height: 250px;
+  min-width: 250px;
+  max-height: 250px;
+  max-width: 250px;
+}
+
+form .logo h4 {
+  font-weight: 400;
+}
+
+form p {
+  margin-top: 20px;
+  color: #043f5f;
+}
+
+form div {
+  width: 70%;
+  margin: 0 auto;
+}
+
+form input {
+  width: 100%;
+  height: 50px;
+  font-size: 22px;
+  padding: 20px;
+  border-radius: 10px;
+  border: none;
+}
+
+form a {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+}
+
+form button {
+  height: 55px;
+  width: 30%;
+  border-radius: 10px;
+  border: none;
+  background-color: #2e8fb0;
+  color: #fff;
+  margin: 0 auto;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+}
+
+form .error {
+  margin: 0;
+  font-size: 18px;
+  color: #e02121;
+}
+
+@media only screen and (max-width: 1366px) {
+  form .logo img {
+    min-height: 150px;
+    min-width: 150px;
+    max-height: 150px;
+    max-width: 150px;
+  }
+
+  form .logo h1 {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+
+  form .logo h4 {
+    font-size: 18px;
+  }
+
+  form input {
+    height: 40px;
+    border-radius: 8px;
+  }
+
+  form a {
+    font-size: 13px;
+  }
+
+  form button {
+    font-size: 18px;
+    height: 45px;
+  }
+
+  form .error {
+    font-size: 14px;
+  }
+}

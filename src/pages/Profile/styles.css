@@ -1,0 +1,75 @@
+.userFeed {
+  width: 35%;
+  height: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+  color: #043f5f;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.userFeed div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.userFeed div input[type="file"] {
+  display: none;
+}
+
+.userFeed img {
+  height: 35%;
+  width: 35%;
+}
+
+.userFeed h2 {
+  margin-bottom: 40px;
+}
+
+.userFeed p {
+  margin-bottom: 20px;
+}
+
+.userFeed button {
+  height: 55px;
+  width: 30%;
+  border-radius: 10px;
+  border: none;
+  background-color: #2e8fb0;
+  color: #fff;
+  margin: 0 auto;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.userFeed form {
+  width: 60%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.userFeed form .buttonGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonGroup button {
+  width: 50%;
+  margin-right: 5%;
+}
+
+.buttonGroup button#cancel {
+  margin-right: 0;
+  background-color: #b5b5b5;
+  color: rgba(0, 0, 0, 0.7);
+}
