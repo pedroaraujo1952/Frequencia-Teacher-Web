@@ -9,7 +9,7 @@ import Avatar from "../../assets/profile-user.png";
 
 import "./styles.css";
 
-export default class Home extends Component {
+export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.fileInput = React.createRef();
@@ -140,7 +140,7 @@ export default class Home extends Component {
     return (
       <div>
         {this.state.loading ? <Loading /> : null}
-        <Header />
+        <Header/>
         <div className="userFeed">
           <div>
             {this.state.edit ? (

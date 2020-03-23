@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
-import Profile from "./pages/Profile/Profile";
+//import Profile from "./pages/Profile/Profile";
 import { fire } from "./config/firebaseConfig";
 
 import "./styles.css";
@@ -17,7 +17,6 @@ export default class App extends Component {
 
   componentDidMount() {
     this.authListener();
-    console.log(this.state.user);
   }
 
   authListener() {
@@ -32,7 +31,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">{this.state.user ? <Profile /> : <Login />}</div>
+      <div className="App">{this.state.user ? <Home/> : <Login />}</div>
     );
   }
 }

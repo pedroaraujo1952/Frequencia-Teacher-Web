@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 150px;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  padding: 10px 40px 0 40px;
+  z-index: 2;
+  background-color: gray;
+} 
+  
+.backImage {
+  width: 100px;
+  margin-top: 3%;
+}
+
+.logoImage {
+  width: 100px;
+  margin-left: 20px;
+}
+
+.textoLogo h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 64px;
+  color: #043F5F;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.avatarImage {
+  width: 100px;
+  margin-top: 3%;
+}
