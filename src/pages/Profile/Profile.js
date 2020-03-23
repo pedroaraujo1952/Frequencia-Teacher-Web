@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { fire } from "../../config/firebaseConfig";
-import * as firebase from "firebase/app";
 
 import Header from "../../components/UserHeader/Header";
 import Loading from "../../components/Loading/Loading";
+
+import * as User from "../../controllers/User";
 
 import Avatar from "../../assets/profile-user.png";
 
@@ -36,27 +36,9 @@ export default class Home extends Component {
   }
 
   getUser = async () => {
-    let uid,
-      username,
-      email,
-      avatar = "";
+    var user = await User.getUser();
 
-    var user = await fire.auth().currentUser;
-    if (user) {
-      uid = user.uid;
-      username = user.displayName ? user.displayName : "Sem nome de usuário";
-      email = user.email;
-      avatar = user.photoURL;
-    }
-
-    const _user = {
-      uid: uid,
-      username: username,
-      email: email,
-      avatar: avatar
-    };
-
-    this.setState({ user: _user });
+    this.setState({ user });
   };
 
   handleChange = ev => {
@@ -68,45 +50,24 @@ export default class Home extends Component {
     this.setState({ edit: false, email: "", pswd: "", avatar: Avatar });
   };
 
-  reauthenticate = (email, password) => {
-    var user = firebase.auth().currentUser;
-
-    //Create the reauthentication credential
-    var credential = firebase.auth.EmailAuthProvider.credential(
-      this.state.email,
-      this.state.pswd
-    );
-
-    //Reauthenticate user to update data
-    return user.reauthenticateWithCredential(credential);
-  };
-
   handleConfirm = async ev => {
     ev.preventDefault();
 
     const state = this.state;
-
     this.setState({ loading: true });
-    console.log(state.avatar);
 
-    this.reauthenticate(state.email, state.pswd).then(() => {
-      var user = firebase.auth().currentUser;
-      user
-        .updateProfile({
-          displayName: "",
-          photoURL: ""
-        })
-        .then(() => {
-          this.setState({ loading: false });
+    User.reauthUser(state.email, state.pswd).then(() => {
+      User.updateUserProfile("Pedro Araujo", "").then(
+        hasLoaded => {
           window.location.reload();
-        })
-        .catch(error => {
+          this.setState({ loading: !hasLoaded });
+        },
+        error => {
           console.log(error);
           this.setState({ loading: false });
-        });
+        }
+      );
     });
-
-    console.log("ok");
   };
 
   //Not implemented with firebase yet

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 
 import Loading from "../../components/Loading/Loading";
-import { fire } from "../../config/firebaseConfig";
+import ForgotPassword from "../../components/ForgotPassword/Forgot";
+
+import * as User from "../../controllers/User";
 
 import Logo from "../../assets/Logok.png";
 
 import "./styles.css";
-import ForgotPassword from "../../components/ForgotPassword/Forgot";
 
 export default class Login extends Component {
   constructor(props) {
@@ -28,25 +29,32 @@ export default class Login extends Component {
   handleClick = async ev => {
     ev.preventDefault();
     this.setState({ loading: true });
-    await setTimeout(() => {
-      fire
-        .auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.pswd)
-        .then(this.setState({ loading: false }))
-        .catch(error => {
-          this.setState({ loading: false });
-          if (error.code === "auth/user-not-found") {
-            this.setState({
-              emailError: "Usuário não encontrado",
-              pswdError: ""
-            });
-          } else if (error.code === "auth/invalid-email") {
-            this.setState({ emailError: "Email inválido", pswdError: "" });
-          } else if (error.code === "auth/wrong-password") {
-            this.setState({ pswdError: "Senha inválida", emailError: "" });
-          }
-        });
-    }, 1200);
+
+    await User.login(this.state.email, this.state.pswd).then(
+      login => {},
+      error => {
+        if (error.type === "EMAIL_ERROR")
+          this.setState({
+            loading: false,
+            emailError: error.message,
+            pswdError: ""
+          });
+        else if (error.type === "PSWD_ERROR")
+          this.setState({
+            loading: false,
+            pswdError: error.message,
+            emailError: ""
+          });
+        else {
+          this.setState({
+            loading: false,
+            pswdError: "",
+            emailError: ""
+          });
+          alert(error);
+        }
+      }
+    );
   };
 
   handleChange = ev => {
@@ -66,30 +74,45 @@ export default class Login extends Component {
     ev.preventDefault();
 
     const { email } = this.state;
-    let message = "";
 
-    await fire
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(
-        (message = `Email enviado para ${email}\nVerifique sua caixa de mensagens`)
-      )
-      .catch(error => {
-        if (error.code === "auth/user-not-found") {
+    await User.forgotPassword(email).then(
+      message => {
+        this.setState({ popUpStats: false, emailRecoverError: "" });
+        alert(message);
+      },
+      error => {
+        if (error.type === "EMAIL_ERROR")
           this.setState({
-            emailRecoverError: "Usuário não encontrado"
+            emailRecoverError: error.message
           });
-          message = "";
-        } else if (error.code === "auth/invalid-email") {
-          this.setState({ emailRecoverError: "Email inválido" });
-          message = "";
+        else {
+          alert(error);
         }
-        message = "";
-      });
-    if (message.length > 2) {
-      alert(message);
-      this.setState({ popUpStats: false });
-    }
+      }
+    );
+
+    // await fire
+    //   .auth()
+    //   .sendPasswordResetEmail(email)
+    //   .then(
+    //     (message = `Email enviado para ${email}\nVerifique sua caixa de mensagens`)
+    //   )
+    //   .catch(error => {
+    //     if (error.code === "auth/user-not-found") {
+    //       this.setState({
+    //         emailRecoverError: "Usuário não encontrado"
+    //       });
+    //       message = "";
+    //     } else if (error.code === "auth/invalid-email") {
+    //       this.setState({ emailRecoverError: "Email inválido" });
+    //       message = "";
+    //     }
+    //     message = "";
+    //   });
+    // if (message.length > 2) {
+    //   alert(message);
+    //   this.setState({ popUpStats: false });
+    // }
   };
 
   render() {
