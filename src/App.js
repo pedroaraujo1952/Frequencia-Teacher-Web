@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Login from "./pages/Login/Login";
-import Home from "./pages/Home/Home";
+// import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import { fire } from "./config/firebaseConfig";
 

@@ -67,10 +67,11 @@ form button {
   font-size: 22px;
 }
 
-form .error {
+.error {
   margin: 0;
   font-size: 18px;
   color: #e02121;
+  text-align: start;
 }
 
 @media only screen and (max-width: 1366px) {

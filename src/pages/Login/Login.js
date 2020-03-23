@@ -6,6 +6,7 @@ import { fire } from "../../config/firebaseConfig";
 import Logo from "../../assets/Logok.png";
 
 import "./styles.css";
+import ForgotPassword from "../../components/ForgotPassword/Forgot";
 
 export default class Login extends Component {
   constructor(props) {
@@ -13,9 +14,14 @@ export default class Login extends Component {
     this.state = {
       email: "",
       emailError: "",
+      emailRecoverError: "",
+
       pswd: "",
       pswdError: "",
-      loading: false
+
+      loading: false,
+
+      popUpStats: false
     };
   }
 
@@ -47,10 +53,57 @@ export default class Login extends Component {
     this.setState({ [ev.target.name]: ev.target.value });
   };
 
+  handleForgotPassword = () => {
+    this.setState({ popUpStats: true });
+  };
+
+  handleClose = ev => {
+    ev.preventDefault();
+    this.setState({ popUpStats: false, emailRecoverError: "" });
+  };
+
+  handleChangePassword = async ev => {
+    ev.preventDefault();
+
+    const { email } = this.state;
+    let message = "";
+
+    await fire
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(
+        (message = `Email enviado para ${email}\nVerifique sua caixa de mensagens`)
+      )
+      .catch(error => {
+        if (error.code === "auth/user-not-found") {
+          this.setState({
+            emailRecoverError: "Usuário não encontrado"
+          });
+          message = "";
+        } else if (error.code === "auth/invalid-email") {
+          this.setState({ emailRecoverError: "Email inválido" });
+          message = "";
+        }
+        message = "";
+      });
+    if (message.length > 2) {
+      alert(message);
+      this.setState({ popUpStats: false });
+    }
+  };
+
   render() {
     return (
       <div className="loginScreen">
         {this.state.loading ? <Loading /> : null}
+        {this.state.popUpStats ? (
+          <ForgotPassword
+            handleClose={this.handleClose}
+            handleChange={this.handleChange}
+            handleChangePassword={this.handleChangePassword}
+            emailError={this.state.emailRecoverError}
+          />
+        ) : null}
         <form>
           <div className="logo">
             <img src={Logo} alt="" />
@@ -71,11 +124,12 @@ export default class Login extends Component {
             <input type="password" name="pswd" onChange={this.handleChange} />
             <p className="error">{this.state.pswdError}</p>
 
-            <p style={{ marginTop: "5px" }}>
-              {/* eslint-disable-next-line */}
-              <a href="" target="_blank">
-                Esqueci minha senha
-              </a>
+            <p
+              style={{ marginTop: "5px" }}
+              className="link"
+              onClick={this.handleForgotPassword}
+            >
+              Esqueci minha senha
             </p>
           </div>
 
