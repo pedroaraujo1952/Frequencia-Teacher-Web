@@ -47,7 +47,7 @@ form input {
   border: none;
 }
 
-form a {
+form .link {
   font-size: 18px;
   color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
@@ -96,7 +96,7 @@ form button {
     border-radius: 8px;
   }
 
-  form a {
+  form .link {
     font-size: 13px;
   }
 
