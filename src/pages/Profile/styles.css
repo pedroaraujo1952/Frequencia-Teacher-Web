@@ -26,6 +26,8 @@
 .userFeed img {
   height: 35%;
   width: 35%;
+  
+  margin-top: 100px;
 }
 
 .userFeed h2 {

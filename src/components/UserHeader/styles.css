@@ -3,12 +3,18 @@
   justify-content: space-between;
   align-items: center;
 
-  height: 100px;
+  height: 150px;
   position: fixed;
   top: 0;
   left: 0;
 
   padding: 10px 40px 0 40px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backImage {
+  width: 100px;
+  margin-top: 3%;
 }
 
 .header img {
