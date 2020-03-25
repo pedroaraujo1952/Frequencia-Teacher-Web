@@ -61,6 +61,44 @@ export default class Report extends Component {
     });
   };
 
+  handleAbsent = async () => {
+    const { students } = this.state;
+    var newStudents = [];
+
+    students.forEach(element => {
+      if (element.checkin === "Ausente" && element.checkout === "Ausente") {
+        newStudents.push(element);
+      }
+    });
+
+    this.setState({ students: newStudents });
+  };
+
+  handleLate = async () => {
+    const { students } = this.state;
+    var newStudents = [];
+
+    students.forEach(element => {
+      if (element.checkinStatus === false) {
+        newStudents.push(element);
+      }
+    });
+
+    this.setState({ students: newStudents });
+  };
+
+  handleFilterChange = ev => {
+    const value = ev.target.value;
+
+    if (value === "absent") {
+      this.handleAbsent();
+    } else if (value === "late") {
+      this.handleLate();
+    } else {
+      this.getData("3AI", "evento1");
+    }
+  };
+
   handleBack = ev => {
     ev.preventDefault();
     this.setState({ goHome: true });
@@ -95,8 +133,12 @@ export default class Report extends Component {
           <img src={Logo} alt="" /> <h1>Frequência</h1>
         </header>
         <div className="filter">
-          <select name="filter" defaultValue="default">
-            <option value="default" default disabled>
+          <select
+            name="filter"
+            defaultValue="default"
+            onChange={this.handleFilterChange}
+          >
+            <option value="default" default>
               Filtrar por
             </option>
             <option value="late">Atrasados</option>
