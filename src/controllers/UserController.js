@@ -114,3 +114,33 @@ export async function forgotPassword(email) {
       });
   });
 }
+
+export async function changeEmail(newEmail) {
+  const user = fire.auth().currentUser;
+
+  return new Promise((resolve, reject) => {
+    user
+      .updateEmail(newEmail)
+      .then(() => resolve(true))
+      .catch(error => {
+        //Error code validation
+        const ERROR = new Error(error);
+        reject(ERROR.getError);
+      });
+  });
+}
+
+export async function changePassword(newPsdw) {
+  const user = fire.auth().currentUser;
+
+  return new Promise((resolve, reject) => {
+    user
+      .updatePassword(newPsdw)
+      .then(() => resolve(true))
+      .catch(error => {
+        //Error code validation
+        const ERROR = new Error(error);
+        reject(ERROR.getError);
+      });
+  });
+}

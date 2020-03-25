@@ -39,6 +39,12 @@ export default class Error {
       case "auth/user-not-found":
         return "Usuário não encontrado";
 
+      case "auth/weak-password":
+        return "Senha fraca";
+
+      case "auth/email-already-in-use":
+        return "Este email já está em uso";
+
       case "auth/missing-continue-uri":
         return "Contate o administrador do sistema";
 

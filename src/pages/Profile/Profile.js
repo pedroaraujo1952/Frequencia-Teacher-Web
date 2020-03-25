@@ -9,6 +9,8 @@ import Avatar from "../../assets/profile-user.png";
 
 import "./styles.css";
 import { isLogged } from "../../services/auth";
+import { fire } from "../../config/firebaseConfig";
+import Error from "../../errors/user.error";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -21,11 +23,16 @@ export default class Profile extends Component {
       avatar: Avatar,
       avatarURL: null,
 
-      edit: false,
+      edit: null,
+
+      firstFieldTitle: "",
+      secondFieldTitle: "",
 
       email: "",
+      newEmail: "",
       emailError: "",
-      pswd: "",
+      password: "",
+      newPassword: "",
       pswdError: "",
 
       loading: false
@@ -49,7 +56,16 @@ export default class Profile extends Component {
 
   handleCancel = ev => {
     ev.preventDefault();
-    this.setState({ edit: false, email: "", pswd: "", avatar: Avatar });
+    this.setState({
+      edit: false,
+      email: "",
+      password: "",
+      newEmail: "",
+      newPassword: "",
+      emailError: "",
+      pswdError: "",
+      avatar: Avatar
+    });
   };
 
   handleConfirm = async ev => {
@@ -58,18 +74,109 @@ export default class Profile extends Component {
     const state = this.state;
     this.setState({ loading: true });
 
-    User.reauthUser(state.email, state.pswd).then(() => {
-      User.updateUserProfile("Pedro Araujo", "").then(
-        hasLoaded => {
-          window.location.reload();
-          this.setState({ loading: !hasLoaded });
-        },
-        error => {
-          console.log(error);
+    console.log(state);
+
+    var user = fire.auth().currentUser;
+
+    if (state.edit === "Email") {
+      User.reauthUser(user.email, state.password)
+        .then(() => {
+          User.changeEmail(state.newEmail).then(
+            hasLoaded => {
+              window.location.reload();
+              this.setState({ loading: !hasLoaded });
+            },
+            error => {
+              if (error.type === "EMAIL_ERROR")
+                this.setState({
+                  loading: false,
+                  emailError: error.message,
+                  pswdError: ""
+                });
+              else if (error.type === "PSWD_ERROR")
+                this.setState({
+                  loading: false,
+                  emailError: error.message,
+                  pswdError: ""
+                });
+              else {
+                this.setState({
+                  loading: false,
+                  pswdError: "",
+                  emailError: ""
+                });
+                alert(error);
+              }
+              this.setState({ loading: false });
+            }
+          );
+        })
+        .catch(error => {
+          const ERROR = new Error(error);
+          console.log(ERROR);
+          const errorObject = ERROR.getError;
+          if (errorObject.type === "PSWD_ERROR")
+            this.setState({
+              loading: false,
+              pswdError: errorObject.message,
+              emailError: ""
+            });
+          else {
+            this.setState({
+              loading: false,
+              pswdError: "",
+              emailError: ""
+            });
+            alert(errorObject);
+          }
           this.setState({ loading: false });
-        }
-      );
-    });
+        });
+    } else if (state.edit === "Password") {
+      User.reauthUser(user.email, state.password).then(() => {
+        User.changePassword(state.newPassword).then(
+          hasLoaded => {
+            window.location.reload();
+            this.setState({ loading: !hasLoaded });
+          },
+          error => {
+            if (error.type === "EMAIL_ERROR")
+              this.setState({
+                loading: false,
+                emailError: error.message,
+                pswdError: ""
+              });
+            else if (error.type === "PSWD_ERROR")
+              this.setState({
+                loading: false,
+                emailError: error.message,
+                pswdError: ""
+              });
+            else {
+              this.setState({
+                loading: false,
+                pswdError: "",
+                emailError: ""
+              });
+              alert(error);
+            }
+            this.setState({ loading: false });
+          }
+        );
+      });
+    }
+
+    // User.reauthUser(state.email, state.pswd).then(() => {
+    //   User.updateUserProfile("Pedro Araujo", "").then(
+    //     hasLoaded => {
+    //       window.location.reload();
+    //       this.setState({ loading: !hasLoaded });
+    //     },
+    //     error => {
+    //       console.log(error);
+    //       this.setState({ loading: false });
+    //     }
+    //   );
+    // });
   };
 
   //Not implemented with firebase yet
@@ -135,12 +242,20 @@ export default class Profile extends Component {
 
           {this.state.edit ? (
             <form>
-              <p>Email</p>
-              <input type="email" name="email" onChange={this.handleChange} />
+              <p>{this.state.firstFieldTitle}</p>
+              <input
+                type={this.state.edit}
+                name={`new${this.state.edit}`}
+                onChange={this.handleChange}
+              />
               <p className="error">{this.state.emailError}</p>
 
-              <p>Senha</p>
-              <input type="password" name="pswd" onChange={this.handleChange} />
+              <p>{this.state.secondFieldTitle}</p>
+              <input
+                type="password"
+                name="password"
+                onChange={this.handleChange}
+              />
               <p className="error">{this.state.pswdError}</p>
 
               <div className="buttonGroup">
@@ -159,10 +274,27 @@ export default class Profile extends Component {
               <button
                 onClick={ev => {
                   ev.preventDefault();
-                  this.setState({ edit: true });
+                  this.setState({
+                    edit: "Email",
+                    firstFieldTitle: "Novo Email",
+                    secondFieldTitle: "Senha atual"
+                  });
                 }}
               >
-                Editar Perfil
+                Alterar Email
+              </button>
+              <button
+                style={{ marginTop: "20px" }}
+                onClick={ev => {
+                  ev.preventDefault();
+                  this.setState({
+                    edit: "Password",
+                    firstFieldTitle: "Nova Senha",
+                    secondFieldTitle: "Senha Atual"
+                  });
+                }}
+              >
+                Alterar Senha
               </button>
             </div>
           )}
