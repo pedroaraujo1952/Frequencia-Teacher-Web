@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { fire } from "../../config/firebaseConfig";
+import { isLogged } from "../../services/auth";
 
 import Header from "../../components/HomeHeader/Header";
 import Loading from "../../components/Loading/Loading";
@@ -9,32 +10,31 @@ import Avatar from "../../assets/profile-user.png";
 import "./styles.css";
 
 class Class {
-    constructor(name_, events_) {
-        this.name = name_;
-        this.events = events_;
-    }
+  constructor(name_, events_) {
+    this.name = name_;
+    this.events = events_;
+  }
 }
 
 class Event {
-    constructor(
-        name_,
-        date_,
-        description_,
-        timeBegin_,
-        timeEnd_,
-        keyWord_,
-        frequence_
-    ){
-        this.name = name_;
-        this.date = date_;
-        this.description = description_;
-        this.timeBegin = timeBegin_;
-        this.timeEnd = timeEnd_;
-        this.keyWord = keyWord_;
-        this.frequence = frequence_;
-    }
+  constructor(
+    name_,
+    date_,
+    description_,
+    timeBegin_,
+    timeEnd_,
+    keyWord_,
+    frequence_
+  ) {
+    this.name = name_;
+    this.date = date_;
+    this.description = description_;
+    this.timeBegin = timeBegin_;
+    this.timeEnd = timeEnd_;
+    this.keyWord = keyWord_;
+    this.frequence = frequence_;
+  }
 }
-
 
 export default class Home extends Component {
   constructor(props) {
@@ -57,8 +57,17 @@ export default class Home extends Component {
     var classes = [];
     classes[0] = new Class("3ºAI", []);
     classes[1] = new Class("3ºBI", []);
-    classes[2] = new Class("3ºCI", [new Event(
-        "Ponto e Reta", "22/03/2020", "lalala lala lala lala", "07h10", "08h00", "Flor", null)]);
+    classes[2] = new Class("3ºCI", [
+      new Event(
+        "Ponto e Reta",
+        "22/03/2020",
+        "lalala lala lala lala",
+        "07h10",
+        "08h00",
+        "Flor",
+        null
+      )
+    ]);
 
     this.state = {
       user: null,
@@ -80,8 +89,8 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    isLogged();
     this.getUser();
-    console.log(this.state.user);
   }
 
   getUser = async () => {
@@ -155,79 +164,81 @@ export default class Home extends Component {
 
   render() {
     return (
-        <div>{this.state.loading ? <Loading /> : null}
-        <Header/>{/*<Header avatar={this.state.avatarURL}/>*/}
+      <div>
+        {this.state.loading ? <Loading /> : null}
+        <Header />
+        {/*<Header avatar={this.state.avatarURL}/>*/}
         <div className="homeFeed">
-            {this.state.classes.map((c) => (
-                <div className="rectanguleClass" key={c.name}>
-                    <div className="nameClass">
-                        <h1>{c.name}</h1>
+          {this.state.classes.map(c => (
+            <div className="rectanguleClass" key={c.name}>
+              <div className="nameClass">
+                <h1>{c.name}</h1>
+              </div>
+              <div className="events">
+                {c.events.map(e => (
+                  <div className="rectanguleEvent" key={e.name}>
+                    <div className="nameEvent">
+                      <h2>{e.name}</h2>
                     </div>
-                    <div className="events">
-                        {c.events.map((e) => (
-                            <div className="rectanguleEvent" key={e.name}>
-                                <div className="nameEvent">
-                                    <h2>{e.name}</h2>
-                                </div>
-                                <div className="dateEvent">
-                                    <h2>{e.date}</h2>
-                                </div>
-                                <div className="line"/>
-                                <div className="descriptionEvent">
-                                    <h2>Descrição: {e.description}</h2>
-                                </div>
-                                <div className="timeBeginEvent">
-                                    <h2>Início: {e.timeBegin}</h2>
-                                </div>
-                                <div className="timeEndEvent">
-                                    <h2>Fim: {e.timeEnd}</h2>
-                                </div>
-                                <div className="keyWordEvent">
-                                    <h2>Palavra-passe: {e.keyWord}</h2>
-                                </div>
-                                <div className="editEvent">
-                                    <button
-                                        /*onClick={ev => {
+                    <div className="dateEvent">
+                      <h2>{e.date}</h2>
+                    </div>
+                    <div className="line" />
+                    <div className="descriptionEvent">
+                      <h2>Descrição: {e.description}</h2>
+                    </div>
+                    <div className="timeBeginEvent">
+                      <h2>Início: {e.timeBegin}</h2>
+                    </div>
+                    <div className="timeEndEvent">
+                      <h2>Fim: {e.timeEnd}</h2>
+                    </div>
+                    <div className="keyWordEvent">
+                      <h2>Palavra-passe: {e.keyWord}</h2>
+                    </div>
+                    <div className="editEvent">
+                      <button
+                      /*onClick={ev => {
                                         ev.preventDefault();
                                         }*/
-                                    >
-                                    <h1>Editar evento</h1> 
-                                    </button>
-                                </div>
-                                <div className="deleteEvent">
-                                    <button
-                                        /*onClick={ev => {
+                      >
+                        <h1>Editar evento</h1>
+                      </button>
+                    </div>
+                    <div className="deleteEvent">
+                      <button
+                      /*onClick={ev => {
                                         ev.preventDefault();
                                         }*/
-                                    >
-                                    <h1>Excluir evento</h1> 
-                                    </button>
-                                </div>
-                                <div className="frequenceEvent">
-                                <button
-                                    /*onClick={ev => {
+                      >
+                        <h1>Excluir evento</h1>
+                      </button>
+                    </div>
+                    <div className="frequenceEvent">
+                      <button
+                      /*onClick={ev => {
                                     ev.preventDefault();
                                     }*/
-                                >
-                                <h1>Frequência</h1> 
-                                </button>
-                                </div>
-                            </div>
-                        ))}
+                      >
+                        <h1>Frequência</h1>
+                      </button>
                     </div>
-                    <div className="createEvent">
-                    <button
-                        /*onClick={ev => {
+                  </div>
+                ))}
+              </div>
+              <div className="createEvent">
+                <button
+                /*onClick={ev => {
                         ev.preventDefault();
                         }*/
-                    >
-                    <h1>+ Criar evento</h1> 
-                    </button>
-                    </div>
-                </div>
-            ))}
+                >
+                  <h1>+ Criar evento</h1>
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-        </div>
+      </div>
     );
   }
 }

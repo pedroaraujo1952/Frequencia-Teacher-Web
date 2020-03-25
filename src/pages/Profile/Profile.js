@@ -3,11 +3,12 @@ import React, { Component } from "react";
 import Header from "../../components/UserHeader/Header";
 import Loading from "../../components/Loading/Loading";
 
-import * as User from "../../controllers/User";
+import * as User from "../../controllers/UserController";
 
 import Avatar from "../../assets/profile-user.png";
 
 import "./styles.css";
+import { isLogged } from "../../services/auth";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
+    isLogged();
     this.getUser();
   }
 
@@ -101,7 +103,7 @@ export default class Profile extends Component {
     return (
       <div>
         {this.state.loading ? <Loading /> : null}
-        <Header/>
+        <Header />
         <div className="userFeed">
           <div>
             {this.state.edit ? (

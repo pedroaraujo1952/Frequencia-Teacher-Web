@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Loading from "../../components/Loading/Loading";
 import ForgotPassword from "../../components/ForgotPassword/Forgot";
 
-import * as User from "../../controllers/User";
+import * as User from "../../controllers/UserController";
 
 import Logo from "../../assets/Logok.png";
 

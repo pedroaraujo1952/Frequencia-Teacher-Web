@@ -1,0 +1,204 @@
+.report {
+  width: 100%;
+  height: 100%;
+  position: static;
+  overflow-y: hidden;
+}
+
+.report header {
+  height: 100px;
+  width: 30%;
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #043f5f;
+}
+
+header img {
+  max-width: 130px;
+  max-height: 130px;
+  min-width: 130px;
+  min-height: 130px;
+}
+
+.report .filter {
+  float: right;
+  height: 55px;
+  width: 250px;
+  margin-right: 5%;
+}
+
+.report .filter select {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  padding-left: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 550;
+}
+
+.report .filter option {
+  font-size: 10px;
+  width: 250px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 550;
+}
+
+.report .tableHeader {
+  height: 70px;
+  width: 90%;
+  margin: 105px auto;
+  margin-bottom: 30px;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #043f5f;
+}
+
+.tableHeader div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 150px;
+}
+
+.tableHeader h2 {
+  padding-top: 10px;
+  padding-left: 40px;
+}
+
+.tableHeader div h2 {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: auto;
+}
+
+.report .table {
+  height: 60%;
+  width: 90%;
+  margin: 0 auto;
+  padding: 40px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.vr {
+  height: 53%;
+  width: 1px;
+  border-left: 2px solid;
+  position: absolute;
+  left: 55%;
+  border: 0.01em solid #666666;
+}
+
+table {
+  height: 10px;
+}
+
+table tr {
+  height: 5px;
+}
+
+table td {
+  height: 5px;
+  padding-top: 0px;
+}
+
+table td:not(:first-child) {
+  width: 230px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 6%;
+  padding-left: 6%;
+}
+
+table td:first-child {
+  width: 64%;
+}
+
+table td#second-child {
+  width: 100px;
+  padding-left: 0px;
+  padding-right: 55px;
+}
+
+@media only screen and (max-width: 1366px) {
+  .report .filter {
+    float: right;
+    height: 50px;
+    width: 250px;
+    margin-right: 5%;
+  }
+
+  .report .filter select {
+    font-size: 16px;
+  }
+
+  .report .tableHeader {
+    font-size: 14px;
+    padding-top: 10px;
+  }
+
+  .report .tableHeader div {
+    padding-left: 500px;
+  }
+
+  .report .tableHeader h2 {
+    width: 200px;
+    padding-left: 60px;
+    padding-right: 20px;
+  }
+
+  .report .tableHeader h2#first {
+    /* margin-right: 10px; */
+    padding-left: 100px;
+    padding-right: 0;
+    text-align: end;
+  }
+
+  .report .tableHeader h2#second {
+    /* margin-right: 20px; */
+    padding-left: 40px;
+    text-align: end;
+  }
+
+  .report .tableHeader h2#third {
+    margin-right: 20px;
+    padding-left: 20px;
+  }
+
+  .report .table {
+    height: 50%;
+    padding: 20px;
+  }
+
+  .report .table .vr {
+    height: 43%;
+    margin: 15px 0;
+  }
+
+  table td:not(:first-child) {
+    width: 230px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 6%;
+    padding-left: 6%;
+  }
+
+  table td#second-child {
+    width: 100px;
+    padding-right: 55px;
+  }
+}

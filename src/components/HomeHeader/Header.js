@@ -6,12 +6,11 @@ import Logo from "../../assets/Logok.png";
 import Back from "../../assets/back.png";
 import Avatar from "../../assets/profile-user.png";
 
-import { Redirect } from 'react-router';
+import { Redirect } from "react-router";
 
 import "./styles.css";
 
 export default class Header extends Component {
- 
   constructor(props) {
     super(props);
     this.state = {
@@ -34,14 +33,13 @@ export default class Header extends Component {
     if (this.state.goProfile) {
       return <Redirect to="/profile" />;
     }
-    if(this.state.user) {
-      return <Redirect to="/"/>
+    if (this.state.user) {
+      return <Redirect to="/" />;
     }
-    return(
-        <div className="header">
-
-          <div className="backImage">
-            <img
+    return (
+      <div className="homeHeader">
+        <div className="backImage">
+          <img
             src={Back}
             alt="voltar"
             style={{
@@ -52,38 +50,38 @@ export default class Header extends Component {
               padding: "2px"
             }}
             onClick={this.logout}
-            />
-          </div>
-
-          <div className="logoImage">
-            <img 
-              src={Logo} 
-              alt=""
-              style={{
-                height: "130px",
-                width: "130px",
-                padding: "2px"
-              }} 
-            />
-          </div>
-
-          <div className="textoLogo"><h1>Turmas</h1></div>
-
-          <div className="avatarImage">
-            <img 
-              src={Avatar} 
-              alt="perfil"
-              style={{
-                height: "80px",
-                width: "80px",
-                padding: "2px"
-              }}
-              onClick={this.profile}
-            />
-          </div>
-
+          />
         </div>
-    );
-  }    
-}
 
+        <div className="logoImage">
+          <img
+            src={Logo}
+            alt=""
+            style={{
+              height: "130px",
+              width: "130px",
+              padding: "2px"
+            }}
+          />
+        </div>
+
+        <div className="textoLogo">
+          <h1>Turmas</h1>
+        </div>
+
+        <div className="avatarImage">
+          <img
+            src={Avatar}
+            alt="perfil"
+            style={{
+              height: "80px",
+              width: "80px",
+              padding: "2px"
+            }}
+            onClick={this.profile}
+          />
+        </div>
+      </div>
+    );
+  }
+}
