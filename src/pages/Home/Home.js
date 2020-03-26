@@ -6,6 +6,8 @@ import Loading from "../../components/Loading/Loading";
 
 import Avatar from "../../assets/profile-user.png";
 
+import { Redirect } from 'react-router';
+
 import "./styles.css";
 
 class Class {
@@ -75,7 +77,8 @@ export default class Home extends Component {
       pswdError: "",
 
       loading: false,
-      classes: classes
+      classes: classes,
+      new_event: false
     };
   }
 
@@ -154,6 +157,9 @@ export default class Home extends Component {
   };*/
 
   render() {
+    if(this.state.new_event) {
+      return <Redirect to="/create_event"/>
+    }
     return (
         <div>{this.state.loading ? <Loading /> : null}
         <Header/>{/*<Header avatar={this.state.avatarURL}/>*/}
@@ -217,9 +223,10 @@ export default class Home extends Component {
                     </div>
                     <div className="createEvent">
                     <button
-                        /*onClick={ev => {
-                        ev.preventDefault();
-                        }*/
+                        onClick={ev => {
+                          ev.preventDefault();
+                          this.setState({new_event: true});
+                        }}
                     >
                     <h1>+ Criar evento</h1> 
                     </button>
