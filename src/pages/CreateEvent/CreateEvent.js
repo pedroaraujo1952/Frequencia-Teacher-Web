@@ -136,47 +136,6 @@ export default class CreateEvent extends Component {
     this.setState({backHome: true});
   }
 
-  /*reauthenticate = (email, password) => {
-    var user = firebase.auth().currentUser;
-
-    //Create the reauthentication credential
-    var credential = firebase.auth.EmailAuthProvider.credential(
-      this.state.email,
-      this.state.pswd
-    );
-
-    //Reauthenticate user to update data
-    return user.reauthenticateWithCredential(credential);
-  };*/
-
-  /*handleConfirm = async ev => {
-    ev.preventDefault();
-
-    const state = this.state;
-
-    this.setState({ loading: true });
-    console.log(state.avatar);
-
-    this.reauthenticate(state.email, state.pswd).then(() => {
-      var user = firebase.auth().currentUser;
-      user
-        .updateProfile({
-          displayName: "",
-          photoURL: ""
-        })
-        .then(() => {
-          this.setState({ loading: false });
-          window.location.reload();
-        })
-        .catch(error => {
-          console.log(error);
-          this.setState({ loading: false });
-        });
-    });
-
-    console.log("ok");
-  };*/
-
   render() {
     if(this.state.backHome) {
       return <Redirect to="/"/>
