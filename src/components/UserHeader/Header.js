@@ -23,7 +23,7 @@ export default class Header extends Component {
 
   render() {
     if (this.state.goHome) {
-      return <Redirect to="/"/>;
+      return <Redirect to={{pathname: "/home"}}/>;
     }
     return(
       <div className="header">

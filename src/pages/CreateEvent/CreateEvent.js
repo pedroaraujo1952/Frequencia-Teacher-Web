@@ -9,12 +9,15 @@ import { Redirect } from 'react-router';
 
 import "./styles.css";
 
+var cont_keys, students = {};
+
 export default class CreateEvent extends Component {
+
   constructor(props) {
     super(props);
-
+    cont_keys = 0;
     this.state = {
-      user: null,
+      nameClass: this.props.nameClass,
       backHome: false,
       name: '',
       date: '',
@@ -25,45 +28,15 @@ export default class CreateEvent extends Component {
       minutesEnd: '',
       word: '',
       notifyHour: '',
-      keyWord: []
+      keyWord: ['','','']
     };
   }
-
-  componentDidMount() {
-    this.getUser();
-    console.log(this.state.user);
-  }
-
-  getUser = async () => {
-    let uid,
-      username,
-      email,
-      avatar = "";
-
-    var user = await fire.auth().currentUser;
-    if (user) {
-      uid = user.uid;
-      username = user.displayName ? user.displayName : "Sem nome de usuário";
-      email = user.email;
-      avatar = user.photoURL;
-    }
-
-    const _user = {
-      uid: uid,
-      username: username,   
-      email: email,
-      avatar: avatar
-    };
-
-    this.setState({ user: _user });
-  };
 
   handleAddWord = ev => {
     ev.preventDefault();
     var el = document.getElementsByClassName('warningNotifyHour');
     var h = parseInt(this.state.notifyHour.substring(0,2));
     var min = parseInt(this.state.notifyHour.substring(3,5));
-    console.log(h,min)
     if(
       this.state.word === '' ||
       this.state.notifyHour === '' ||
@@ -80,11 +53,11 @@ export default class CreateEvent extends Component {
       (h === parseInt(this.state.hourBegin) && min <= parseInt(this.state.minutesBegin))
     ) {
       el[0].style.display = 'block';
-    } else {
+    } else if(cont_keys !== 3) {
       el[0].style.display = 'none';
       var word = this.state.word + ', ' + this.state.notifyHour;
       const { keyWord } = this.state;
-      keyWord.push(word); 
+      keyWord[cont_keys++] = word; 
       this.setState({keyWord})
     }
   };
@@ -123,17 +96,63 @@ export default class CreateEvent extends Component {
       y !== 20 
     ) {
       el[0].style.display = 'block';
+    } else if(cont_keys === 0) {
+      el[0].style.display = 'block';
     } else {
       el[0].style.display = 'none';
+      this.sendEvent();
     } 
   }
 
-  sendEvent = ev => {
-    ev.preventDefault();
-    /*
-    Send to database
-    */
+  sendEvent = async () => {
     this.setState({backHome: true});
+    this.loadStudents();
+    var user = await fire.auth().currentUser;
+    var userId = user.uid;
+    var data = {
+      begin: this.state.hourBegin + 'h' + this.state.minutesBegin,
+      date: this.state.date,
+      description: this.state.description,
+      end: this.state.hourEnd + 'h' + this.state.minutesEnd,
+      keys: {'key1': this.state.keyWord[0], 'key2': this.state.keyWord[1], 'key3': this.state.keyWord[2]},
+      //First alternative to add students
+      students: students
+    };
+    fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass).push(data);
+    
+    // Second alternative to add students
+    /*var eventKey = '';
+    fire.database().ref('professores/' + userId + '/events/' + this.state.nameClass).on('value', function(snapshot) {
+      snapshot.forEach(function (event) {
+        if(data.date === event.val().date &&
+            data.description === event.val().description &&
+            data.begin === event.val().begin &&
+            data.end === event.val().end){
+              eventKey = event.key;
+            }
+      });
+    });
+    console.log(students, this.state.nameClass, eventKey);
+    fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass + '/' +  eventKey).push([{'students': students}]);*/
+  }
+
+  loadStudents() {
+    var students_list  = [];
+    var cont = 0;
+    fire.database().ref('salas/' + this.state.nameClass).on('value', function(snapshot) {
+      snapshot.forEach(function (value) {
+        var name = value.val().name;
+        students_list.push(name)
+        cont++;
+      })
+      for(var i=0;i<cont;i++){
+        var key = 'student' + i.toString();
+        students[key] = { 
+          'checkin': "", 'checkout': "", 
+          'keys': { 'key1': "", 'key2': "", 'key3': "" }, 
+          'name': students_list[i] };
+      }
+    });
   }
 
   render() {
@@ -142,7 +161,7 @@ export default class CreateEvent extends Component {
     }
     return (
         <div>{this.state.loading ? <Loading /> : null}
-            <Header/>{/*<Header avatar={this.state.avatarURL}/>*/}
+            <Header/>
             <div className="newEvent">
                 <div className="title">
                     <h1>Título</h1>
@@ -200,8 +219,8 @@ export default class CreateEvent extends Component {
                     />
                     <h2 name="button" onClick={this.handleAddWord}>+</h2>
                     <div className="words">
-                        {this.state.keyWord.map((k) => (
-                            <h2 key={k}>{k}</h2>
+                        {this.state.keyWord.map((k,index) => (
+                            <h2 key={index}>{k}</h2>
                         ))}
                     </div>
                 </div>
@@ -218,7 +237,10 @@ export default class CreateEvent extends Component {
                   <h2 name="msgWarning">*Preencha todos os campos corretamente</h2>
                 </div>
                 <div className="cancelButton">
-                    <button onClick={this.sendEvent}>
+                    <button onClick={ ev => {
+                        ev.preventDefault();
+                        this.setState({backHome: true});
+                    }}>
                     <h2>Cancelar</h2> 
                     </button>
                 </div>
