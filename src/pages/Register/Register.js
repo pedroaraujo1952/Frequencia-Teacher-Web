@@ -130,8 +130,11 @@ export default class Register extends Component {
                   name: "",
                   subject: "",
                   pswd: "",
+                  pswdError: "",
                   pswdConfirm: "",
-                  email: ""
+                  pswdConfirmError: "",
+                  email: "",
+                  emailError: ""
                 })
               }
             />
