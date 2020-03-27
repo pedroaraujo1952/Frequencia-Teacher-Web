@@ -8,6 +8,7 @@ import * as User from "../../controllers/UserController";
 import Logo from "../../assets/Logok.png";
 
 import "./styles.css";
+import { NavLink } from "react-router-dom";
 
 export default class Login extends Component {
   constructor(props) {
@@ -147,13 +148,34 @@ export default class Login extends Component {
             <input type="password" name="pswd" onChange={this.handleChange} />
             <p className="error">{this.state.pswdError}</p>
 
-            <p
-              style={{ marginTop: "5px" }}
-              className="link"
-              onClick={this.handleForgotPassword}
+            <div
+              className="linksContainer"
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                margin: "0"
+              }}
             >
-              Esqueci minha senha
-            </p>
+              <p
+                style={{ marginTop: "5px" }}
+                className="link"
+                onClick={this.handleForgotPassword}
+              >
+                Esqueci minha senha
+              </p>
+
+              <NavLink
+                style={{ marginTop: "5px", textAlign: "end" }}
+                activeClassName="link"
+                className="link"
+                onClick={this.handleForgotPassword}
+                to="/signup"
+              >
+                Cadastrar
+              </NavLink>
+            </div>
           </div>
 
           <button onClick={this.handleClick}>Entrar</button>

@@ -31,7 +31,7 @@ export default class Header extends Component {
 
   render() {
     if (this.state.goProfile) {
-      return <Redirect to="/report" />;
+      return <Redirect to="/profile" />;
     }
     if (this.state.user) {
       return <Redirect to="/" />;

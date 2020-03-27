@@ -9,7 +9,7 @@
   z-index: 1;
 }
 
-form .logo {
+.logo {
   width: 90%;
   display: flex;
   justify-content: center;
@@ -17,14 +17,14 @@ form .logo {
   color: #043f5f;
 }
 
-form .logo img {
+.logo img {
   min-height: 250px;
   min-width: 250px;
   max-height: 250px;
   max-width: 250px;
 }
 
-form .logo h4 {
+.logo h4 {
   font-weight: 400;
 }
 
@@ -94,6 +94,12 @@ form button {
   form input {
     height: 40px;
     border-radius: 8px;
+  }
+
+  div .linksContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   form .link {

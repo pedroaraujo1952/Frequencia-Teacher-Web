@@ -45,6 +45,12 @@ export default class Error {
       case "auth/email-already-in-use":
         return "Este email já está em uso";
 
+      case "auth/operation-not-allowed":
+        return "Contate o administrador do sistema";
+
+      case "auth/wrong-confirm-password":
+        return "Por favor, verifique se as senhas inseridas estão corretas";
+
       case "auth/missing-continue-uri":
         return "Contate o administrador do sistema";
 

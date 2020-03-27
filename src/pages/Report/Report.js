@@ -62,6 +62,7 @@ export default class Report extends Component {
   };
 
   handleAbsent = async () => {
+    await this.getData("3AI", "evento1");
     const { students } = this.state;
     var newStudents = [];
 
@@ -75,6 +76,7 @@ export default class Report extends Component {
   };
 
   handleLate = async () => {
+    await this.getData("3AI", "evento1");
     const { students } = this.state;
     var newStudents = [];
 

@@ -1,7 +1,55 @@
 import * as firebase from "firebase/app";
 
-import { fire } from "../config/firebaseConfig";
+import { fire, database } from "../config/firebaseConfig";
 import Error from "../errors/user.error";
+
+export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
+  return new Promise((resolve, reject) => {
+    if (pswd === pswdConfirm) {
+      const user = {
+        name: name,
+        subject: subject,
+        email: email
+      };
+
+      fire
+        .auth()
+        .createUserWithEmailAndPassword(email, pswd)
+        .then(() => {
+          const uid = fire.auth().currentUser.uid;
+
+          database
+            .ref(`professores/${uid}`)
+            .set(user)
+            .then(() => {
+              updateUserName(name).then(
+                () => resolve(true),
+                error => {
+                  fire.auth().currentUser.delete();
+                  const ERROR = new Error(error);
+                  reject(ERROR.getError);
+                }
+              );
+            })
+            .catch(error => {
+              fire.auth().currentUser.delete();
+              const ERROR = new Error(error);
+              reject(ERROR.getError);
+            });
+        })
+        .catch(error => {
+          const ERROR = new Error(error);
+          reject(ERROR.getError);
+        });
+    } else {
+      const error = {
+        code: "auth/wrong-confirm-password"
+      };
+      const ERROR = new Error(error);
+      reject(ERROR.getError);
+    }
+  });
+}
 
 export async function getUser() {
   return new Promise((resolve, reject) => {
