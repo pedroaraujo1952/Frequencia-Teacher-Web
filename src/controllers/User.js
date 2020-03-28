@@ -1,7 +1,16 @@
 import * as firebase from "firebase/app";
 
-import { fire } from "../config/firebaseConfig";
+import { fire, database } from "../config/firebaseConfig";
 import Error from "../errors/user.error";
+
+export async function getSubject(uid) {
+  return new Promise((resolve, reject) => {
+    database.ref(`professores/${uid}/subject`).once("value", snap => {
+      console.log(snap.val());
+      resolve(snap.val());
+    });
+  });
+}
 
 export async function getUser() {
   return new Promise((resolve, reject) => {
