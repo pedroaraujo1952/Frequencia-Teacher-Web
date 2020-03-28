@@ -135,38 +135,29 @@ export default class CreateEvent extends Component {
       date: this.state.date,
       description: this.state.description,
       end: this.state.hourEnd + 'h' + this.state.minutesEnd,
-      keys: {'key1': this.state.keyWord[0], 'key2': this.state.keyWord[1], 'key3': this.state.keyWord[2]},
-      //students: {}
+      keys: {'key1': this.state.keyWord[0], 'key2': this.state.keyWord[1], 'key3': this.state.keyWord[2]}
     };
-    //await this.loatStudents(data);
     if(!this.props.editEvent){
-      console.log('criar');
-      fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass).push(data);
+      var eventKey = '';
+      eventKey = (await fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass).push(data)).key;
+      this.loatStudents(eventKey, userId);
     } else{
-      console.log('editar');
-      console.log(this.state)
       fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass + '/' + this.state.key).set(data);
     }
   }
 
-  loatStudents = async (data) => {
-    var cont = 0;
-    var students_list = [];
+  loatStudents = async (eventKey, userId) => {
+    var nameClass = this.state.nameClass;
     fire.database().ref('salas/' + this.state.nameClass).on('value', function(snapshot) {
-      snapshot.forEach(function (value) {
-        var name = value.val().name;
-        students_list.push(name)
-        cont++;
-      })
-      for(var i=0;i<cont;i++){
-        var key = "student" + i.toString();
-        var obj = {
-          checkin: "", checkout: "", 
+      snapshot.forEach(async function(value) {
+        var data = {
+          checkin: "", 
+          checkout: "", 
           keys: {key1: "", key2: "", key3: ""}, 
-          name: students_list[i] 
+          name: value.val().name
         }
-        data.students[key] = obj;
-      }
+        await fire.database().ref().child('professores/' + userId + '/events/' + nameClass + '/' + eventKey + '/students').push(data);
+      });
     });
   }
 

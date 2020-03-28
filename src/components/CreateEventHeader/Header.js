@@ -14,7 +14,6 @@ export default class Header extends Component {
   }
 
   componentWillMount = () => {
-    console.log(this.props)
     this.setState({
       text: this.props.info
     })
