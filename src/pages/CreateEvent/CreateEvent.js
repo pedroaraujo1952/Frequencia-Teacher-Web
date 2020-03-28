@@ -3,13 +3,12 @@ import { fire } from "../../config/firebaseConfig";
 import MaskedInput from 'react-text-mask';
 
 import Header from "../../components/CreateEventHeader/Header";
-import Loading from "../../components/Loading/Loading";
 
 import { Redirect } from 'react-router';
 
 import "./styles.css";
 
-var cont_keys, students = {};
+var cont_keys;
 
 export default class CreateEvent extends Component {
 
@@ -106,39 +105,24 @@ export default class CreateEvent extends Component {
 
   sendEvent = async () => {
     this.setState({backHome: true});
-    this.loadStudents();
-    var user = await fire.auth().currentUser;
+    var user = fire.auth().currentUser;
     var userId = user.uid;
     var data = {
+      title: this.state.name,
       begin: this.state.hourBegin + 'h' + this.state.minutesBegin,
       date: this.state.date,
       description: this.state.description,
       end: this.state.hourEnd + 'h' + this.state.minutesEnd,
       keys: {'key1': this.state.keyWord[0], 'key2': this.state.keyWord[1], 'key3': this.state.keyWord[2]},
-      //First alternative to add students
-      students: students
+      students: {}
     };
+    await this.loatStudents(data);
     fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass).push(data);
-    
-    // Second alternative to add students
-    /*var eventKey = '';
-    fire.database().ref('professores/' + userId + '/events/' + this.state.nameClass).on('value', function(snapshot) {
-      snapshot.forEach(function (event) {
-        if(data.date === event.val().date &&
-            data.description === event.val().description &&
-            data.begin === event.val().begin &&
-            data.end === event.val().end){
-              eventKey = event.key;
-            }
-      });
-    });
-    console.log(students, this.state.nameClass, eventKey);
-    fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass + '/' +  eventKey).push([{'students': students}]);*/
   }
 
-  loadStudents() {
-    var students_list  = [];
+  loatStudents = async (data) => {
     var cont = 0;
+    var students_list = [];
     fire.database().ref('salas/' + this.state.nameClass).on('value', function(snapshot) {
       snapshot.forEach(function (value) {
         var name = value.val().name;
@@ -146,11 +130,13 @@ export default class CreateEvent extends Component {
         cont++;
       })
       for(var i=0;i<cont;i++){
-        var key = 'student' + i.toString();
-        students[key] = { 
-          'checkin': "", 'checkout': "", 
-          'keys': { 'key1': "", 'key2': "", 'key3': "" }, 
-          'name': students_list[i] };
+        var key = "student" + i.toString();
+        var obj = {
+          checkin: "", checkout: "", 
+          keys: {key1: "", key2: "", key3: ""}, 
+          name: students_list[i] 
+        }
+        data.students[key] = obj;
       }
     });
   }
@@ -160,7 +146,7 @@ export default class CreateEvent extends Component {
       return <Redirect to="/"/>
     }
     return (
-        <div>{this.state.loading ? <Loading /> : null}
+        <div>
             <Header/>
             <div className="newEvent">
                 <div className="title">

@@ -64,8 +64,7 @@ export default class Home extends Component {
     };
   }
 
-  componentDidMount() {
-    try {
+  loadClasses() {
     var userId = fire.auth().currentUser.uid;
     var cont = 0;
     var { classes } = this.state;
@@ -75,7 +74,7 @@ export default class Home extends Component {
           fire.database().ref('professores/' + userId + '/events/' + nameClass.key).on('value', function(snapshot) {
             snapshot.forEach(function (event) {
                 if(event.key !== 'evento0'){
-                    var name = "Aula";
+                    var name = event.val().title;
                     var date = event.val().date;
                     var description = event.val().description;
                     var timeBegin = event.val().begin;
@@ -103,6 +102,11 @@ export default class Home extends Component {
       })
     });
     this.setState({classes});
+  }
+
+  componentWillMount() {
+    try {
+        this.loadClasses();
     } catch (e) {
         fire.auth().signOut();
         this.setState({goLogin: true});
@@ -122,14 +126,14 @@ export default class Home extends Component {
         {this.state.new_event ? <CreateEvent nameClass={new_event_class}/> :
         <div><Header/>
         <div className="homeFeed">
-            {this.state.classes.map((c) => (
-                <div className="rectanguleClass" key={c.name}>
+            {this.state.classes.map((c, index) => (
+                <div className="rectanguleClass" key={index}>
                     <div className="nameClass">
                         <h1>{c.name}</h1>
                     </div>
                     <div className="events">
-                        {c.events.map((e) => (
-                            <div className="rectanguleEvent" key={e.name}>
+                        {c.events.map((e, index) => (
+                            <div className="rectanguleEvent" key={index}>
                                 <div className="nameEvent">
                                     <h2>{e.name}</h2>
                                 </div>
@@ -149,11 +153,13 @@ export default class Home extends Component {
                                 <div className="keyWordEvent">
                                     <h2>Palavra-passe: {e.keyWord}</h2>
                                 </div>
-                                <div className="editEvent">
-                                    <button>
+                                {/*<div className="editEvent">
+                                    <button  onClick={ ev => {
+                                        ev.preventDefault();
+                                    }}>
                                     <h1>Editar evento</h1> 
                                     </button>
-                                </div>
+                                </div>*/}
                                 <div className="deleteEvent">
                                     <button onClick={ ev => {
                                         ev.preventDefault();
@@ -170,11 +176,7 @@ export default class Home extends Component {
                                     </button>
                                 </div>
                                 <div className="frequenceEvent">
-                                <button
-                                    /*onClick={ev => {
-                                    ev.preventDefault();
-                                    }*/
-                                >
+                                <button>
                                 <h1>Frequência</h1> 
                                 </button>
                                 </div>
@@ -193,8 +195,8 @@ export default class Home extends Component {
                 </div>
             ))}
         </div>
-        </div>}
         </div>
+    }</div>
     );
   }
 }
