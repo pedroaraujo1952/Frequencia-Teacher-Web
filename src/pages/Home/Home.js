@@ -39,7 +39,7 @@ class Event {
     }
 }
 
-var new_event_class = "";
+var new_event_class = "", editEvent = false, eventToEdit = new Event();
 
 export default class Home extends Component {
   constructor(props) {
@@ -123,7 +123,10 @@ export default class Home extends Component {
     }
     return (
         <div>
-        {this.state.new_event ? <CreateEvent nameClass={new_event_class}/> :
+        {this.state.new_event ? <CreateEvent 
+                                    nameClass={new_event_class} 
+                                    editEvent={editEvent}
+                                    eventToEdit={eventToEdit}/> :
         <div><Header/>
         <div className="homeFeed">
             {this.state.classes.map((c, index) => (
@@ -153,13 +156,17 @@ export default class Home extends Component {
                                 <div className="keyWordEvent">
                                     <h2>Palavra-passe: {e.keyWord}</h2>
                                 </div>
-                                {/*<div className="editEvent">
+                                <div className="editEvent">
                                     <button  onClick={ ev => {
                                         ev.preventDefault();
+                                        this.setState({new_event: true});
+                                        new_event_class = c.name;
+                                        editEvent = true;
+                                        eventToEdit = e;
                                     }}>
                                     <h1>Editar evento</h1> 
                                     </button>
-                                </div>*/}
+                                </div>
                                 <div className="deleteEvent">
                                     <button onClick={ ev => {
                                         ev.preventDefault();

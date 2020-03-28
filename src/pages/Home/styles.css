@@ -165,10 +165,10 @@
     margin-top: 116px;
 }
 
-/*.rectanguleEvent .editEvent {
+.rectanguleEvent .editEvent {
     height: 0px;
     position: absolute;
-}*/
+}*
 
 .rectanguleEvent .deleteEvent {
     height: 0px;
@@ -180,7 +180,7 @@
     position: absolute;
 }
 
-/*.rectanguleEvent .editEvent button {
+.rectanguleEvent .editEvent button {
     width: 45%;
     height: 50px;
     background: #2E8FB0;
@@ -188,7 +188,7 @@
 
     margin-left: 25%;
     margin-top: 180px;
-}*/
+}
 
 .rectanguleEvent .deleteEvent button {
     width: 45%;
@@ -196,7 +196,7 @@
     background: #FF6262;
     border-radius: 10px;
 
-    margin-left: 100%;
+    margin-left: 125%;
     margin-top: 180px;
 }
 
@@ -206,7 +206,7 @@
     background: #2E8FB0;
     border-radius: 10px;
 
-    margin-left: 50%;
+    margin-left: 75%;
     margin-top: 180px;
 }
 
