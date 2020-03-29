@@ -38,14 +38,15 @@ export default class CreateEvent extends Component {
   componentWillMount = async () => {
     if (this.props.editEvent) {
       this.setState({
-        name: this.props.eventToEdit.name,
+        name: this.props.eventToEdit.title,
         date: this.props.eventToEdit.date,
         description: this.props.eventToEdit.description,
-        key: this.props.eventToEdit.key,
-        hourBegin: this.props.eventToEdit.timeBegin.substring(0, 2),
-        minutesBegin: this.props.eventToEdit.timeBegin.substring(3, 5),
-        hourEnd: this.props.eventToEdit.timeEnd.substring(0, 2),
-        minutesEnd: this.props.eventToEdit.timeEnd.substring(3, 5),
+        key: this.props.eventToEdit.keys,
+        link: this.props.eventToEdit.link,
+        hourBegin: this.props.eventToEdit.begin.substring(0, 2),
+        minutesBegin: this.props.eventToEdit.begin.substring(3, 5),
+        hourEnd: this.props.eventToEdit.end.substring(0, 2),
+        minutesEnd: this.props.eventToEdit.end.substring(3, 5),
         info: "Editar evento"
       });
     } else {
@@ -156,12 +157,22 @@ export default class CreateEvent extends Component {
           <div className="title">
             <div>
               <h1>Título</h1>
-              <input type="text" name="name" onChange={this.handleChange} />
+              <input
+                type="text"
+                name="name"
+                onChange={this.handleChange}
+                defaultValue={this.state.name}
+              />
             </div>
 
             <div>
               <h1>Link do Meeting</h1>
-              <input type="text" name="link" onChange={this.handleChange} />
+              <input
+                type="text"
+                name="link"
+                onChange={this.handleChange}
+                defaultValue={this.state.link}
+              />
             </div>
           </div>
           <div className="timeBegin">
@@ -170,12 +181,14 @@ export default class CreateEvent extends Component {
               name="hourBegin"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.hourBegin}
             />
             <h2 name="h">h</h2>
             <MaskedInput
               name="minutesBegin"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.minutesBegin}
             />
             <h2 name="min">min</h2>
           </div>
@@ -185,12 +198,14 @@ export default class CreateEvent extends Component {
               name="hourEnd"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.hourEnd}
             />
             <h2 name="h">h</h2>
             <MaskedInput
               name="minutesEnd"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.minutesEnd}
             />
             <h2 name="min">min</h2>
           </div>
@@ -200,6 +215,7 @@ export default class CreateEvent extends Component {
               name="date"
               mask={[/[0-9]/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.date}
             />
           </div>
           <div className="keyWords">
@@ -236,11 +252,16 @@ export default class CreateEvent extends Component {
               type="text"
               name="description"
               onChange={this.handleChange}
+              defaultValue={this.state.description}
             />
           </div>
           <div className="buttonGroup">
             <div className="saveButton">
-              <button onClick={this.verify}>
+              <button
+                onClick={
+                  this.props.editEvent ? this.handleEditEvent : this.verify
+                }
+              >
                 <h2>Salvar</h2>
               </button>
             </div>
