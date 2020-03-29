@@ -60,7 +60,8 @@ export default class Home extends Component {
 
       loading: false,
       classes: [],
-      new_event: false
+      new_event: false,
+      reportState: null
     };
   }
 
@@ -93,6 +94,12 @@ export default class Home extends Component {
   render() {
     if (this.state.goLogin) {
       return <Redirect to={{ pathname: "/" }} />;
+    }
+
+    if (this.state.reportState) {
+      return (
+        <Redirect to={{ pathname: "/report", state: this.state.reportState }} />
+      );
     }
     return (
       <div>
@@ -166,7 +173,18 @@ export default class Home extends Component {
                           </button>
                         </div>
                         <div className="frequenceEvent">
-                          <button>
+                          <button
+                            onClick={ev => {
+                              ev.preventDefault();
+
+                              const reportState = {
+                                classroom: c.name,
+                                id: e.id
+                              };
+
+                              this.setState({ reportState });
+                            }}
+                          >
                             <h1>Frequência</h1>
                           </button>
                         </div>

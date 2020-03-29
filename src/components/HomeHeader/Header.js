@@ -35,7 +35,7 @@ export default class Header extends Component {
     if (this.state.goProfile) {
       return <Redirect to={{ pathname: "/profile" }} />;
     }
-    if (this.state.user) {
+    if (this.state.logout) {
       return <Redirect to="/" />;
     }
     return (
