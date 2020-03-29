@@ -1,220 +1,227 @@
 .homeFeed {
-    width: 35%;
-    height: auto;
-    position: absolute;
-    top: 15%;
-    z-index: 1;
-    left: 12%;
+  width: 35%;
+  height: auto;
+  position: absolute;
+  top: 15%;
+  z-index: 1;
+  left: 12%;
 }
 
 .rectanguleClass {
-    width: 210%;
-    min-height: 135px;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+  width: 210%;
+  min-height: 135px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 
-    margin-top: 100px;
-    margin-bottom: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .createEvent {
-    height: 100px;
+  height: 100px;
 }
 
 .nameClass h1 {
-    width: 197px;
-    height: 40px;
-    padding-top: 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 64px;
-    color: #043F5F;
+  width: 197px;
+  height: 40px;
+  padding-top: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 64px;
+  color: #043f5f;
 
-    margin-left: 36px;
+  margin-left: 36px;
 }
 
-.createEvent button{
-    width: 344px;
-    height: 60px;
-    left: 1022px;
-    top: 205px;
-    background: #2E8FB0;
-    border-radius: 10px;
+.createEvent button {
+  width: 344px;
+  height: 60px;
+  left: 1022px;
+  top: 205px;
+  background: #2e8fb0;
+  border-radius: 10px;
 
-    float: right;
-    margin-right: 22px; 
+  float: right;
+  margin-right: 22px;
 }
 
 .createEvent button h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 36px;
-    line-height: 48px;
-    color: #FFFFFF;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 48px;
+  color: #ffffff;
 }
 
 .rectanguleEvent {
-    width: 95%;
-    height: 243px;
-    background: #E1E7DD;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 18px;
+  width: 95%;
+  height: 243px;
+  background: #e1e7dd;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
 
-    margin-top: 80px;
-    margin-left: 35px;
-    margin-bottom: 30px;
+  margin-top: 80px;
+  margin-left: 35px;
+  margin-bottom: 30px;
 }
 
 .rectanguleEvent .nameEvent {
-    height: 0px;
-    position: absolute;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 43px;
-    color: rgba(0, 0, 0, 0.6);
+  height: 0px;
+  position: absolute;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 43px;
+  color: rgba(0, 0, 0, 0.6);
 
-    padding-top: 14px;
-    padding-left: 27px;
+  padding-top: 14px;
+  padding-left: 27px;
 }
 
 .rectanguleEvent .dateEvent {
-    height: 0px;
-    width: 200%;
-    position: absolute;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 37px;
-    color: rgba(0, 0, 0, 0.6);
-    text-align: right;
+  height: 0px;
+  width: 200%;
+  position: absolute;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 37px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: right;
 
-    padding-top: 14px;
-    padding-right: 40px;
+  padding-top: 14px;
+  padding-right: 40px;
 }
 
 .rectanguleEvent .line {
-    position: absolute;
-    width: 190%;
-    height: 0px;
-    border: 1px solid #666666;
+  position: absolute;
+  width: 190%;
+  height: 0px;
+  border: 1px solid #666666;
 
-    margin-left: 27px;
-    margin-top: 61px;
+  margin-left: 27px;
+  margin-top: 61px;
 }
 
 .rectanguleEvent .descriptionEvent {
-    height: 0px;
-    position: absolute;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+  height: 0px;
+  position: absolute;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
 
-    margin-left: 27px;
-    margin-top: 72px;
+  margin-left: 27px;
+  margin-top: 72px;
 }
 
 .rectanguleEvent .timeBeginEvent {
-    height: 0px;
-    width: 160%;
-    position: absolute;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
-    text-align: right;
+  height: 0px;
+  width: 160%;
+  position: absolute;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: right;
 
-    padding-right: 45px;
-    margin-top: 72px;
+  padding-right: 45px;
+  margin-top: 72px;
 }
 
 .rectanguleEvent .timeEndEvent {
-    height: 0px;
-    width: 200%;
-    position: absolute;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
-    text-align: right;
+  height: 0px;
+  width: 200%;
+  position: absolute;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: right;
 
-    padding-right: 45px;
-    margin-top: 72px;
+  padding-right: 45px;
+  margin-top: 72px;
 }
 
 .rectanguleEvent .keyWordEvent {
-    height: 0px;
-    position: absolute;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+  height: 0px;
+  position: absolute;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
 
-    margin-left: 27px;
-    margin-top: 116px;
+  margin-left: 27px;
+  margin-top: 116px;
 }
 
 .rectanguleEvent .editEvent {
-    height: 0px;
-    position: absolute;
-}*
-
-.rectanguleEvent .deleteEvent {
-    height: 0px;
-    position: absolute;
+  height: 0px;
+  position: absolute;
+}
+* .rectanguleEvent .deleteEvent {
+  height: 0px;
+  position: absolute;
 }
 
 .rectanguleEvent .frequenceEvent {
-    height: 0px;
-    position: absolute;
+  height: 0px;
+  position: absolute;
 }
 
 .rectanguleEvent .editEvent button {
-    width: 45%;
-    height: 50px;
-    background: #2E8FB0;
-    border-radius: 10px;
+  width: 45%;
+  height: 50px;
+  background: #2e8fb0;
+  border-radius: 10px;
 
-    margin-left: 25%;
-    margin-top: 180px;
+  margin-left: 25%;
+  margin-top: 180px;
 }
 
 .rectanguleEvent .deleteEvent button {
-    width: 45%;
-    height: 50px;
-    background: #FF6262;
-    border-radius: 10px;
+  width: 45%;
+  height: 50px;
+  background: #ff6262;
+  border-radius: 10px;
 
-    margin-left: 125%;
-    margin-top: 180px;
+  margin-left: 125%;
+  margin-top: 180px;
 }
 
 .rectanguleEvent .frequenceEvent button {
-    width: 45%;
-    height: 50px;
-    background: #2E8FB0;
-    border-radius: 10px;
+  width: 45%;
+  height: 50px;
+  background: #2e8fb0;
+  border-radius: 10px;
 
-    margin-left: 75%;
-    margin-top: 180px;
+  margin-left: 75%;
+  margin-top: 180px;
 }
 
 .rectanguleEvent button h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 40px;
-    color: #FFFFFF;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 40px;
+  color: #ffffff;
+}
+
+.descriptionEvent h2 {
+  width: 500px;
+  height: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
