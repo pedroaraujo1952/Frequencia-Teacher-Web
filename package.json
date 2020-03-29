@@ -18,8 +18,8 @@
   },
   "scripts": {
     "start": "env-cmd -f ./.env.development react-scripts start",
-    "build": "env-cmd -f ./.env.development react-scripts start",
-    "test": "env-cmd -f ./.env.development react-scripts start",
+    "build": "env-cmd -f ./.env.development react-scripts build",
+    "test": "env-cmd -f ./.env.development react-scripts eject",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

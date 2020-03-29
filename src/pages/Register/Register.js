@@ -169,7 +169,9 @@ export default class Register extends Component {
           />
           <p className="error">{this.state.pswdError}</p>
 
-          <button onClick={this.handleSignup}>CADASTRAR</button>
+          <button onClick={this.handleSignup} style={{ fontSize: "14px" }}>
+            CADASTRAR
+          </button>
         </form>
       </div>
     );

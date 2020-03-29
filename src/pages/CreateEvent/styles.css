@@ -335,3 +335,13 @@
   justify-content: space-between;
   align-items: center;
 }
+
+@media only screen and (max-width: 1366px) {
+  .newEvent .title {
+    width: 74%;
+  }
+
+  .newEvent .description {
+    width: 67%;
+  }
+}

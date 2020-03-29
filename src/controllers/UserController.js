@@ -10,7 +10,123 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
       const user = {
         name: name,
         subject: subject,
-        email: email
+        email: email,
+        events: {
+          "3AI": {
+            evento0: {
+              begin: " ",
+              date: " ",
+              description: " ",
+              end: " ",
+              keys: {
+                key1: "",
+                key2: "",
+                key3: ""
+              },
+              link: "https://meet.google.com/jyi-fkvd-gih",
+              students: {
+                student0: {
+                  checkin: "",
+                  checkout: "",
+                  keys: {
+                    key1: "",
+                    key2: "",
+                    key3: ""
+                  },
+                  name: ""
+                },
+                student1: {
+                  checkin: "",
+                  checkout: "",
+                  keys: {
+                    key1: "",
+                    key2: "",
+                    key3: ""
+                  },
+                  name: ""
+                }
+              },
+              subject: "Matematica",
+              title: " "
+            }
+          },
+          "3BI": {
+            evento0: {
+              begin: " ",
+              date: " ",
+              description: " ",
+              end: " ",
+              keys: {
+                key1: "",
+                key2: "",
+                key3: ""
+              },
+              link: "https://meet.google.com/jyi-fkvd-gih",
+              students: {
+                student0: {
+                  checkin: "",
+                  checkout: "",
+                  keys: {
+                    key1: "",
+                    key2: "",
+                    key3: ""
+                  },
+                  name: ""
+                },
+                student1: {
+                  checkin: "",
+                  checkout: "",
+                  keys: {
+                    key1: "",
+                    key2: "",
+                    key3: ""
+                  },
+                  name: ""
+                }
+              },
+              subject: "Matematica",
+              title: " "
+            }
+          },
+          "3CI": {
+            evento0: {
+              begin: " ",
+              date: " ",
+              description: " ",
+              end: " ",
+              keys: {
+                key1: "",
+                key2: "",
+                key3: ""
+              },
+              link: "https://meet.google.com/jyi-fkvd-gih",
+              students: {
+                student0: {
+                  checkin: "",
+                  checkout: "",
+                  keys: {
+                    key1: "",
+                    key2: "",
+                    key3: ""
+                  },
+                  name: ""
+                },
+                student1: {
+                  checkin: "",
+                  checkout: "",
+                  keys: {
+                    key1: "",
+                    key2: "",
+                    key3: ""
+                  },
+                  name: ""
+                }
+              },
+              subject: "Matematica",
+              title: " "
+            }
+          }
+        }
       };
 
       fire

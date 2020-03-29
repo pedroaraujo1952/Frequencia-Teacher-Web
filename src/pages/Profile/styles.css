@@ -69,8 +69,8 @@
   align-items: center;
 }
 
-.buttonGroup button {
-  width: 50%;
+.userFeed .buttonGroup button {
+  /* width: 50%; */
   margin-right: 5%;
 }
 
