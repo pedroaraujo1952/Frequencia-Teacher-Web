@@ -1,0 +1,331 @@
+.newEvent {
+  height: auto;
+  position: absolute;
+  top: 18%;
+  z-index: 1;
+  left: 6%;
+}
+
+.newEvent h1 {
+  width: 355px;
+  height: 52px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 43px;
+  color: #043f5f;
+}
+
+.title {
+  width: 52%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title input {
+  width: 400px;
+  height: 51px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 43px;
+  color: #043f5f;
+
+  padding-left: 20px;
+}
+
+.timeBegin {
+  margin-top: 28px;
+  height: 0px;
+  position: absolute;
+}
+
+.timeBegin input {
+  width: 119px;
+  height: 51px;
+  border: none;
+  background: #ffffff;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 43px;
+  color: #043f5f;
+  text-align: center;
+}
+
+.timeBegin h2 {
+  width: 19px;
+  height: 43px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 43px;
+  color: #043f5f;
+}
+
+.timeBegin input[name="hourBegin"] {
+  position: absolute;
+}
+
+.timeBegin h2[name="h"] {
+  position: absolute;
+  margin-left: 130px;
+}
+
+.timeBegin h2[name="min"] {
+  position: absolute;
+  margin-left: 300px;
+}
+
+.timeBegin input[name="minutesBegin"] {
+  position: absolute;
+  margin-left: 170px;
+}
+
+.timeEnd {
+  position: absolute;
+  height: 0px;
+  margin-left: 500px;
+  margin-top: 28px;
+}
+
+.timeEnd input {
+  width: 119px;
+  height: 51px;
+  border: none;
+  background: #ffffff;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 43px;
+  color: #043f5f;
+  text-align: center;
+}
+
+.timeEnd h2 {
+  width: 19px;
+  height: 43px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 43px;
+  color: #043f5f;
+}
+
+.timeEnd input[name="hourEnd"] {
+  position: absolute;
+}
+
+.timeEnd h2[name="h"] {
+  position: absolute;
+  margin-left: 130px;
+}
+
+.timeEnd h2[name="min"] {
+  position: absolute;
+  margin-left: 300px;
+}
+
+.timeEnd input[name="minutesEnd"] {
+  position: absolute;
+  margin-left: 170px;
+}
+
+.date {
+  margin-top: 150px;
+}
+
+.date input {
+  width: 430px;
+  height: 51px;
+  background: #ffffff;
+  border: 0px;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 43px;
+  color: #043f5f;
+  padding-left: 20px;
+}
+
+.keyWords h1 {
+  margin-top: 20px;
+}
+
+.keyWords input[name="word"] {
+  position: absolute;
+  width: 228px;
+  height: 51px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  padding-left: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 43px;
+  color: rgba(4, 63, 95, 0.69);
+  margin-top: 10px;
+}
+
+.keyWords input[name="word"]::placeholder {
+  color: rgba(4, 63, 95, 0.69);
+}
+
+.keyWords input[name="notifyHour"] {
+  position: absolute;
+  width: 228px;
+  height: 51px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-left: 250px;
+  border: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 43px;
+  color: rgba(4, 63, 95, 0.69);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.keyWords input[name="notifyHour"]::placeholder {
+  color: rgba(4, 63, 95, 0.69);
+  font-size: 20px;
+}
+
+.keyWords h2[name="button"] {
+  position: absolute;
+  height: 0px;
+  margin-left: 500px;
+  font-size: 50px;
+  color: #043f5f;
+}
+
+.keyWords h2[name="button"]:hover {
+  cursor: pointer;
+}
+
+.words {
+  margin-top: 75px;
+  margin-left: 20px;
+}
+
+.words h2 {
+  font-size: 24px;
+  width: 300px;
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 37px;
+  color: #043f5f;
+}
+
+.description {
+  width: 48%;
+  height: 200px;
+  margin-top: 10px;
+}
+
+.description input {
+  height: 119px;
+  border: none;
+  background: #ffffff;
+  border-radius: 8px;
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 43px;
+  color: #043f5f;
+  padding-left: 20px;
+}
+
+.saveButton button {
+  width: 242px;
+  height: 64px;
+  background: #2e8fb0;
+  border-radius: 10px;
+}
+
+.saveButton button h2 {
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  color: #ffffff;
+  padding-top: 5px;
+}
+
+.cancelButton,
+.saveButton {
+  width: auto;
+}
+
+.cancelButton button {
+  width: 242px;
+  height: 64px;
+  background: #b5b5b5;
+  border-radius: 10px;
+  margin-bottom: 100px;
+}
+
+.cancelButton button h2 {
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  color: rgba(0, 0, 0, 0.7);
+  padding-top: 5px;
+}
+
+.warning {
+  height: 0px;
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 250px;
+  display: none;
+}
+
+.warning h2[name="msgWarning"] {
+  color: red;
+  font-size: 24px;
+}
+
+.warningNotifyHour {
+  height: 0px;
+  position: absolute;
+  margin-left: 250px;
+  margin-top: 20px;
+  display: none;
+}
+
+.warningNotifyHour h2[name="msgWarning"] {
+  color: red;
+  font-size: 24px;
+}
+
+.newEvent .buttonGroup {
+  height: 64px;
+  width: 48%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

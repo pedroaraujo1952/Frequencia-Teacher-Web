@@ -15,6 +15,7 @@ export default class Header extends Component {
     super(props);
     this.state = {
       goProfile: false,
+      logout: false,
       user: null
     };
   }
@@ -22,6 +23,7 @@ export default class Header extends Component {
   logout = ev => {
     ev.preventDefault();
     fire.auth().signOut();
+    this.setState({ logout: true });
   };
 
   profile = ev => {
@@ -31,7 +33,7 @@ export default class Header extends Component {
 
   render() {
     if (this.state.goProfile) {
-      return <Redirect to="/profile" />;
+      return <Redirect to={{ pathname: "/profile" }} />;
     }
     if (this.state.user) {
       return <Redirect to="/" />;

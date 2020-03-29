@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
 import Login from "./pages/Login/Login";
-import Home from "./pages/Home/Home";
 import { fire } from "./config/firebaseConfig";
+
+import { Redirect } from 'react-router';
 
 import "./styles.css";
 
@@ -29,6 +30,6 @@ export default class App extends Component {
   }
 
   render() {
-    return <div className="App">{this.state.user ? <Home /> : <Login />}</div>;
+    return <div className="App">{this.state.user ? <Redirect to={{pathname: "/home"}}/> : <Login />}</div>;
   }
 }
