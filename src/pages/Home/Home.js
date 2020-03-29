@@ -42,7 +42,9 @@ class Event {
   }
 }
 
-var new_event_class = "";
+var new_event_class = "",
+  editEvent = false,
+  eventToEdit = new Event();
 
 export default class Home extends Component {
   constructor(props) {
@@ -99,7 +101,11 @@ export default class Home extends Component {
     return (
       <div>
         {this.state.new_event ? (
-          <CreateEvent nameClass={new_event_class} />
+          <CreateEvent
+            nameClass={new_event_class}
+            editEvent={editEvent}
+            eventToEdit={eventToEdit}
+          />
         ) : (
           <div>
             {this.state.loading ? <Loading /> : null}
@@ -135,13 +141,19 @@ export default class Home extends Component {
                             {e.keys["key3"]}
                           </h2>
                         </div>
-                        {/*<div className="editEvent">
-                                    <button  onClick={ ev => {
-                                        ev.preventDefault();
-                                    }}>
-                                    <h1>Editar evento</h1> 
-                                    </button>
-                                </div>*/}
+                        <div className="editEvent">
+                          <button
+                            onClick={ev => {
+                              ev.preventDefault();
+                              this.setState({ new_event: true });
+                              new_event_class = c.name;
+                              editEvent = true;
+                              eventToEdit = e;
+                            }}
+                          >
+                            <h1>Editar evento</h1>
+                          </button>
+                        </div>
                         <div className="deleteEvent">
                           <button
                             onClick={ev => {

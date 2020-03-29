@@ -29,9 +29,31 @@ export default class CreateEvent extends Component {
       minutesEnd: "",
       word: "",
       notifyHour: "",
-      keyWord: ["", "", ""]
+      keyWord: ["", "", ""],
+      key: "",
+      info: ""
     };
   }
+
+  componentWillMount = async () => {
+    if (this.props.editEvent) {
+      this.setState({
+        name: this.props.eventToEdit.name,
+        date: this.props.eventToEdit.date,
+        description: this.props.eventToEdit.description,
+        key: this.props.eventToEdit.key,
+        hourBegin: this.props.eventToEdit.timeBegin.substring(0, 2),
+        minutesBegin: this.props.eventToEdit.timeBegin.substring(3, 5),
+        hourEnd: this.props.eventToEdit.timeEnd.substring(0, 2),
+        minutesEnd: this.props.eventToEdit.timeEnd.substring(3, 5),
+        info: "Editar evento"
+      });
+    } else {
+      this.setState({
+        info: "Novo evento"
+      });
+    }
+  };
 
   handleAddWord = ev => {
     ev.preventDefault();
@@ -109,6 +131,18 @@ export default class CreateEvent extends Component {
       error => this.setState({ backHome: true })
     );
     this.setState({ backHome: true });
+
+    // if(!this.props.editEvent){
+    //   var eventKey = '';
+    //   eventKey = (await fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass).push(data)).key;
+    //   this.loatStudents(eventKey, userId);
+    // } else{
+    //   fire.database().ref().child('professores/' + userId + '/events/' + this.state.nameClass + '/' + this.state.key).set(data);
+    // }
+  };
+
+  handleEditEvent = async () => {
+    console.log(this.props.editEvent);
   };
 
   render() {
