@@ -1,4 +1,10 @@
+.newEventBody {
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
 .newEvent {
+  width: 100%;
   height: auto;
   position: absolute;
   top: 18%;

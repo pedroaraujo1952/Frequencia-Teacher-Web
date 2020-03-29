@@ -18,7 +18,9 @@ export async function getClasses(snapshot) {
           end: event.val().end,
           keys: event.val().keys,
           students: event.val().students,
-          title: event.val().title
+          title: event.val().title,
+          subject: event.val().subject,
+          link: event.val().link
         };
         if (event.key !== "evento0") className.events.push(EVENT);
       });

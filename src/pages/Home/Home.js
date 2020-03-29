@@ -15,7 +15,31 @@ import * as Event from "../../controllers/EventController";
 import "./styles.css";
 import Loading from "../../components/Loading/Loading";
 
-var new_event_class = "";
+class Events {
+  constructor(
+    name_,
+    date_,
+    description_,
+    timeBegin_,
+    timeEnd_,
+    keyWord_,
+    students_,
+    key_
+  ) {
+    this.name = name_;
+    this.date = date_;
+    this.description = description_;
+    this.timeBegin = timeBegin_;
+    this.timeEnd = timeEnd_;
+    this.keyWord = keyWord_;
+    this.students = students_;
+    this.key = key_;
+  }
+}
+
+var new_event_class = "",
+  editEvent = false,
+  eventToEdit = new Events();
 
 export default class Home extends Component {
   constructor(props) {
@@ -42,6 +66,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     try {
+      editEvent = false;
       this.loadClasses();
     } catch (e) {
       fire.auth().signOut();
@@ -72,7 +97,11 @@ export default class Home extends Component {
     return (
       <div>
         {this.state.new_event ? (
-          <CreateEvent nameClass={new_event_class} />
+          <CreateEvent
+            nameClass={new_event_class}
+            editEvent={editEvent}
+            eventToEdit={eventToEdit}
+          />
         ) : (
           <div>
             {this.state.loading ? <Loading /> : null}
@@ -104,17 +133,23 @@ export default class Home extends Component {
                         </div>
                         <div className="keyWordEvent">
                           <h2>
-                            Palavra-passe: {e.keys["key1"]}, {e.keys["key2"]},{" "}
-                            {e.keys["key3"]}
+                            Palavra-passe: {e.keys["key1"].key},{" "}
+                            {e.keys["key2"].key}, {e.keys["key3"].key}
                           </h2>
                         </div>
-                        {/*<div className="editEvent">
-                                    <button  onClick={ ev => {
-                                        ev.preventDefault();
-                                    }}>
-                                    <h1>Editar evento</h1> 
-                                    </button>
-                                </div>*/}
+                        <div className="editEvent">
+                          <button
+                            onClick={ev => {
+                              ev.preventDefault();
+                              this.setState({ new_event: true });
+                              new_event_class = c.name;
+                              editEvent = true;
+                              eventToEdit = e;
+                            }}
+                          >
+                            <h1>Editar evento</h1>
+                          </button>
+                        </div>
                         <div className="deleteEvent">
                           <button
                             onClick={async ev => {

@@ -29,9 +29,35 @@ export default class CreateEvent extends Component {
       minutesEnd: "",
       word: "",
       notifyHour: "",
-      keyWord: ["", "", ""]
+      keyWord: ["", "", ""],
+      notifTime: ["", "", ""],
+      key: "",
+      info: ""
     };
   }
+
+  componentWillMount = async () => {
+    if (this.props.editEvent) {
+      this.setState({
+        id: this.props.eventToEdit.id,
+        name: this.props.eventToEdit.title,
+        date: this.props.eventToEdit.date,
+        description: this.props.eventToEdit.description,
+        students: this.props.eventToEdit.students,
+        key: this.props.eventToEdit.keys,
+        link: this.props.eventToEdit.link,
+        hourBegin: this.props.eventToEdit.begin.substring(0, 2),
+        minutesBegin: this.props.eventToEdit.begin.substring(3, 5),
+        hourEnd: this.props.eventToEdit.end.substring(0, 2),
+        minutesEnd: this.props.eventToEdit.end.substring(3, 5),
+        info: "Editar evento"
+      });
+    } else {
+      this.setState({
+        info: "Novo evento"
+      });
+    }
+  };
 
   handleAddWord = ev => {
     ev.preventDefault();
@@ -59,9 +85,12 @@ export default class CreateEvent extends Component {
     } else if (cont_keys !== 3) {
       el[0].style.display = "none";
       var word = this.state.word;
-      const { keyWord } = this.state;
-      keyWord[cont_keys++] = word;
-      this.setState({ keyWord });
+      var notif = this.state.notifyHour;
+      const { keyWord, notifTime } = this.state;
+      keyWord[cont_keys] = word;
+      notifTime[cont_keys] = notif;
+      cont_keys++;
+      this.setState({ keyWord, notifTime });
     }
   };
 
@@ -111,23 +140,41 @@ export default class CreateEvent extends Component {
     this.setState({ backHome: true });
   };
 
+  handleEditEvent = async () => {
+    await Event.updateEvent(this.state).then(
+      () => {},
+      error => this.setState({ backHome: true })
+    );
+    this.setState({ backHome: true });
+  };
+
   render() {
     if (this.state.backHome) {
       return <Redirect to="/" />;
     }
     return (
-      <div>
+      <div className="newEventBody">
         <Header />
         <div className="newEvent">
           <div className="title">
             <div>
               <h1>Título</h1>
-              <input type="text" name="name" onChange={this.handleChange} />
+              <input
+                type="text"
+                name="name"
+                onChange={this.handleChange}
+                defaultValue={this.state.name}
+              />
             </div>
 
             <div>
               <h1>Link do Meeting</h1>
-              <input type="text" name="link" onChange={this.handleChange} />
+              <input
+                type="text"
+                name="link"
+                onChange={this.handleChange}
+                defaultValue={this.state.link}
+              />
             </div>
           </div>
           <div className="timeBegin">
@@ -136,12 +183,14 @@ export default class CreateEvent extends Component {
               name="hourBegin"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.hourBegin}
             />
             <h2 name="h">h</h2>
             <MaskedInput
               name="minutesBegin"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.minutesBegin}
             />
             <h2 name="min">min</h2>
           </div>
@@ -151,12 +200,14 @@ export default class CreateEvent extends Component {
               name="hourEnd"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.hourEnd}
             />
             <h2 name="h">h</h2>
             <MaskedInput
               name="minutesEnd"
               mask={[/[0-9]/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.minutesEnd}
             />
             <h2 name="min">min</h2>
           </div>
@@ -166,6 +217,7 @@ export default class CreateEvent extends Component {
               name="date"
               mask={[/[0-9]/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/]}
               onChange={this.handleChange}
+              defaultValue={this.state.date}
             />
           </div>
           <div className="keyWords">
@@ -202,11 +254,16 @@ export default class CreateEvent extends Component {
               type="text"
               name="description"
               onChange={this.handleChange}
+              defaultValue={this.state.description}
             />
           </div>
           <div className="buttonGroup">
             <div className="saveButton">
-              <button onClick={this.verify}>
+              <button
+                onClick={
+                  this.props.editEvent ? this.handleEditEvent : this.verify
+                }
+              >
                 <h2>Salvar</h2>
               </button>
             </div>
