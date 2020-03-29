@@ -60,46 +60,10 @@ export default class Register extends Component {
             emailError: "",
             pswdConfirmError: ""
           });
-          alert(error);
+          alert(error.message);
         }
       }
     );
-
-    // const { name, subject, email, pswd, pswdConfirm } = this.state;
-
-    // if (pswd === pswdConfirm) {
-    //   const user = {
-    //     name: name,
-    //     subject: subject,
-    //     email: email
-    //   };
-
-    //   await fire
-    //     .auth()
-    //     .createUserWithEmailAndPassword(email, pswd)
-    //     .then(async () => {
-    //       const uid = await fire.auth().currentUser.uid;
-
-    //       await database
-    //         .ref(`professores/${uid}`)
-    //         .set(user)
-    //         .then(async () => {
-    //           await User.updateUserName(name).then(
-    //             stats => this.setState({ stats: stats, loading: false }),
-    //             err => {
-    //               alert(err);
-    //               this.setState({ loading: false });
-    //             }
-    //           );
-    //         });
-    //     })
-    //     .catch(err => {
-    //       alert(err);
-    //       this.setState({ loading: false });
-    //     });
-    // } else {
-    //   console.log("senha n bate");
-    // }
   };
 
   render() {

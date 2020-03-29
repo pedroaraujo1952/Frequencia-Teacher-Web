@@ -6,7 +6,13 @@ import Error from "../errors/user.error";
 
 export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
   return new Promise((resolve, reject) => {
-    if (pswd === pswdConfirm) {
+    // if (!email.includes("@fmm.org")) {
+    //   const error = {
+    //     code: "auth/unauthorized-domain"
+    //   };
+    //   const ERROR = new Error(error);
+    //   reject(ERROR.getError);
+    /*} else*/ if (pswd === pswdConfirm) {
       const user = {
         name: name,
         subject: subject,
@@ -23,7 +29,7 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
                 key2: "",
                 key3: ""
               },
-              link: "https://meet.google.com/jyi-fkvd-gih",
+              link: "",
               students: {
                 student0: {
                   checkin: "",
@@ -61,7 +67,7 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
                 key2: "",
                 key3: ""
               },
-              link: "https://meet.google.com/jyi-fkvd-gih",
+              link: "",
               students: {
                 student0: {
                   checkin: "",
@@ -99,7 +105,7 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
                 key2: "",
                 key3: ""
               },
-              link: "https://meet.google.com/jyi-fkvd-gih",
+              link: "",
               students: {
                 student0: {
                   checkin: "",

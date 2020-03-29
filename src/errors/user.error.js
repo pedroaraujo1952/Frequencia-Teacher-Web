@@ -60,6 +60,9 @@ export default class Error {
       case "auth/unauthorized-continue-uri":
         return "Contate o administrador do sistema";
 
+      case "auth/unauthorized-domain":
+        return "Você está tentando criar um conta com um domínio não permitido\nCaso você não seja professor, esta aplicação não é pra você";
+
       default:
         return "Contate o administrador do sistema";
     }
