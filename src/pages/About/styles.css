@@ -1,0 +1,38 @@
+.aboutUs {
+  position: fixed;
+}
+
+.aboutUs header {
+  height: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutUs h4,
+.aboutUs p,
+.aboutUs .body {
+  height: auto;
+  width: auto;
+}
+
+.aboutUs .body {
+  width: 800px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  text-align: center;
+  line-height: 53px;
+  color: #043f5f;
+}
+
+.aboutUs .designers {
+  margin-bottom: 25%;
+}

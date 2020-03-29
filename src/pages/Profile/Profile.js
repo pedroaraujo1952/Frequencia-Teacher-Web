@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+import { fire } from "../../config/firebaseConfig";
+import { isLogged } from "../../services/auth";
+import Error from "../../errors/user.error";
+
 import Header from "../../components/UserHeader/Header";
 import Loading from "../../components/Loading/Loading";
 
@@ -8,9 +12,6 @@ import * as User from "../../controllers/UserController";
 import Avatar from "../../assets/profile-user.png";
 
 import "./styles.css";
-import { isLogged } from "../../services/auth";
-import { fire } from "../../config/firebaseConfig";
-import Error from "../../errors/user.error";
 
 export default class Profile extends Component {
   constructor(props) {

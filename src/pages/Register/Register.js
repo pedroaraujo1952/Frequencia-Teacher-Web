@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+
+import * as User from "../../controllers/UserController";
+
+import Loading from "../../components/Loading/Loading";
 
 import Logo from "../../assets/Logok.png";
 import Back from "../../assets/back.png";
 
 import "./styles.css";
-import { fire, database } from "../../config/firebaseConfig";
-import * as User from "../../controllers/UserController";
-import { Redirect } from "react-router-dom";
-import Loading from "../../components/Loading/Loading";
 
 export default class Register extends Component {
   constructor() {

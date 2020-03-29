@@ -25,7 +25,10 @@ export default class Report extends Component {
 
   componentDidMount() {
     isLogged();
-    this.getData("3AI", "evento1");
+    this.getData(
+      this.props.location.state.classroom,
+      this.props.location.state.id
+    );
   }
 
   getEvents = async () => {};
@@ -46,8 +49,14 @@ export default class Report extends Component {
         const studentObject = element.val();
         const student = {
           name: studentObject["name"],
-          checkin: studentObject["checkin"],
-          checkout: studentObject["checkout"],
+          checkin:
+            studentObject["checkin"] === ""
+              ? "Ausente"
+              : studentObject["checkin"],
+          checkout:
+            studentObject["checkout"] === ""
+              ? "Ausente"
+              : studentObject["checkout"],
           key: Students.validateKey(element.child("keys")),
           checkinStatus: Students.validateTime(
             event["begin"],

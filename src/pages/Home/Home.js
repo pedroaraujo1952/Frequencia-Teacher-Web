@@ -1,22 +1,19 @@
 import React, { Component } from "react";
-import { fire } from "../../config/firebaseConfig";
-import { isLogged } from "../../services/auth";
+import { Redirect } from "react-router";
 
+import { fire } from "../../config/firebaseConfig";
 import Header from "../../components/HomeHeader/Header";
 import Loading from "../../components/Loading/Loading";
+import CreateEvent from "../CreateEvent/CreateEvent";
+
+import * as Class from "../../controllers/ClassController";
+import * as Event from "../../controllers/EventController";
 
 import Avatar from "../../assets/profile-user.png";
 
 import "./styles.css";
 
-class Class {
-  constructor(name_, events_) {
-    this.name = name_;
-    this.events = events_;
-  }
-}
-
-class Event {
+class Events {
   constructor(
     name_,
     date_,
@@ -24,7 +21,8 @@ class Event {
     timeBegin_,
     timeEnd_,
     keyWord_,
-    frequence_
+    students_,
+    key_
   ) {
     this.name = name_;
     this.date = date_;
@@ -32,46 +30,21 @@ class Event {
     this.timeBegin = timeBegin_;
     this.timeEnd = timeEnd_;
     this.keyWord = keyWord_;
-    this.frequence = frequence_;
+    this.students = students_;
+    this.key = key_;
   }
 }
+
+var new_event_class = "",
+  editEvent = false,
+  eventToEdit = new Events();
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
-    /*
-    Understanding the model:
-
-    1. Create a class using new Class
-        
-        1.1. Parameters: class name and related events
-        
-        1.2. Create an event using new Event
-            
-            1.2.1. Parameters: event's name, date, description, 
-                            start time, end time, key word, 
-                            and related students (to do) 
-    */
-
-    var classes = [];
-    classes[0] = new Class("3ºAI", []);
-    classes[1] = new Class("3ºBI", []);
-    classes[2] = new Class("3ºCI", [
-      new Event(
-        "Ponto e Reta",
-        "22/03/2020",
-        "lalala lala lala lala",
-        "07h10",
-        "08h00",
-        "Flor",
-        null
-      )
-    ]);
-
     this.state = {
-      user: null,
-
+      goLogin: false,
       username: "",
       avatar: Avatar,
       avatarURL: null,
@@ -84,160 +57,154 @@ export default class Home extends Component {
       pswdError: "",
 
       loading: false,
-      classes: classes
+      classes: [],
+      new_event: false,
+      reportState: null
     };
   }
 
   componentDidMount() {
-    isLogged();
-    this.getUser();
+    try {
+      editEvent = false;
+      this.loadClasses();
+    } catch (e) {
+      fire.auth().signOut();
+      this.setState({ goLogin: true });
+    }
   }
 
-  getUser = async () => {
-    let uid,
-      username,
-      email,
-      avatar = "";
-
-    var user = await fire.auth().currentUser;
-    if (user) {
-      uid = user.uid;
-      username = user.displayName ? user.displayName : "Sem nome de usuário";
-      email = user.email;
-      avatar = user.photoURL;
-    }
-
-    const _user = {
-      uid: uid,
-      username: username,
-      email: email,
-      avatar: avatar
-    };
-
-    this.setState({ user: _user });
+  loadClasses = async () => {
+    this.setState({ loading: true });
+    Class.loadClasses().then(
+      classroom => {
+        this.setState({ classes: classroom, loading: false });
+      },
+      error => {
+        window.location.replace("/");
+      }
+    );
   };
 
   handleChange = ev => {
     this.setState({ [ev.target.name]: ev.target.value });
   };
 
-  /*reauthenticate = (email, password) => {
-    var user = firebase.auth().currentUser;
-
-    //Create the reauthentication credential
-    var credential = firebase.auth.EmailAuthProvider.credential(
-      this.state.email,
-      this.state.pswd
-    );
-
-    //Reauthenticate user to update data
-    return user.reauthenticateWithCredential(credential);
-  };*/
-
-  /*handleConfirm = async ev => {
-    ev.preventDefault();
-
-    const state = this.state;
-
-    this.setState({ loading: true });
-    console.log(state.avatar);
-
-    this.reauthenticate(state.email, state.pswd).then(() => {
-      var user = firebase.auth().currentUser;
-      user
-        .updateProfile({
-          displayName: "",
-          photoURL: ""
-        })
-        .then(() => {
-          this.setState({ loading: false });
-          window.location.reload();
-        })
-        .catch(error => {
-          console.log(error);
-          this.setState({ loading: false });
-        });
-    });
-
-    console.log("ok");
-  };*/
-
   render() {
+    if (this.state.goLogin) {
+      return <Redirect to={{ pathname: "/" }} />;
+    }
+
+    if (this.state.reportState) {
+      return (
+        <Redirect to={{ pathname: "/report", state: this.state.reportState }} />
+      );
+    }
     return (
       <div>
-        {this.state.loading ? <Loading /> : null}
-        <Header />
-        {/*<Header avatar={this.state.avatarURL}/>*/}
-        <div className="homeFeed">
-          {this.state.classes.map(c => (
-            <div className="rectanguleClass" key={c.name}>
-              <div className="nameClass">
-                <h1>{c.name}</h1>
-              </div>
-              <div className="events">
-                {c.events.map(e => (
-                  <div className="rectanguleEvent" key={e.name}>
-                    <div className="nameEvent">
-                      <h2>{e.name}</h2>
-                    </div>
-                    <div className="dateEvent">
-                      <h2>{e.date}</h2>
-                    </div>
-                    <div className="line" />
-                    <div className="descriptionEvent">
-                      <h2>Descrição: {e.description}</h2>
-                    </div>
-                    <div className="timeBeginEvent">
-                      <h2>Início: {e.timeBegin}</h2>
-                    </div>
-                    <div className="timeEndEvent">
-                      <h2>Fim: {e.timeEnd}</h2>
-                    </div>
-                    <div className="keyWordEvent">
-                      <h2>Palavra-passe: {e.keyWord}</h2>
-                    </div>
-                    <div className="editEvent">
-                      <button
-                      /*onClick={ev => {
-                                        ev.preventDefault();
-                                        }*/
-                      >
-                        <h1>Editar evento</h1>
-                      </button>
-                    </div>
-                    <div className="deleteEvent">
-                      <button
-                      /*onClick={ev => {
-                                        ev.preventDefault();
-                                        }*/
-                      >
-                        <h1>Excluir evento</h1>
-                      </button>
-                    </div>
-                    <div className="frequenceEvent">
-                      <button
-                      /*onClick={ev => {
-                                    ev.preventDefault();
-                                    }*/
-                      >
-                        <h1>Frequência</h1>
-                      </button>
-                    </div>
+        {this.state.new_event ? (
+          <CreateEvent
+            nameClass={new_event_class}
+            editEvent={editEvent}
+            eventToEdit={eventToEdit}
+          />
+        ) : (
+          <div>
+            {this.state.loading ? <Loading /> : null}
+            <Header />
+            <div className="homeFeed">
+              {this.state.classes.map((c, index) => (
+                <div className="rectanguleClass" key={index}>
+                  <div className="nameClass">
+                    <h1>{c.name}</h1>
                   </div>
-                ))}
-              </div>
-              <div className="createEvent">
-                <button
-                /*onClick={ev => {
+                  <div className="events">
+                    {c.events.map((e, ind) => (
+                      <div className="rectanguleEvent" key={ind}>
+                        <div className="nameEvent">
+                          <h2>{e.title}</h2>
+                        </div>
+                        <div className="dateEvent">
+                          <h2>{e.date}</h2>
+                        </div>
+                        <div className="line" />
+                        <div className="descriptionEvent">
+                          <h2>Descrição: {e.description}</h2>
+                        </div>
+                        <div className="timeBeginEvent">
+                          <h2>Início: {e.begin}</h2>
+                        </div>
+                        <div className="timeEndEvent">
+                          <h2>Fim: {e.end}</h2>
+                        </div>
+                        <div className="keyWordEvent">
+                          <h2>
+                            Palavra-passe: {e.keys["key1"].key},{" "}
+                            {e.keys["key2"].key}, {e.keys["key3"].key}
+                          </h2>
+                        </div>
+                        <div className="editEvent">
+                          <button
+                            onClick={ev => {
+                              ev.preventDefault();
+                              this.setState({ new_event: true });
+                              new_event_class = c.name;
+                              editEvent = true;
+                              eventToEdit = e;
+                            }}
+                          >
+                            <h1>Editar evento</h1>
+                          </button>
+                        </div>
+                        <div className="deleteEvent">
+                          <button
+                            onClick={async ev => {
+                              ev.preventDefault();
+
+                              await Event.deleteEvent(e, c.name).then(() => {
+                                const { classes } = this.state;
+                                classes[index].events.splice(ind, 1);
+                                this.setState({ classes });
+                              });
+                            }}
+                          >
+                            <h1>Excluir evento</h1>
+                          </button>
+                        </div>
+                        <div className="frequenceEvent">
+                          <button
+                            onClick={ev => {
+                              ev.preventDefault();
+
+                              const reportState = {
+                                classroom: c.name,
+                                id: e.id
+                              };
+
+                              this.setState({ reportState });
+                            }}
+                          >
+                            <h1>Frequência</h1>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="createEvent">
+                    <button
+                      onClick={ev => {
                         ev.preventDefault();
-                        }*/
-                >
-                  <h1>+ Criar evento</h1>
-                </button>
-              </div>
+                        new_event_class = c.name;
+                        this.setState({ new_event: true });
+                      }}
+                    >
+                      <h1>+ Criar evento</h1>
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
     );
   }

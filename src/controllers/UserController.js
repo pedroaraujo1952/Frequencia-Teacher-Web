@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 
 import { fire, database } from "../config/firebaseConfig";
+
 import Error from "../errors/user.error";
 
 export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
@@ -48,6 +49,15 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
       const ERROR = new Error(error);
       reject(ERROR.getError);
     }
+  });
+}
+
+export async function getSubject(uid) {
+  return new Promise((resolve, reject) => {
+    database.ref(`professores/${uid}/subject`).once("value", snap => {
+      console.log(snap.val());
+      resolve(snap.val());
+    });
   });
 }
 

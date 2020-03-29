@@ -1,5 +1,4 @@
-// import * as User from "../controllers/UserController";
-// import { database } from "../config/firebaseConfig";
+import { database } from "../config/firebaseConfig";
 
 export function validateKey(array) {
   var keys = array;
@@ -15,4 +14,12 @@ export function validateKey(array) {
 export function validateTime(eventInit, studentTime) {
   if (eventInit === studentTime) return true;
   else return false;
+}
+
+export async function getStudents(className) {
+  return new Promise((resolve, reject) => {
+    database.ref(`salas/${className}`).once("value", snap => {
+      resolve(snap.val());
+    });
+  });
 }

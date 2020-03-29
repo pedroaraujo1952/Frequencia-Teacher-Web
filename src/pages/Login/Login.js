@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 
 import Loading from "../../components/Loading/Loading";
 import ForgotPassword from "../../components/ForgotPassword/Forgot";
@@ -6,9 +7,9 @@ import ForgotPassword from "../../components/ForgotPassword/Forgot";
 import * as User from "../../controllers/UserController";
 
 import Logo from "../../assets/Logok.png";
+import Info from "../../assets/info.png";
 
 import "./styles.css";
-import { NavLink } from "react-router-dom";
 
 export default class Login extends Component {
   constructor(props) {
@@ -91,29 +92,6 @@ export default class Login extends Component {
         }
       }
     );
-
-    // await fire
-    //   .auth()
-    //   .sendPasswordResetEmail(email)
-    //   .then(
-    //     (message = `Email enviado para ${email}\nVerifique sua caixa de mensagens`)
-    //   )
-    //   .catch(error => {
-    //     if (error.code === "auth/user-not-found") {
-    //       this.setState({
-    //         emailRecoverError: "Usuário não encontrado"
-    //       });
-    //       message = "";
-    //     } else if (error.code === "auth/invalid-email") {
-    //       this.setState({ emailRecoverError: "Email inválido" });
-    //       message = "";
-    //     }
-    //     message = "";
-    //   });
-    // if (message.length > 2) {
-    //   alert(message);
-    //   this.setState({ popUpStats: false });
-    // }
   };
 
   render() {
@@ -128,6 +106,9 @@ export default class Login extends Component {
             emailError={this.state.emailRecoverError}
           />
         ) : null}
+        <NavLink to="/about" className="infoIcon">
+          <img src={Info} alt="informações" className="infoIcon" />
+        </NavLink>
         <form>
           <div className="logo">
             <img src={Logo} alt="" />

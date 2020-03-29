@@ -74,6 +74,17 @@ form button {
   text-align: start;
 }
 
+.infoIcon {
+  max-width: 40px;
+  max-height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+
+  margin: 20px;
+
+  float: right;
+}
+
 @media only screen and (max-width: 1366px) {
   form .logo img {
     min-height: 150px;

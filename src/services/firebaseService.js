@@ -1,3 +1,3 @@
-import { firebaseDatabase } from "../utils/firebaseUtils";
+// import { firebaseDatabase } from "../utils/firebaseUtils";
 
-export default class FirebaseService {}
+// export default class FirebaseService {}
