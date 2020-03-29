@@ -1,0 +1,30 @@
+[debug] [2020-03-29T05:24:08.220Z] ----------------------------------------------------------------------
+[debug] [2020-03-29T05:24:08.223Z] Command:       C:\Users\pedro\scoop\apps\nodejs\current\node.exe C:\Users\pedro\scoop\apps\nodejs\current\bin\node_modules\firebase-tools\lib\bin\firebase.js deploy --only hosting:fmm-check-student.web.app
+[debug] [2020-03-29T05:24:08.223Z] CLI Version:   7.16.1
+[debug] [2020-03-29T05:24:08.223Z] Platform:      win32
+[debug] [2020-03-29T05:24:08.223Z] Node Version:  v12.4.0
+[debug] [2020-03-29T05:24:08.224Z] Time:          Sun Mar 29 2020 01:24:08 GMT-0400 (GMT-04:00)
+[debug] [2020-03-29T05:24:08.224Z] ----------------------------------------------------------------------
+[debug] [2020-03-29T05:24:08.224Z] 
+[debug] [2020-03-29T05:24:08.230Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-29T05:24:08.231Z] > authorizing via signed-in user
+[debug] [2020-03-29T05:24:08.231Z] [iam] checking project fmm-check-student for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-03-29T05:24:08.233Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/fmm-check-student:testIamPermissions  
+
+[debug] [2020-03-29T05:24:09.520Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-29T05:24:09.521Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/fmm-check-student  
+ 
+[debug] [2020-03-29T05:24:11.063Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'fmm-check-student'...
+[info] 
+[info] i  deploying hosting
+[info] 
+[info] +  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/fmm-check-student/overview
+[debug] [2020-03-29T05:24:11.428Z] TypeError: Cannot read property 'deploys' of undefined
+    at C:\Users\pedro\scoop\persist\nodejs\bin\node_modules\firebase-tools\lib\deploy\index.js:84:36
+    at processTicksAndRejections (internal/process/task_queues.js:89:5)
+[error] 
+[error] Error: An unexpected error has occurred.
