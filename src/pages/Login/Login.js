@@ -140,7 +140,7 @@ export default class Login extends Component {
               }}
             >
               <p
-                style={{ marginTop: "5px" }}
+                style={{ marginTop: "5px", cursor: "pointer", width: "170px" }}
                 className="link"
                 onClick={this.handleForgotPassword}
               >
@@ -148,7 +148,7 @@ export default class Login extends Component {
               </p>
 
               <NavLink
-                style={{ marginTop: "5px", textAlign: "end" }}
+                style={{ marginTop: "5px", textAlign: "end", width: "75px" }}
                 activeClassName="link"
                 className="link"
                 onClick={this.handleForgotPassword}

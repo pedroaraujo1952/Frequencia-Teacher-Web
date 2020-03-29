@@ -33,6 +33,7 @@
   height: 35px;
   width: 35px;
   float: right;
+  cursor: pointer;
 }
 
 .popUp .body {
