@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 import MaskedInput from "react-text-mask";
 
+import { messaging, fire } from "../../config/firebaseConfig";
+
 import * as Event from "../../controllers/EventController";
 
 import Header from "../../components/CreateEventHeader/Header";
@@ -136,7 +138,11 @@ export default class CreateEvent extends Component {
       error => this.setState({ backHome: true })
     );
     this.setState({ backHome: true });
+    this.createNotification();
   };
+
+  createNotification = async () => {
+  }
 
   handleEditEvent = async () => {
     await Event.updateEvent(this.state).then(
