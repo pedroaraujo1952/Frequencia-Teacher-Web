@@ -31,8 +31,6 @@ export default class Report extends Component {
     );
   }
 
-  getEvents = async () => {};
-
   getData = async (classroom, eventName) => {
     var user = await User.getUser();
 
@@ -71,7 +69,10 @@ export default class Report extends Component {
   };
 
   handleAbsent = async () => {
-    await this.getData("3AI", "evento1");
+    await this.getData(
+      this.props.location.state.classroom,
+      this.props.location.state.id
+    );
     const { students } = this.state;
     var newStudents = [];
 
@@ -85,12 +86,18 @@ export default class Report extends Component {
   };
 
   handleLate = async () => {
-    await this.getData("3AI", "evento1");
+    await this.getData(
+      this.props.location.state.classroom,
+      this.props.location.state.id
+    );
     const { students } = this.state;
     var newStudents = [];
 
     students.forEach(element => {
-      if (element.checkinStatus === false) {
+      if (
+        element.checkinStatus === false &&
+        (element.checkin !== "Ausente" || element.checkout !== "Ausente")
+      ) {
         newStudents.push(element);
       }
     });
@@ -106,7 +113,10 @@ export default class Report extends Component {
     } else if (value === "late") {
       this.handleLate();
     } else {
-      this.getData("3AI", "evento1");
+      this.getData(
+        this.props.location.state.classroom,
+        this.props.location.state.id
+      );
     }
   };
 

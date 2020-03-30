@@ -2,6 +2,7 @@ import { fire, database } from "../config/firebaseConfig";
 
 import * as Student from "./StudentsController";
 import * as User from "./UserController";
+import * as Notif from "./NotificationController";
 
 export async function createEvent(state) {
   return new Promise(async (resolve, reject) => {
@@ -35,8 +36,15 @@ export async function createEvent(state) {
         students: await Student.getStudents(state.nameClass)
       };
 
-      database.ref(`professores/${uid}/events/${state.nameClass}`).push(data);
-      resolve(data);
+      await database
+        .ref(`professores/${uid}/events/${state.nameClass}`)
+        .push(data)
+        .then(() => {
+          Notif.sendNotification(state.nameClass, data).then(
+            () => resolve(true),
+            error => reject(error)
+          );
+        });
     } catch (error) {
       reject(error);
     }

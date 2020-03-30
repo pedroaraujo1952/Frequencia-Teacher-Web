@@ -17,13 +17,13 @@ export const fire = firebase.initializeApp(config, {
 });
 export const database = firebase.database();
 export const storage = firebase.storage();
-const messaging = firebase.messaging();
+// const messaging = firebase.messaging();
 
-messaging.usePublicVapidKey(
-  // Project Settings => Cloud Messaging => Web Push certificates
-    "BLzTUv-eL8F44SUM-YYcFMqjxVDQevbT6cAc9kgJfa7DvfQWG0USpx4N2hOz3mm9nqNn4Y4w_M8RndSRQBYbXNg"
-);
+// messaging.usePublicVapidKey(
+//   // Project Settings => Cloud Messaging => Web Push certificates
+//   "BLzTUv-eL8F44SUM-YYcFMqjxVDQevbT6cAc9kgJfa7DvfQWG0USpx4N2hOz3mm9nqNn4Y4w_M8RndSRQBYbXNg"
+// );
 
-export { messaging };
+// export { messaging };
 
-console.log(messaging)
+// console.log(messaging);
