@@ -8,7 +8,7 @@ import Header from "../../components/CreateEventHeader/Header";
 
 import "./styles.css";
 
-var cont_keys;
+var cont_keys = 0;
 
 export default class CreateEvent extends Component {
   constructor(props) {
@@ -30,7 +30,9 @@ export default class CreateEvent extends Component {
       keyWord: ["", "", ""],
       notifTime: ["", "", ""],
       key: "",
-      info: ""
+      info: "",
+      infoWarning: "",
+      infoWarning_: ""
     };
   }
 
@@ -70,6 +72,7 @@ export default class CreateEvent extends Component {
       this.state.hourEnd === "" ||
       this.state.minutesEnd === ""
     ) {
+      this.setState({infoWarning: "*Informe a hora de início e término da aula"});
       el[0].style.display = "block";
     } else if (
       h > parseInt(this.state.hourEnd) ||
@@ -79,8 +82,22 @@ export default class CreateEvent extends Component {
       (h === parseInt(this.state.hourBegin) &&
         min <= parseInt(this.state.minutesBegin))
     ) {
+      this.setState({infoWarning: "*Informe um horário entre o intervalo de aula"});
       el[0].style.display = "block";
-    } else if (cont_keys !== 3) {
+    } else if(
+      this.state.notifyHour === this.state.notifTime[0] ||
+      this.state.notifyHour === this.state.notifTime[1] ||
+      this.state.notifyHour === this.state.notifTime[2] 
+    ){
+      this.setState({infoWarning: "*Informe um horário diferente"});
+      el[0].style.display = "block";
+    } else if(cont_keys === 3){
+      this.setState({infoWarning: "*É permitido adicionar apenas 3 palavras-passe"});
+      el[0].style.display = "block";
+    } else if(h > 24 || min >= 60){
+      this.setState({infoWarning: "*Informe um horário válido"});
+      el[0].style.display = "block";
+    }else {
       el[0].style.display = "none";
       var word = this.state.word;
       var notif = this.state.notifyHour;
@@ -112,6 +129,7 @@ export default class CreateEvent extends Component {
       this.state.keyWord === [] ||
       this.state.description === ""
     ) {
+      this.setState({infoWarning_: "*Preencha todos os campos"});
       el[0].style.display = "block";
     } else if (
       parseInt(this.state.hourEnd) >= 24 ||
@@ -119,10 +137,13 @@ export default class CreateEvent extends Component {
       parseInt(this.state.hourBegin) >= 24 ||
       parseInt(this.state.minuteBegin) >= 60
     ) {
+      this.setState({infoWarning_: "*Informe horários válidos"});
       el[0].style.display = "block";
     } else if (d > 31 || m > 12 || y !== 20) {
+      this.setState({infoWarning_: "*Informe uma data válida"});
       el[0].style.display = "block";
-    } else if (cont_keys === 0) {
+    } else if (cont_keys !== 3) {
+      this.setState({infoWarning_: "*Informe 3 palavras-passe"});
       el[0].style.display = "block";
     } else {
       el[0].style.display = "none";
@@ -155,7 +176,7 @@ export default class CreateEvent extends Component {
         <Header />
         <div className="newEvent">
           <div className="title">
-            <div>
+            <div className="title_">
               <h1>Título</h1>
               <input
                 type="text"
@@ -164,8 +185,7 @@ export default class CreateEvent extends Component {
                 defaultValue={this.state.name}
               />
             </div>
-
-            <div>
+            <div className="linkMeeting">
               <h1>Link do Meeting</h1>
               <input
                 type="text"
@@ -221,7 +241,7 @@ export default class CreateEvent extends Component {
           <div className="keyWords">
             <div className="warningNotifyHour">
               <h2 name="msgWarning">
-                *Informe um horário entre o intervalo da aula
+                {this.state.infoWarning}
               </h2>
             </div>
             <h1>Palavras-passe</h1>
@@ -242,8 +262,8 @@ export default class CreateEvent extends Component {
             </h2>
             <div className="words">
               {this.state.keyWord.map((k, index) => (
-                <h2 key={index}>{k}</h2>
-              ))}
+                <h2 key={index}>{k}{k!=='' ? ", " : null}{this.state.notifTime[index]}</h2>
+              ))} 
             </div>
           </div>
           <div className="description">
@@ -255,6 +275,9 @@ export default class CreateEvent extends Component {
               defaultValue={this.state.description}
             />
           </div>
+          <div className="warning">
+            <h2 name="msgWarning">{this.state.infoWarning_}</h2>
+          </div>
           <div className="buttonGroup">
             <div className="saveButton">
               <button
@@ -264,9 +287,6 @@ export default class CreateEvent extends Component {
               >
                 <h2>Salvar</h2>
               </button>
-            </div>
-            <div className="warning">
-              <h2 name="msgWarning">*Preencha todos os campos corretamente</h2>
             </div>
             <div className="cancelButton">
               <button
@@ -279,7 +299,7 @@ export default class CreateEvent extends Component {
               </button>
             </div>
           </div>
-        </div>
+          </div>
       </div>
     );
   }

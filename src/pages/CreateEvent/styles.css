@@ -4,7 +4,7 @@
 }
 
 .newEvent {
-  width: 100%;
+  width: 65%;
   height: auto;
   position: absolute;
   top: 18%;
@@ -13,7 +13,7 @@
 }
 
 .newEvent h1 {
-  width: 355px;
+  width: 300px;
   height: 52px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-style: normal;
@@ -24,8 +24,6 @@
 }
 
 .title {
-  width: 52%;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -46,8 +44,19 @@
   padding-left: 20px;
 }
 
+.linkMeeting {
+  position: absolute;
+  margin-left: 450px;
+  height: 0px;
+}
+
+.title_ {
+  position: absolute;
+  height: 0px;
+}
+
 .timeBegin {
-  margin-top: 28px;
+  margin-top: 128px;
   height: 0px;
   position: absolute;
 }
@@ -100,8 +109,8 @@
 .timeEnd {
   position: absolute;
   height: 0px;
-  margin-left: 500px;
-  margin-top: 28px;
+  margin-left: 450px;
+  margin-top: 128px;
 }
 
 .timeEnd input {
@@ -150,11 +159,11 @@
 }
 
 .date {
-  margin-top: 150px;
+  margin-top: 250px;
 }
 
 .date input {
-  width: 430px;
+  width: 400px;
   height: 51px;
   background: #ffffff;
   border: 0px;
@@ -245,7 +254,7 @@
 }
 
 .description {
-  width: 48%;
+  width: 80%;
   height: 200px;
   margin-top: 10px;
 }
@@ -330,18 +339,17 @@
 
 .newEvent .buttonGroup {
   height: 64px;
-  width: 48%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 @media only screen and (max-width: 1366px) {
-  .newEvent .title {
-    width: 74%;
+  .newEvent .buttonGroup {
+    width: 100%;
   }
-
   .newEvent .description {
-    width: 67%;
+    width: 100%;
   }
 }
