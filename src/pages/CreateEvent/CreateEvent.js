@@ -64,8 +64,10 @@ export default class CreateEvent extends Component {
     var el = document.getElementsByClassName("warningNotifyHour");
     var h = parseInt(this.state.notifyHour.substring(0, 2));
     var min = parseInt(this.state.notifyHour.substring(3, 5));
-    if (
-      this.state.word === "" ||
+    if(this.state.word === "") {
+      this.setState({infoWarning: "*Informe uma palavra-passe"});
+      el[0].style.display = "block";
+    } else if (
       this.state.notifyHour === "" ||
       this.state.hourBegin === "" ||
       this.state.minutesBegin === "" ||
@@ -268,7 +270,7 @@ export default class CreateEvent extends Component {
           </div>
           <div className="description">
             <h1>Descrição</h1>
-            <input
+            <textarea
               type="text"
               name="description"
               onChange={this.handleChange}

@@ -259,7 +259,7 @@
   margin-top: 10px;
 }
 
-.description input {
+.description textarea {
   height: 119px;
   border: none;
   background: #ffffff;
@@ -270,7 +270,8 @@
   font-size: 32px;
   line-height: 43px;
   color: #043f5f;
-  padding-left: 20px;
+  padding: 20px;
+  resize: none;
 }
 
 .saveButton button {
