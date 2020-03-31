@@ -40,7 +40,7 @@ export async function createEvent(state) {
         .ref(`professores/${uid}/events/${state.nameClass}`)
         .push(data)
         .then(() => {
-          Notif.sendNotification(state.nameClass, data).then(
+          Notif.sendNotification(state.nameClass, data, "create").then(
             () => resolve(true),
             error => reject(error)
           );
@@ -55,12 +55,18 @@ export async function deleteEvent(event, className) {
   return new Promise((resolve, reject) => {
     var uid = fire.auth().currentUser.uid;
 
-    console.log(uid);
+    console.log(event);
 
     if (event.id !== "evento0") {
       database
         .ref(`professores/${uid}/events/${className}/${event.id}`)
-        .remove();
+        .remove()
+        .then(() => {
+          Notif.sendNotification(className, event, "delete").then(
+            () => resolve(true),
+            error => reject(error)
+          );
+        });
 
       resolve(true);
     }
@@ -88,7 +94,13 @@ export async function updateEvent(state) {
 
       database
         .ref(`professores/${uid}/events/${state.nameClass}/${state.id}`)
-        .set(data);
+        .set(data)
+        .then(() => {
+          Notif.sendNotification(state.nameClass, data, "update").then(
+            () => resolve(true),
+            error => reject(error)
+          );
+        });
       resolve(data);
     } catch (error) {
       reject(error);

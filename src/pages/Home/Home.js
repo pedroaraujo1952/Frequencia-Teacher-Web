@@ -137,10 +137,7 @@ export default class Home extends Component {
                           <h2>Fim: {e.end}</h2>
                         </div>
                         <div className="keyWordEvent">
-                          <h2>
-                            Palavra-passe: {e.keys["key1"].key},{" "}
-                            {e.keys["key2"].key}, {e.keys["key3"].key}
-                          </h2>
+                          <h2>Palavra-passe: {e.formatedKeys}</h2>
                         </div>
                         <div className="editEvent">
                           <button
@@ -177,7 +174,8 @@ export default class Home extends Component {
 
                               const reportState = {
                                 classroom: c.name,
-                                id: e.id
+                                id: e.id,
+                                keyCount: e.keyCount
                               };
 
                               this.setState({ reportState });

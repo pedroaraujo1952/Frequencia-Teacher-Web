@@ -204,9 +204,13 @@ export default class Report extends Component {
                         </td>
                       )}
                       {student["key"] !== 0 ? (
-                        <td>{student["key"]}/3</td>
+                        <td>
+                          {student["key"]}/{this.props.location.state.keyCount}
+                        </td>
                       ) : (
-                        <td style={{ color: "#ff0000" }}>{student["key"]}/3</td>
+                        <td style={{ color: "#ff0000" }}>
+                          {student["key"]}/{this.props.location.state.keyCount}
+                        </td>
                       )}
                     </tr>
                   ))

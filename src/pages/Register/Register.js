@@ -106,7 +106,7 @@ export default class Register extends Component {
           </div>
         </header>
 
-        <form>
+        <form className="registerForm">
           <div className="logo">
             <img src={Logo} alt="" />
             <h1>CADASTRO</h1>

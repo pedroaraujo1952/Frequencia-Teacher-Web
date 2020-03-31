@@ -7,6 +7,7 @@ import * as Event from "../../controllers/EventController";
 import Header from "../../components/CreateEventHeader/Header";
 
 import "./styles.css";
+import Loading from "../../components/Loading/Loading";
 
 var cont_keys = 0;
 
@@ -64,8 +65,8 @@ export default class CreateEvent extends Component {
     var el = document.getElementsByClassName("warningNotifyHour");
     var h = parseInt(this.state.notifyHour.substring(0, 2));
     var min = parseInt(this.state.notifyHour.substring(3, 5));
-    if(this.state.word === "") {
-      this.setState({infoWarning: "*Informe uma palavra-passe"});
+    if (this.state.word === "") {
+      this.setState({ infoWarning: "*Informe uma palavra-passe" });
       el[0].style.display = "block";
     } else if (
       this.state.notifyHour === "" ||
@@ -74,7 +75,9 @@ export default class CreateEvent extends Component {
       this.state.hourEnd === "" ||
       this.state.minutesEnd === ""
     ) {
-      this.setState({infoWarning: "*Informe a hora de início e término da aula"});
+      this.setState({
+        infoWarning: "*Informe a hora de início e término da aula"
+      });
       el[0].style.display = "block";
     } else if (
       h > parseInt(this.state.hourEnd) ||
@@ -84,22 +87,26 @@ export default class CreateEvent extends Component {
       (h === parseInt(this.state.hourBegin) &&
         min <= parseInt(this.state.minutesBegin))
     ) {
-      this.setState({infoWarning: "*Informe um horário entre o intervalo de aula"});
+      this.setState({
+        infoWarning: "*Informe um horário entre o intervalo de aula"
+      });
       el[0].style.display = "block";
-    } else if(
+    } else if (
       this.state.notifyHour === this.state.notifTime[0] ||
       this.state.notifyHour === this.state.notifTime[1] ||
-      this.state.notifyHour === this.state.notifTime[2] 
-    ){
-      this.setState({infoWarning: "*Informe um horário diferente"});
+      this.state.notifyHour === this.state.notifTime[2]
+    ) {
+      this.setState({ infoWarning: "*Informe um horário diferente" });
       el[0].style.display = "block";
-    } else if(cont_keys === 3){
-      this.setState({infoWarning: "*É permitido adicionar apenas 3 palavras-passe"});
+    } else if (cont_keys === 3) {
+      this.setState({
+        infoWarning: "*É permitido adicionar apenas 3 palavras-passe"
+      });
       el[0].style.display = "block";
-    } else if(h > 24 || min >= 60){
-      this.setState({infoWarning: "*Informe um horário válido"});
+    } else if (h > 24 || min >= 60) {
+      this.setState({ infoWarning: "*Informe um horário válido" });
       el[0].style.display = "block";
-    }else {
+    } else {
       el[0].style.display = "none";
       var word = this.state.word;
       var notif = this.state.notifyHour;
@@ -131,7 +138,7 @@ export default class CreateEvent extends Component {
       this.state.keyWord === [] ||
       this.state.description === ""
     ) {
-      this.setState({infoWarning_: "*Preencha todos os campos"});
+      this.setState({ infoWarning_: "*Preencha todos os campos" });
       el[0].style.display = "block";
     } else if (
       parseInt(this.state.hourEnd) >= 24 ||
@@ -139,13 +146,10 @@ export default class CreateEvent extends Component {
       parseInt(this.state.hourBegin) >= 24 ||
       parseInt(this.state.minuteBegin) >= 60
     ) {
-      this.setState({infoWarning_: "*Informe horários válidos"});
+      this.setState({ infoWarning_: "*Informe horários válidos" });
       el[0].style.display = "block";
     } else if (d > 31 || m > 12 || y !== 20) {
-      this.setState({infoWarning_: "*Informe uma data válida"});
-      el[0].style.display = "block";
-    } else if (cont_keys !== 3) {
-      this.setState({infoWarning_: "*Informe 3 palavras-passe"});
+      this.setState({ infoWarning_: "*Informe uma data válida" });
       el[0].style.display = "block";
     } else {
       el[0].style.display = "none";
@@ -154,8 +158,9 @@ export default class CreateEvent extends Component {
   };
 
   sendEvent = async () => {
+    this.setState({ loading: true });
     await Event.createEvent(this.state).then(
-      () => {},
+      () => this.setState({ loading: false }),
       error => this.setState({ backHome: true })
     );
     this.setState({ backHome: true });
@@ -175,6 +180,7 @@ export default class CreateEvent extends Component {
     }
     return (
       <div className="newEventBody">
+        {this.state.loading ? <Loading /> : null}
         <Header />
         <div className="newEvent">
           <div className="title">
@@ -242,9 +248,7 @@ export default class CreateEvent extends Component {
           </div>
           <div className="keyWords">
             <div className="warningNotifyHour">
-              <h2 name="msgWarning">
-                {this.state.infoWarning}
-              </h2>
+              <h2 name="msgWarning">{this.state.infoWarning}</h2>
             </div>
             <h1>Palavras-passe</h1>
             <input
@@ -264,8 +268,12 @@ export default class CreateEvent extends Component {
             </h2>
             <div className="words">
               {this.state.keyWord.map((k, index) => (
-                <h2 key={index}>{k}{k!=='' ? ", " : null}{this.state.notifTime[index]}</h2>
-              ))} 
+                <h2 key={index}>
+                  {k}
+                  {k !== "" ? ", " : null}
+                  {this.state.notifTime[index]}
+                </h2>
+              ))}
             </div>
           </div>
           <div className="description">
@@ -301,7 +309,7 @@ export default class CreateEvent extends Component {
               </button>
             </div>
           </div>
-          </div>
+        </div>
       </div>
     );
   }
