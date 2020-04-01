@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import * as React from 'react'; 
 import { Redirect } from "react-router";
 
 import { fire } from "../../config/firebaseConfig";
 import Header from "../../components/HomeHeader/Header";
 import Loading from "../../components/Loading/Loading";
 import CreateEvent from "../CreateEvent/CreateEvent";
+
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import * as Class from "../../controllers/ClassController";
 import * as Event from "../../controllers/EventController";
@@ -39,7 +42,9 @@ var new_event_class = "",
   editEvent = false,
   eventToEdit = new Events();
 
-export default class Home extends Component {
+toast.configure();
+
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
 
@@ -59,7 +64,7 @@ export default class Home extends Component {
       loading: false,
       classes: [],
       new_event: false,
-      reportState: null
+      reportState: null,
     };
   }
 
@@ -112,6 +117,12 @@ export default class Home extends Component {
             {this.state.loading ? <Loading /> : null}
             <Header />
             <div className="homeFeed">
+              {localStorage.getItem('EventCreated') ? toast.success('Evento criado com sucesso', {
+                autoClose:1500
+              }) | localStorage.removeItem('EventCreated') : null }
+              {localStorage.getItem('EventEdited') ? toast.success('Evento editado com sucesso', {
+                autoClose:1500
+              }) | localStorage.removeItem('EventEdited') : null }
               {this.state.classes.map((c, index) => (
                 <div className="rectanguleClass" key={index}>
                   <div className="nameClass">
@@ -161,6 +172,9 @@ export default class Home extends Component {
                                 const { classes } = this.state;
                                 classes[index].events.splice(ind, 1);
                                 this.setState({ classes });
+                                toast.success('Evento deletado com sucesso', {
+                                  autoClose:1500
+                                })
                               });
                             }}
                           >

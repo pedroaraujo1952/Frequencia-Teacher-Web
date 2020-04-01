@@ -55,8 +55,6 @@ export async function deleteEvent(event, className) {
   return new Promise((resolve, reject) => {
     var uid = fire.auth().currentUser.uid;
 
-    console.log(event);
-
     if (event.id !== "evento0") {
       database
         .ref(`professores/${uid}/events/${className}/${event.id}`)
@@ -77,6 +75,7 @@ export async function updateEvent(state) {
   return new Promise(async (resolve, reject) => {
     try {
       var uid = fire.auth().currentUser.uid;
+      console.log(state)
 
       var data = {
         title: state.name,
@@ -88,7 +87,20 @@ export async function updateEvent(state) {
         date: state.date,
         description: state.description,
         end: state.hourEnd + "h" + state.minutesEnd,
-        keys: state.key,
+        keys: {
+          key1: {
+            key: state.keyWord[0],
+            time: state.notifTime[0]
+          },
+          key2: {
+            key: state.keyWord[1],
+            time: state.notifTime[1]
+          },
+          key3: {
+            key: state.keyWord[2],
+            time: state.notifTime[2]
+          }
+        },
         students: state.students
       };
 

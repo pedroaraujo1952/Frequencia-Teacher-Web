@@ -163,7 +163,8 @@ export default class CreateEvent extends Component {
       () => this.setState({ loading: false }),
       error => this.setState({ backHome: true })
     );
-    this.setState({ backHome: true });
+    localStorage.setItem('EventCreated', true);
+    this.setState({ backHome: true});
   };
 
   handleEditEvent = async () => {
@@ -171,12 +172,13 @@ export default class CreateEvent extends Component {
       () => {},
       error => this.setState({ backHome: true })
     );
-    this.setState({ backHome: true });
+    localStorage.setItem('EventEdited', true);
+    this.setState({ backHome: true});
   };
 
   render() {
     if (this.state.backHome) {
-      return <Redirect to="/" />;
+      return <Redirect to={{pathname: "/"}}/>;
     }
     return (
       <div className="newEventBody">

@@ -225,3 +225,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.Toastify__toast-container {
+  height: 50px;
+  width: 30%;
+}
+
+.Toastify__close-button {
+  width: 10%;
+}
+
+.Toastify__toast-body {
+  margin: 10px
+}
