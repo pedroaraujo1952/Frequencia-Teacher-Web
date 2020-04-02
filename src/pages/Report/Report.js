@@ -194,7 +194,8 @@ export default class Report extends Component {
                           {student["checkin"]}
                         </td>
                       )}
-                      {student["checkin"] !== "Ausente" ? (
+                      {student["checkin"] !== "Ausente" ||
+                      student["checkout"] !== "Ausente" ? (
                         <td style={{ textAlign: "center" }}>
                           {student["checkout"]}
                         </td>
@@ -203,7 +204,8 @@ export default class Report extends Component {
                           {student["checkout"]}
                         </td>
                       )}
-                      {student["key"] !== 0 ? (
+                      {student["key"] !== 0 ||
+                      this.props.location.state.keyCount === 0 ? (
                         <td>
                           {student["key"]}/{this.props.location.state.keyCount}
                         </td>
