@@ -293,6 +293,7 @@
 .cancelButton,
 .saveButton {
   width: auto;
+  height: 64px;
 }
 
 .cancelButton button {
