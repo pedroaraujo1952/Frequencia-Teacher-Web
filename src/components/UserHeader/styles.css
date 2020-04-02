@@ -15,6 +15,10 @@
   width: 100px;
 }
 
+.backImage img {
+  cursor: pointer;
+}
+
 .header img {
   height: 100%;
   width: 100px;

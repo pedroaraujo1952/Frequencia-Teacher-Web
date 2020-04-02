@@ -48,7 +48,8 @@ export default class Header extends Component {
               borderRadius: "100%",
               height: "80px",
               width: "80px",
-              padding: "2px"
+              padding: "2px",
+              cursor: "pointer"
             }}
             onClick={this.logout}
           />

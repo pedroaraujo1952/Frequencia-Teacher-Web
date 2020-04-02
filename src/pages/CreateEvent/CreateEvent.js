@@ -5,6 +5,7 @@ import MaskedInput from "react-text-mask";
 import * as Event from "../../controllers/EventController";
 
 import Header from "../../components/CreateEventHeader/Header";
+import Logo from "../../assets/Logok.png";
 
 import "./styles.css";
 import Loading from "../../components/Loading/Loading";
@@ -163,8 +164,8 @@ export default class CreateEvent extends Component {
       () => this.setState({ loading: false }),
       error => this.setState({ backHome: true })
     );
-    localStorage.setItem('EventCreated', true);
-    this.setState({ backHome: true});
+    localStorage.setItem("EventCreated", true);
+    this.setState({ backHome: true });
   };
 
   handleEditEvent = async () => {
@@ -172,18 +173,30 @@ export default class CreateEvent extends Component {
       () => {},
       error => this.setState({ backHome: true })
     );
-    localStorage.setItem('EventEdited', true);
-    this.setState({ backHome: true});
+    localStorage.setItem("EventEdited", true);
+    this.setState({ backHome: true });
   };
 
   render() {
     if (this.state.backHome) {
-      return <Redirect to={{pathname: "/"}}/>;
+      return <Redirect to={{ pathname: "/" }} />;
     }
     return (
       <div className="newEventBody">
         {this.state.loading ? <Loading /> : null}
-        <Header />
+        {/* <Header /> */}
+        <div className="logoImage" style={{ padding: "10px 40px 0" }}>
+          <img
+            src={Logo}
+            alt=""
+            style={{
+              height: "130px",
+              width: "130px",
+              padding: "2px",
+              marginBottom: "20px"
+            }}
+          />
+        </div>
         <div className="newEvent">
           <div className="title">
             <div className="title_">
