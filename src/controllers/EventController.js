@@ -73,10 +73,10 @@ export async function deleteEvent(event, className) {
 
 export async function updateEvent(state) {
   var keysAfter = 0;
-  if(state.keyWord[0] !== "")keysAfter++;
-  if(state.keyWord[1] !== "")keysAfter++;
-  if(state.keyWord[2] !== "")keysAfter++;
-  if(keysAfter !== 0){
+  if (state.keyWord[0] !== "") keysAfter++;
+  if (state.keyWord[1] !== "") keysAfter++;
+  if (state.keyWord[2] !== "") keysAfter++;
+  if (keysAfter !== 0) {
     state.key = {
       key1: {
         key: state.keyWord[0],
@@ -90,7 +90,7 @@ export async function updateEvent(state) {
         key: state.keyWord[2],
         time: state.notifTime[2]
       }
-    }
+    };
   }
   return new Promise(async (resolve, reject) => {
     try {
