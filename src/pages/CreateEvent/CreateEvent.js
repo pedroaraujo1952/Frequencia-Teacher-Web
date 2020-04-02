@@ -4,11 +4,11 @@ import MaskedInput from "react-text-mask";
 
 import * as Event from "../../controllers/EventController";
 
-import Header from "../../components/CreateEventHeader/Header";
+import Loading from "../../components/Loading/Loading";
+
 import Logo from "../../assets/Logok.png";
 
 import "./styles.css";
-import Loading from "../../components/Loading/Loading";
 
 var cont_keys = 0;
 
