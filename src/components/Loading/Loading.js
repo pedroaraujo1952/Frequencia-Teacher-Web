@@ -1,23 +1,21 @@
 import React from "react";
-import Loader from "react-loader-spinner";
+import Backdrop from "@material-ui/core/Backdrop";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { makeStyles } from "@material-ui/core/styles";
 
-import "./styles.css";
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#043f5f",
+  },
+}));
 
-const style = {
-  width: "10%",
-  height: "10%",
-  position: "fixed",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)"
-};
+export default function MaterialBackdrop({ loading }) {
+  const classes = useStyles();
 
-const Loading = () => (
-  <div className="loading">
-    <div style={style}>
-      <Loader type="Oval" color="#043f5f" height={80} width={80} />
-    </div>
-  </div>
-);
-
-export default Loading;
+  return (
+    <Backdrop className={classes.backdrop} open={loading}>
+      <CircularProgress color="inherit" />
+    </Backdrop>
+  );
+}

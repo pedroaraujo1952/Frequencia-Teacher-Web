@@ -34,7 +34,7 @@ export default class CreateEvent extends Component {
       key: "",
       info: "",
       infoWarning: "",
-      infoWarning_: ""
+      infoWarning_: "",
     };
   }
 
@@ -52,16 +52,16 @@ export default class CreateEvent extends Component {
         minutesBegin: this.props.eventToEdit.begin.substring(3, 5),
         hourEnd: this.props.eventToEdit.end.substring(0, 2),
         minutesEnd: this.props.eventToEdit.end.substring(3, 5),
-        info: "Editar evento"
+        info: "Editar evento",
       });
     } else {
       this.setState({
-        info: "Novo evento"
+        info: "Novo evento",
       });
     }
   };
 
-  handleAddWord = ev => {
+  handleAddWord = (ev) => {
     ev.preventDefault();
     var el = document.getElementsByClassName("warningNotifyHour");
     var h = parseInt(this.state.notifyHour.substring(0, 2));
@@ -77,7 +77,7 @@ export default class CreateEvent extends Component {
       this.state.minutesEnd === ""
     ) {
       this.setState({
-        infoWarning: "*Informe a hora de início e término da aula"
+        infoWarning: "*Informe a hora de início e término da aula",
       });
       el[0].style.display = "block";
     } else if (
@@ -89,7 +89,7 @@ export default class CreateEvent extends Component {
         min <= parseInt(this.state.minutesBegin))
     ) {
       this.setState({
-        infoWarning: "*Informe um horário entre o intervalo de aula"
+        infoWarning: "*Informe um horário entre o intervalo de aula",
       });
       el[0].style.display = "block";
     } else if (
@@ -101,7 +101,7 @@ export default class CreateEvent extends Component {
       el[0].style.display = "block";
     } else if (cont_keys === 3) {
       this.setState({
-        infoWarning: "*É permitido adicionar apenas 3 palavras-passe"
+        infoWarning: "*É permitido adicionar apenas 3 palavras-passe",
       });
       el[0].style.display = "block";
     } else if (h > 24 || min >= 60) {
@@ -119,11 +119,11 @@ export default class CreateEvent extends Component {
     }
   };
 
-  handleChange = ev => {
+  handleChange = (ev) => {
     this.setState({ [ev.target.name]: ev.target.value });
   };
 
-  verify = ev => {
+  verify = (ev) => {
     ev.preventDefault();
     var el = document.getElementsByClassName("warning");
     var d = parseInt(this.state.date.substring(0, 2));
@@ -162,7 +162,7 @@ export default class CreateEvent extends Component {
     this.setState({ loading: true });
     await Event.createEvent(this.state).then(
       () => this.setState({ loading: false }),
-      error => this.setState({ backHome: true })
+      (error) => this.setState({ backHome: true })
     );
     localStorage.setItem("EventCreated", true);
     this.setState({ backHome: true });
@@ -171,7 +171,7 @@ export default class CreateEvent extends Component {
   handleEditEvent = async () => {
     await Event.updateEvent(this.state).then(
       () => {},
-      error => this.setState({ backHome: true })
+      (error) => this.setState({ backHome: true })
     );
     localStorage.setItem("EventEdited", true);
     this.setState({ backHome: true });
@@ -183,8 +183,8 @@ export default class CreateEvent extends Component {
     }
     return (
       <div className="newEventBody">
-        {this.state.loading ? <Loading /> : null}
-        {/* <Header /> */}
+        <Loading loading={this.state.loading} />
+
         <div className="logoImage" style={{ padding: "10px 40px 0" }}>
           <img
             src={Logo}
@@ -193,7 +193,7 @@ export default class CreateEvent extends Component {
               height: "130px",
               width: "130px",
               padding: "2px",
-              marginBottom: "20px"
+              marginBottom: "20px",
             }}
           />
         </div>
@@ -315,7 +315,7 @@ export default class CreateEvent extends Component {
             </div>
             <div className="cancelButton">
               <button
-                onClick={ev => {
+                onClick={(ev) => {
                   ev.preventDefault();
                   this.setState({ backHome: true });
                 }}

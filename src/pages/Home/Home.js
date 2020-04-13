@@ -64,7 +64,7 @@ export default class Home extends React.Component {
       loading: false,
       classes: [],
       new_event: false,
-      reportState: null
+      reportState: null,
     };
   }
 
@@ -81,16 +81,16 @@ export default class Home extends React.Component {
   loadClasses = async () => {
     this.setState({ loading: true });
     Class.loadClasses().then(
-      classroom => {
+      (classroom) => {
         this.setState({ classes: classroom, loading: false });
       },
-      error => {
+      (error) => {
         window.location.replace("/");
       }
     );
   };
 
-  handleChange = ev => {
+  handleChange = (ev) => {
     this.setState({ [ev.target.name]: ev.target.value });
   };
 
@@ -114,7 +114,7 @@ export default class Home extends React.Component {
           />
         ) : (
           <div>
-            {this.state.loading ? <Loading /> : null}
+            <Loading loading={this.state.loading} />
             <Header />
             <div className="homeFeed">
               {localStorage.getItem("EventCreated")
@@ -122,7 +122,7 @@ export default class Home extends React.Component {
                     autoClose: 3500,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true
+                    draggable: true,
                   }) | localStorage.removeItem("EventCreated")
                 : null}
               {localStorage.getItem("EventEdited")
@@ -130,7 +130,7 @@ export default class Home extends React.Component {
                     autoClose: 3500,
                     closeOnClick: true,
                     pauseOnHover: true,
-                    draggable: true
+                    draggable: true,
                   }) | localStorage.removeItem("EventEdited")
                 : null}
               {this.state.classes.map((c, index) => (
@@ -162,7 +162,7 @@ export default class Home extends React.Component {
                         </div>
                         <div className="editEvent">
                           <button
-                            onClick={ev => {
+                            onClick={(ev) => {
                               ev.preventDefault();
                               this.setState({ new_event: true });
                               new_event_class = c.name;
@@ -175,7 +175,7 @@ export default class Home extends React.Component {
                         </div>
                         <div className="deleteEvent">
                           <button
-                            onClick={async ev => {
+                            onClick={async (ev) => {
                               ev.preventDefault();
 
                               await Event.deleteEvent(e, c.name).then(() => {
@@ -186,7 +186,7 @@ export default class Home extends React.Component {
                                   autoClose: 3500,
                                   closeOnClick: true,
                                   pauseOnHover: true,
-                                  draggable: true
+                                  draggable: true,
                                 });
                               });
                             }}
@@ -196,13 +196,13 @@ export default class Home extends React.Component {
                         </div>
                         <div className="frequenceEvent">
                           <button
-                            onClick={ev => {
+                            onClick={(ev) => {
                               ev.preventDefault();
 
                               const reportState = {
                                 classroom: c.name,
                                 id: e.id,
-                                keyCount: e.keyCount
+                                keyCount: e.keyCount,
                               };
 
                               this.setState({ reportState });
@@ -216,7 +216,7 @@ export default class Home extends React.Component {
                   </div>
                   <div className="createEvent">
                     <button
-                      onClick={ev => {
+                      onClick={(ev) => {
                         ev.preventDefault();
                         new_event_class = c.name;
                         this.setState({ new_event: true });

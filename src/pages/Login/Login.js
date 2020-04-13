@@ -24,34 +24,34 @@ export default class Login extends Component {
 
       loading: false,
 
-      popUpStats: false
+      popUpStats: false,
     };
   }
 
-  handleClick = async ev => {
+  handleClick = async (ev) => {
     ev.preventDefault();
     this.setState({ loading: true });
 
     await User.login(this.state.email, this.state.pswd).then(
-      login => {},
-      error => {
+      (login) => {},
+      (error) => {
         if (error.type === "EMAIL_ERROR")
           this.setState({
             loading: false,
             emailError: error.message,
-            pswdError: ""
+            pswdError: "",
           });
         else if (error.type === "PSWD_ERROR")
           this.setState({
             loading: false,
             pswdError: error.message,
-            emailError: ""
+            emailError: "",
           });
         else {
           this.setState({
             loading: false,
             pswdError: "",
-            emailError: ""
+            emailError: "",
           });
           alert(error);
         }
@@ -59,7 +59,7 @@ export default class Login extends Component {
     );
   };
 
-  handleChange = ev => {
+  handleChange = (ev) => {
     this.setState({ [ev.target.name]: ev.target.value });
   };
 
@@ -67,25 +67,25 @@ export default class Login extends Component {
     this.setState({ popUpStats: true });
   };
 
-  handleClose = ev => {
+  handleClose = (ev) => {
     ev.preventDefault();
     this.setState({ popUpStats: false, emailRecoverError: "" });
   };
 
-  handleChangePassword = async ev => {
+  handleChangePassword = async (ev) => {
     ev.preventDefault();
 
     const { email } = this.state;
 
     await User.forgotPassword(email).then(
-      message => {
+      (message) => {
         this.setState({ popUpStats: false, emailRecoverError: "" });
         alert(message);
       },
-      error => {
+      (error) => {
         if (error.type === "EMAIL_ERROR")
           this.setState({
-            emailRecoverError: error.message
+            emailRecoverError: error.message,
           });
         else {
           alert(error);
@@ -97,7 +97,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className="loginScreen">
-        {this.state.loading ? <Loading /> : null}
+        <Loading loading={this.state.loading} />
         {this.state.popUpStats ? (
           <ForgotPassword
             handleClose={this.handleClose}
@@ -136,7 +136,7 @@ export default class Login extends Component {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                margin: "0"
+                margin: "0",
               }}
             >
               <p

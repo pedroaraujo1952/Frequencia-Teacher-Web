@@ -3,6 +3,7 @@ import { fire, database } from "../config/firebaseConfig";
 import * as Student from "./StudentsController";
 import * as User from "./UserController";
 import * as Notif from "./NotificationController";
+import { formatDate, compareDates } from "../utils/FormatDate";
 
 export async function createEvent(state) {
   return new Promise(async (resolve, reject) => {
@@ -22,18 +23,18 @@ export async function createEvent(state) {
         keys: {
           key1: {
             key: state.keyWord[0],
-            time: state.notifTime[0]
+            time: state.notifTime[0],
           },
           key2: {
             key: state.keyWord[1],
-            time: state.notifTime[1]
+            time: state.notifTime[1],
           },
           key3: {
             key: state.keyWord[2],
-            time: state.notifTime[2]
-          }
+            time: state.notifTime[2],
+          },
         },
-        students: await Student.getStudents(state.nameClass)
+        students: await Student.getStudents(state.nameClass),
       };
 
       await database
@@ -42,7 +43,7 @@ export async function createEvent(state) {
         .then(() => {
           Notif.sendNotification(state.nameClass, data, "create").then(
             () => resolve(true),
-            error => reject(error)
+            (error) => reject(error)
           );
         });
     } catch (error) {
@@ -60,10 +61,14 @@ export async function deleteEvent(event, className) {
         .ref(`professores/${uid}/events/${className}/${event.id}`)
         .remove()
         .then(() => {
-          Notif.sendNotification(className, event, "delete").then(
-            () => resolve(true),
-            error => reject(error)
-          );
+          const { date } = event;
+          const fullDate = formatDate();
+          if (!compareDates(fullDate, date)) {
+            Notif.sendNotification(className, event, "delete").then(
+              () => resolve(true),
+              (error) => reject(error)
+            );
+          }
         });
 
       resolve(true);
@@ -80,16 +85,16 @@ export async function updateEvent(state) {
     state.key = {
       key1: {
         key: state.keyWord[0],
-        time: state.notifTime[0]
+        time: state.notifTime[0],
       },
       key2: {
         key: state.keyWord[1],
-        time: state.notifTime[1]
+        time: state.notifTime[1],
       },
       key3: {
         key: state.keyWord[2],
-        time: state.notifTime[2]
-      }
+        time: state.notifTime[2],
+      },
     };
   }
   return new Promise(async (resolve, reject) => {
@@ -106,7 +111,7 @@ export async function updateEvent(state) {
         description: state.description,
         end: state.hourEnd + "h" + state.minutesEnd,
         keys: state.key,
-        students: state.students
+        students: state.students,
       };
 
       database
@@ -115,7 +120,7 @@ export async function updateEvent(state) {
         .then(() => {
           Notif.sendNotification(state.nameClass, data, "update").then(
             () => resolve(true),
-            error => reject(error)
+            (error) => reject(error)
           );
         });
       resolve(data);
