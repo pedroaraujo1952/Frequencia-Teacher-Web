@@ -19,7 +19,7 @@ export default class Report extends Component {
       students: [],
       event: {},
 
-      goHome: false
+      goHome: false,
     };
   }
 
@@ -38,12 +38,12 @@ export default class Report extends Component {
       `professores/${user.uid}/events/${classroom}/${eventName}`
     );
 
-    await eventRef.on("value", snap => {
+    await eventRef.on("value", (snap) => {
       var students = [];
       var event = {};
       event = snap.val();
 
-      snap.child("students").forEach(element => {
+      snap.child("students").forEach((element) => {
         const studentObject = element.val();
         const student = {
           name: studentObject["name"],
@@ -59,10 +59,23 @@ export default class Report extends Component {
           checkinStatus: Students.validateTime(
             event["begin"],
             studentObject["checkin"]
-          )
+          ),
         };
         students.push(student);
       });
+
+      function compare(a, b) {
+        const nameA = a.name;
+        const nameB = b.name;
+
+        let comparison = 0;
+        if (nameA > nameB) comparison = 1;
+        else if (nameA < nameB) comparison = -1;
+
+        return comparison;
+      }
+
+      students.sort(compare);
 
       this.setState({ students, event });
     });
@@ -76,7 +89,7 @@ export default class Report extends Component {
     const { students } = this.state;
     var newStudents = [];
 
-    students.forEach(element => {
+    students.forEach((element) => {
       if (element.checkin === "Ausente" && element.checkout === "Ausente") {
         newStudents.push(element);
       }
@@ -93,7 +106,7 @@ export default class Report extends Component {
     const { students } = this.state;
     var newStudents = [];
 
-    students.forEach(element => {
+    students.forEach((element) => {
       if (
         element.checkinStatus === false &&
         (element.checkin !== "Ausente" || element.checkout !== "Ausente")
@@ -105,7 +118,7 @@ export default class Report extends Component {
     this.setState({ students: newStudents });
   };
 
-  handleFilterChange = ev => {
+  handleFilterChange = (ev) => {
     const value = ev.target.value;
 
     if (value === "absent") {
@@ -120,7 +133,7 @@ export default class Report extends Component {
     }
   };
 
-  handleBack = ev => {
+  handleBack = (ev) => {
     ev.preventDefault();
     this.setState({ goHome: true });
   };
@@ -146,7 +159,7 @@ export default class Report extends Component {
                 minHeight: "80px",
                 marginRight: "10px",
                 padding: "2px",
-                paddingTop: "0"
+                paddingTop: "0",
               }}
               onClick={this.handleBack}
             />

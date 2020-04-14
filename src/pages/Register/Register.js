@@ -10,12 +10,10 @@ import Back from "../../assets/back.png";
 
 import "./styles.css";
 
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
+import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
 import InputBase from "@material-ui/core/InputBase";
 
 export default class Register extends Component {
@@ -31,42 +29,42 @@ export default class Register extends Component {
       pswdConfirm: "",
       pswdConfirmError: "",
 
-      stats: false
+      stats: false,
     };
   }
 
-  handleChange = ev => {
+  handleChange = (ev) => {
     this.setState({ [ev.target.name]: ev.target.value });
   };
 
-  handleSignup = async ev => {
+  handleSignup = async (ev) => {
     ev.preventDefault();
 
     this.setState({ loading: true });
 
     await User.createUser(this.state).then(
-      stats => this.setState({ stats, loading: !stats }),
-      error => {
+      (stats) => this.setState({ stats, loading: !stats }),
+      (error) => {
         if (error.type === "EMAIL_ERROR")
           this.setState({
             loading: false,
             emailError: error.message,
             pswdError: "",
-            pswdConfirmError: ""
+            pswdConfirmError: "",
           });
         else if (error.type === "PSWD_ERROR")
           this.setState({
             loading: false,
             pswdError: error.message,
             pswdConfirmError: error.message,
-            emailError: ""
+            emailError: "",
           });
         else {
           this.setState({
             loading: false,
             pswdError: "",
             emailError: "",
-            pswdConfirmError: ""
+            pswdConfirmError: "",
           });
           alert(error.message);
         }
@@ -75,11 +73,11 @@ export default class Register extends Component {
   };
 
   render() {
-    const BootstrapInput = withStyles(theme => ({
+    const BootstrapInput = withStyles((theme) => ({
       root: {
         "label + &": {
-          marginTop: theme.spacing(3)
-        }
+          marginTop: theme.spacing(3),
+        },
       },
       input: {
         borderRadius: 8,
@@ -94,9 +92,9 @@ export default class Register extends Component {
         "&:focus": {
           borderRadius: 8,
           borderColor: "#80bdff",
-          boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
-        }
-      }
+          boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+        },
+      },
     }))(InputBase);
 
     if (this.state.stats) {
@@ -119,7 +117,7 @@ export default class Register extends Component {
                 maxHeight: "100px",
                 minHeight: "100px",
                 maxWidth: "100px",
-                minWidth: "100px"
+                minWidth: "100px",
               }}
               onClick={() =>
                 this.setState({
@@ -131,7 +129,7 @@ export default class Register extends Component {
                   pswdConfirm: "",
                   pswdConfirmError: "",
                   email: "",
-                  emailError: ""
+                  emailError: "",
                 })
               }
             />
