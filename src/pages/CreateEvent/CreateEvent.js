@@ -154,12 +154,24 @@ export default class CreateEvent extends Component {
       el[0].style.display = "block";
     } else {
       el[0].style.display = "none";
+
       this.sendEvent();
     }
   };
 
+  handleFixTime = (time) => {
+    if(time[1] === '_')time = '0' + time[0];
+    return time;
+  }
+
   sendEvent = async () => {
-    this.setState({ loading: true });
+    this.setState({
+      hourBegin: await this.handleFixTime(this.state.hourBegin), 
+      hourEnd: await this.handleFixTime(this.state.hourEnd), 
+      minutesBegin: await this.handleFixTime(this.state.minutesBegin), 
+      minutesEnd: await this.handleFixTime(this.state.minutesEnd),
+      loading: true
+    })
     await Event.createEvent(this.state).then(
       () => this.setState({ loading: false }),
       (error) => this.setState({ backHome: true })
@@ -169,6 +181,13 @@ export default class CreateEvent extends Component {
   };
 
   handleEditEvent = async () => {
+    this.setState({
+      hourBegin: await this.handleFixTime(this.state.hourBegin), 
+      hourEnd: await this.handleFixTime(this.state.hourEnd), 
+      minutesBegin: await this.handleFixTime(this.state.minutesBegin), 
+      minutesEnd: await this.handleFixTime(this.state.minutesEnd),
+      loading: true
+    })
     await Event.updateEvent(this.state).then(
       () => {},
       (error) => this.setState({ backHome: true })
