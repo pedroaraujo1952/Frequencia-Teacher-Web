@@ -3,161 +3,18 @@ import * as firebase from "firebase/app";
 import { fire, database } from "../config/firebaseConfig";
 
 import Error from "../errors/user.error";
+import Teacher from "../Models/Teacher";
 
 export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
   return new Promise((resolve, reject) => {
-    // if (!email.includes("@fmm.org")) {
-    //   const error = {
-    //     code: "auth/unauthorized-domain"
-    //   };
-    //   const ERROR = new Error(error);
-    //   reject(ERROR.getError);
-    /*} else*/ if (pswd === pswdConfirm) {
-      const user = {
-        name: name,
-        subject: subject,
-        email: email,
-        events: {
-          "3AI": {
-            evento0: {
-              begin: " ",
-              date: " ",
-              description: " ",
-              end: " ",
-              keys: {
-                key1: {
-                  key: "",
-                  time: ""
-                },
-                key2: {
-                  key: "",
-                  time: ""
-                },
-                key3: {
-                  key: "",
-                  time: ""
-                }
-              },
-              link: "",
-              students: {
-                student0: {
-                  checkin: "",
-                  checkout: "",
-                  keys: {
-                    key1: {
-                      key: "",
-                      time: ""
-                    },
-                    key2: {
-                      key: "",
-                      time: ""
-                    },
-                    key3: {
-                      key: "",
-                      time: ""
-                    }
-                  },
-                  name: ""
-                }
-              },
-              subject: "",
-              title: " "
-            }
-          },
-          "3BI": {
-            evento0: {
-              begin: " ",
-              date: " ",
-              description: " ",
-              end: " ",
-              keys: {
-                key1: {
-                  key: "",
-                  time: ""
-                },
-                key2: {
-                  key: "",
-                  time: ""
-                },
-                key3: {
-                  key: "",
-                  time: ""
-                }
-              },
-              link: "",
-              students: {
-                student0: {
-                  checkin: "",
-                  checkout: "",
-                  keys: {
-                    key1: {
-                      key: "",
-                      time: ""
-                    },
-                    key2: {
-                      key: "",
-                      time: ""
-                    },
-                    key3: {
-                      key: "",
-                      time: ""
-                    }
-                  },
-                  name: ""
-                }
-              },
-              subject: "",
-              title: " "
-            }
-          },
-          "3CI": {
-            evento0: {
-              begin: " ",
-              date: " ",
-              description: " ",
-              end: " ",
-              keys: {
-                key1: {
-                  key: "",
-                  time: ""
-                },
-                key2: {
-                  key: "",
-                  time: ""
-                },
-                key3: {
-                  key: "",
-                  time: ""
-                }
-              },
-              link: "",
-              students: {
-                student0: {
-                  checkin: "",
-                  checkout: "",
-                  keys: {
-                    key1: {
-                      key: "",
-                      time: ""
-                    },
-                    key2: {
-                      key: "",
-                      time: ""
-                    },
-                    key3: {
-                      key: "",
-                      time: ""
-                    }
-                  },
-                  name: ""
-                }
-              },
-              subject: "",
-              title: " "
-            }
-          }
-        }
+    if (!email.includes("@fmm.org")) {
+      const error = {
+        code: "auth/unauthorized-domain",
       };
+      const ERROR = new Error(error);
+      reject(ERROR.getError);
+    } else if (pswd === pswdConfirm) {
+      const user = Teacher(name, subject, email);
 
       fire
         .auth()
@@ -171,26 +28,26 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
             .then(() => {
               updateUserName(name).then(
                 () => resolve(true),
-                error => {
+                (error) => {
                   fire.auth().currentUser.delete();
                   const ERROR = new Error(error);
                   reject(ERROR.getError);
                 }
               );
             })
-            .catch(error => {
+            .catch((error) => {
               fire.auth().currentUser.delete();
               const ERROR = new Error(error);
               reject(ERROR.getError);
             });
         })
-        .catch(error => {
+        .catch((error) => {
           const ERROR = new Error(error);
           reject(ERROR.getError);
         });
     } else {
       const error = {
-        code: "auth/wrong-confirm-password"
+        code: "auth/wrong-confirm-password",
       };
       const ERROR = new Error(error);
       reject(ERROR.getError);
@@ -200,8 +57,7 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
 
 export async function getSubject(uid) {
   return new Promise((resolve, reject) => {
-    database.ref(`professores/${uid}/subject`).once("value", snap => {
-      console.log(snap.val());
+    database.ref(`professores/${uid}/subject`).once("value", (snap) => {
       resolve(snap.val());
     });
   });
@@ -218,7 +74,7 @@ export async function getUser() {
           ? response.displayName
           : "Sem nome de usuário",
         email: response.email,
-        avatar: response.photoURL
+        avatar: response.photoURL,
       };
 
       resolve(user);
@@ -236,7 +92,7 @@ export async function login(email, password) {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => resolve(hasLoaded))
-      .catch(error => {
+      .catch((error) => {
         //Error code validation
         const ERROR = new Error(error);
         reject(ERROR.getError);
@@ -259,7 +115,7 @@ export async function updateUserPhoto(photoURL) {
     var user = firebase.auth().currentUser;
     user
       .updateProfile({
-        photoURL: photoURL
+        photoURL: photoURL,
       })
       .then(() => {
         resolve(true);
@@ -275,7 +131,7 @@ export async function updateUserName(displayName) {
     var user = firebase.auth().currentUser;
     user
       .updateProfile({
-        displayName: displayName
+        displayName: displayName,
       })
       .then(() => {
         resolve(true);
@@ -292,7 +148,7 @@ export async function updateUserProfile(displayName, photoURL) {
     user
       .updateProfile({
         displayName: displayName,
-        photoURL: photoURL
+        photoURL: photoURL,
       })
       .then(() => {
         resolve(true);
@@ -311,7 +167,7 @@ export async function forgotPassword(email) {
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => resolve(message))
-      .catch(error => {
+      .catch((error) => {
         //Error code validation
         const ERROR = new Error(error);
         reject(ERROR.getError);
@@ -326,7 +182,7 @@ export async function changeEmail(newEmail) {
     user
       .updateEmail(newEmail)
       .then(() => resolve(true))
-      .catch(error => {
+      .catch((error) => {
         //Error code validation
         const ERROR = new Error(error);
         reject(ERROR.getError);
@@ -341,7 +197,7 @@ export async function changePassword(newPsdw) {
     user
       .updatePassword(newPsdw)
       .then(() => resolve(true))
-      .catch(error => {
+      .catch((error) => {
         //Error code validation
         const ERROR = new Error(error);
         reject(ERROR.getError);
