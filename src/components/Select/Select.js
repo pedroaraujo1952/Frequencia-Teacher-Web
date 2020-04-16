@@ -41,6 +41,7 @@ export default function MaterialSelect({ onChange, value, name }) {
           onChange={onChange}
           input={<BootstrapInput />}
         >
+          <MenuItem value={"ACST"}>ACST</MenuItem>
           <MenuItem value={"APE"}>APE</MenuItem>
           <MenuItem value={"API"}>API</MenuItem>
           <MenuItem value={"APM"}>APM</MenuItem>
@@ -48,6 +49,7 @@ export default function MaterialSelect({ onChange, value, name }) {
           <MenuItem value={"Arte"}>Arte</MenuItem>
           <MenuItem value={"Biologia"}>Biologia</MenuItem>
           <MenuItem value={"Ed. Física"}>Ed. Física</MenuItem>
+          <MenuItem value={"Eletricidade"}>Eletricidade</MenuItem>
           <MenuItem value={"E. Industrial"}>E. Industrial</MenuItem>
           <MenuItem value={"Filosofia"}>Filosofia</MenuItem>
           <MenuItem value={"Física"}>Física</MenuItem>
@@ -55,12 +57,14 @@ export default function MaterialSelect({ onChange, value, name }) {
           <MenuItem value={"História"}>História</MenuItem>
           <MenuItem value={"L. Inglesa"}>L. Inglesa</MenuItem>
           <MenuItem value={"L. Portuguesa"}>L. Portuguesa</MenuItem>
+          <MenuItem value={"LTP"}>LTP</MenuItem>
           <MenuItem value={"LPIII/WEB"}>LPIII/WEB</MenuItem>
           <MenuItem value={"Matemática"}>Matemática</MenuItem>
           <MenuItem value={"Mobile"}>Mobile</MenuItem>
           <MenuItem value={"Micro"}>Micro</MenuItem>
           <MenuItem value={"Química"}>Química</MenuItem>
           <MenuItem value={"Sociologia"}>Sociologia</MenuItem>
+          <MenuItem value={"UX"}>UX</MenuItem>
         </Select>
       </FormControl>
     </div>
