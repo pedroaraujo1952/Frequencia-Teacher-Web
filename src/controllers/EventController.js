@@ -1,9 +1,10 @@
 import { fire, database } from "../config/firebaseConfig";
 
+import { formatDate, compareDates } from "../utils/FormatDate";
+
 import * as Student from "./StudentsController";
 import * as User from "./UserController";
 import * as Notif from "./NotificationController";
-import { formatDate, compareDates } from "../utils/FormatDate";
 
 export async function createEvent(state) {
   return new Promise(async (resolve, reject) => {
@@ -12,7 +13,7 @@ export async function createEvent(state) {
 
       var data = {
         title: state.name,
-        subject: await User.getSubject(uid),
+        subject: state.selectedSubject,
         link: state.link.includes("https://")
           ? state.link
           : "https://" + state.link,

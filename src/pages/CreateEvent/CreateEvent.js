@@ -4,6 +4,7 @@ import MaskedInput from "react-text-mask";
 
 import * as Event from "../../controllers/EventController";
 
+import Select from "../../components/Select/Select";
 import Loading from "../../components/Loading/Loading";
 
 import Logo from "../../assets/Logok.png";
@@ -20,6 +21,8 @@ export default class CreateEvent extends Component {
       nameClass: this.props.nameClass,
       backHome: false,
       name: "",
+      subjects: this.props.subjects,
+      selectedSubject: "",
       link: "",
       date: "",
       description: "",
@@ -137,7 +140,8 @@ export default class CreateEvent extends Component {
       this.state.minutesEnd === "" ||
       this.state.date === "" ||
       this.state.keyWord === [] ||
-      this.state.description === ""
+      this.state.description === "" ||
+      this.state.selectedSubject === ""
     ) {
       this.setState({ infoWarning_: "*Preencha todos os campos" });
       el[0].style.display = "block";
@@ -160,18 +164,18 @@ export default class CreateEvent extends Component {
   };
 
   handleFixTime = (time) => {
-    if(time[1] === '_')time = '0' + time[0];
+    if (time[1] === "_") time = "0" + time[0];
     return time;
-  }
+  };
 
   sendEvent = async () => {
     this.setState({
-      hourBegin: await this.handleFixTime(this.state.hourBegin), 
-      hourEnd: await this.handleFixTime(this.state.hourEnd), 
-      minutesBegin: await this.handleFixTime(this.state.minutesBegin), 
+      hourBegin: await this.handleFixTime(this.state.hourBegin),
+      hourEnd: await this.handleFixTime(this.state.hourEnd),
+      minutesBegin: await this.handleFixTime(this.state.minutesBegin),
       minutesEnd: await this.handleFixTime(this.state.minutesEnd),
-      loading: true
-    })
+      loading: true,
+    });
     await Event.createEvent(this.state).then(
       () => this.setState({ loading: false }),
       (error) => this.setState({ backHome: true })
@@ -182,12 +186,12 @@ export default class CreateEvent extends Component {
 
   handleEditEvent = async () => {
     this.setState({
-      hourBegin: await this.handleFixTime(this.state.hourBegin), 
-      hourEnd: await this.handleFixTime(this.state.hourEnd), 
-      minutesBegin: await this.handleFixTime(this.state.minutesBegin), 
+      hourBegin: await this.handleFixTime(this.state.hourBegin),
+      hourEnd: await this.handleFixTime(this.state.hourEnd),
+      minutesBegin: await this.handleFixTime(this.state.minutesBegin),
       minutesEnd: await this.handleFixTime(this.state.minutesEnd),
-      loading: true
-    })
+      loading: true,
+    });
     await Event.updateEvent(this.state).then(
       () => {},
       (error) => this.setState({ backHome: true })
@@ -223,6 +227,7 @@ export default class CreateEvent extends Component {
               <input
                 type="text"
                 name="name"
+                placeholder="Ex.: Ponto e Reta"
                 onChange={this.handleChange}
                 defaultValue={this.state.name}
               />
@@ -232,10 +237,20 @@ export default class CreateEvent extends Component {
               <input
                 type="text"
                 name="link"
+                placeholder="Ex.: https://meet.google.com/ijm-vrdd-vjn"
                 onChange={this.handleChange}
                 defaultValue={this.state.link}
               />
             </div>
+          </div>
+          <div className="subject">
+            <h1>Matéria</h1>
+            <Select
+              name="selectedSubject"
+              value={this.state.selectedSubject}
+              onChange={this.handleChange}
+              subjects={this.state.subjects}
+            />
           </div>
           <div className="timeBegin">
             <h1>Horário de Início</h1>
@@ -315,6 +330,7 @@ export default class CreateEvent extends Component {
             <textarea
               type="text"
               name="description"
+              placeholder="Assunto abordado na aula"
               onChange={this.handleChange}
               defaultValue={this.state.description}
             />

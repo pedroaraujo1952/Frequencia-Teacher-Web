@@ -167,15 +167,20 @@
 
 .rectanguleEvent .editEvent {
   height: 0px;
+  width: 100%;
+
   position: absolute;
 }
 * .rectanguleEvent .deleteEvent {
   height: 0px;
+  width: 100%;
   position: absolute;
 }
 
 .rectanguleEvent .frequenceEvent {
   height: 0px;
+  width: 100%;
+
   position: absolute;
 }
 

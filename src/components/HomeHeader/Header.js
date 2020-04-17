@@ -15,17 +15,17 @@ export default class Header extends Component {
     this.state = {
       goProfile: false,
       logout: false,
-      user: null
+      user: null,
     };
   }
 
-  logout = ev => {
+  logout = (ev) => {
     ev.preventDefault();
     fire.auth().signOut();
     this.setState({ logout: true });
   };
 
-  profile = ev => {
+  profile = (ev) => {
     ev.preventDefault();
     this.setState({ goProfile: true });
   };
@@ -39,36 +39,44 @@ export default class Header extends Component {
     }
     return (
       <div className="homeHeader">
-        <div className="backImage">
-          <img
-            src={Back}
-            alt="voltar"
-            style={{
-              border: "3px solid #043f5f",
-              borderRadius: "100%",
-              height: "80px",
-              width: "80px",
-              padding: "2px",
-              cursor: "pointer"
-            }}
-            onClick={this.logout}
-          />
-        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className="backImage">
+            <img
+              src={Back}
+              alt="voltar"
+              style={{
+                border: "3px solid #043f5f",
+                borderRadius: "100%",
+                height: "80px",
+                width: "80px",
+                padding: "2px",
+                cursor: "pointer",
+              }}
+              onClick={this.logout}
+            />
+          </div>
 
-        <div className="logoImage">
-          <img
-            src={Logo}
-            alt=""
-            style={{
-              height: "130px",
-              width: "130px",
-              padding: "2px"
-            }}
-          />
-        </div>
+          <div className="logoImage">
+            <img
+              src={Logo}
+              alt=""
+              style={{
+                height: "130px",
+                width: "130px",
+                padding: "2px",
+              }}
+            />
+          </div>
 
-        <div className="textoLogo">
-          <h1>Turmas</h1>
+          <div className="textoLogo">
+            <h1>Turmas</h1>
+          </div>
         </div>
 
         <div className="avatarImage">
@@ -79,7 +87,7 @@ export default class Header extends Component {
               height: "80px",
               width: "80px",
               padding: "2px",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
             onClick={this.profile}
           />

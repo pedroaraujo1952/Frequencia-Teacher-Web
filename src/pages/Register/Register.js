@@ -4,20 +4,19 @@ import { Redirect } from "react-router-dom";
 import * as User from "../../controllers/UserController";
 
 import Loading from "../../components/Loading/Loading";
+import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";
 
 import Logo from "../../assets/Logok.png";
 import Back from "../../assets/back.png";
 
 import "./styles.css";
 
-import Select from "../../components/Select/Select";
-
 export default class Register extends Component {
   constructor() {
     super();
     this.state = {
       name: "",
-      subject: "",
+      subject: [],
       email: "",
       emailError: "",
       pswd: "",
@@ -117,9 +116,10 @@ export default class Register extends Component {
           <input type="text" name="name" onChange={this.handleChange} />
 
           <p>Materia</p>
-          <Select
+          <MultipleSelect
             name="subject"
             onChange={this.handleChange}
+            onMultipleChange={this.handleMultipleChange}
             value={this.state.subject}
           />
 

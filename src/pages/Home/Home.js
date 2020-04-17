@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import * as Class from "../../controllers/ClassController";
 import * as Event from "../../controllers/EventController";
+import * as User from "../../controllers/UserController";
 
 import Avatar from "../../assets/profile-user.png";
 
@@ -51,6 +52,7 @@ export default class Home extends React.Component {
     this.state = {
       goLogin: false,
       username: "",
+      subjects: "",
       avatar: Avatar,
       avatarURL: null,
 
@@ -72,11 +74,19 @@ export default class Home extends React.Component {
     try {
       editEvent = false;
       this.loadClasses();
+      this.loadSubject();
     } catch (e) {
       fire.auth().signOut();
       this.setState({ goLogin: true });
     }
   }
+
+  loadSubject = async () => {
+    const uid = await fire.auth().currentUser.uid;
+    const subjects = await User.getSubject(uid);
+
+    this.setState({ subjects });
+  };
 
   loadClasses = async () => {
     this.setState({ loading: true });
@@ -109,6 +119,7 @@ export default class Home extends React.Component {
         {this.state.new_event ? (
           <CreateEvent
             nameClass={new_event_class}
+            subjects={this.state.subjects}
             editEvent={editEvent}
             eventToEdit={eventToEdit}
           />

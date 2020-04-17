@@ -9,11 +9,13 @@ const BootstrapInput = withStyles((theme) => ({
   input: {
     borderRadius: 8,
     position: "relative",
+    color: "#043f5f",
     backgroundColor: theme.palette.background.paper,
     fontSize: 22,
-    padding: "11px 26px 10px 12px",
+    padding: "16px 26px 16px 20px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&:focus": {
+      color: "#043f5f",
       borderRadius: 8,
       borderColor: "#80bdff",
       backgroundColor: theme.palette.background.paper,
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MaterialSelect({ onChange, value, name }) {
+export default function MaterialSelect({ onChange, value, name, subjects }) {
   const classes = useStyles();
   return (
     <div>
@@ -41,30 +43,11 @@ export default function MaterialSelect({ onChange, value, name }) {
           onChange={onChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value={"ACST"}>ACST</MenuItem>
-          <MenuItem value={"APE"}>APE</MenuItem>
-          <MenuItem value={"API"}>API</MenuItem>
-          <MenuItem value={"APM"}>APM</MenuItem>
-          <MenuItem value={"APH/CLP"}>APH/CLP</MenuItem>
-          <MenuItem value={"Arte"}>Arte</MenuItem>
-          <MenuItem value={"Biologia"}>Biologia</MenuItem>
-          <MenuItem value={"Ed. Física"}>Ed. Física</MenuItem>
-          <MenuItem value={"Eletricidade"}>Eletricidade</MenuItem>
-          <MenuItem value={"E. Industrial"}>E. Industrial</MenuItem>
-          <MenuItem value={"Filosofia"}>Filosofia</MenuItem>
-          <MenuItem value={"Física"}>Física</MenuItem>
-          <MenuItem value={"Geografia"}>Geografia</MenuItem>
-          <MenuItem value={"História"}>História</MenuItem>
-          <MenuItem value={"L. Inglesa"}>L. Inglesa</MenuItem>
-          <MenuItem value={"L. Portuguesa"}>L. Portuguesa</MenuItem>
-          <MenuItem value={"LTP"}>LTP</MenuItem>
-          <MenuItem value={"LPIII/WEB"}>LPIII/WEB</MenuItem>
-          <MenuItem value={"Matemática"}>Matemática</MenuItem>
-          <MenuItem value={"Mobile"}>Mobile</MenuItem>
-          <MenuItem value={"Micro"}>Micro</MenuItem>
-          <MenuItem value={"Química"}>Química</MenuItem>
-          <MenuItem value={"Sociologia"}>Sociologia</MenuItem>
-          <MenuItem value={"UX"}>UX</MenuItem>
+          {subjects.map((subject) => (
+            <MenuItem key={subject} value={subject}>
+              {subject}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
