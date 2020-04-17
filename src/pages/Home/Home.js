@@ -7,7 +7,6 @@ import Loading from "../../components/Loading/Loading";
 import CreateEvent from "../CreateEvent/CreateEvent";
 
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import * as Class from "../../controllers/ClassController";
 import * as Event from "../../controllers/EventController";
@@ -16,6 +15,7 @@ import * as User from "../../controllers/UserController";
 import Avatar from "../../assets/profile-user.png";
 
 import "./styles.css";
+import "react-toastify/dist/ReactToastify.css";
 
 class Events {
   constructor(

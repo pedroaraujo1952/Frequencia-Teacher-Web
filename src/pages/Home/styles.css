@@ -165,6 +165,10 @@
   margin-top: 116px;
 }
 
+.keyWordEvent h2 {
+  width: 500px;
+}
+
 .rectanguleEvent .editEvent {
   height: 0px;
   width: 100%;
