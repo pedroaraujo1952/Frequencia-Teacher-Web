@@ -3,15 +3,15 @@ import { fire, database } from "../config/firebaseConfig";
 import { formatDate, compareDates } from "../utils/FormatDate";
 
 import * as Student from "./StudentsController";
-import * as User from "./UserController";
+// import * as User from "./UserController";
 import * as Notif from "./NotificationController";
 
 export async function createEvent(state) {
   return new Promise(async (resolve, reject) => {
     try {
       var uid = fire.auth().currentUser.uid;
-      
-      state.classroom.forEach(async classroom => {
+
+      state.classroom.forEach(async (classroom) => {
         var data = {
           title: state.name,
           subject: state.selectedSubject,
@@ -38,7 +38,7 @@ export async function createEvent(state) {
           },
           students: await Student.getStudents(classroom),
         };
-  
+
         await database
           .ref(`professores/${uid}/events/${classroom}`)
           .push(data)
@@ -47,9 +47,8 @@ export async function createEvent(state) {
               () => resolve(true),
               (error) => reject(error)
             );
-          });  
+          });
       });
-      
     } catch (error) {
       reject(error);
     }
@@ -104,9 +103,10 @@ export async function updateEvent(state) {
   return new Promise(async (resolve, reject) => {
     try {
       var uid = fire.auth().currentUser.uid;
+
       var data = {
         title: state.name,
-        subject: await User.getSubject(uid),
+        subject: state.selectedSubject,
         link: state.link.includes("https://")
           ? state.link
           : "https://" + state.link,

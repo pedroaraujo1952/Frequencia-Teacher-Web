@@ -57,13 +57,13 @@ export default class CreateEvent extends Component {
         minutesBegin: this.props.eventToEdit.begin.substring(3, 5),
         hourEnd: this.props.eventToEdit.end.substring(0, 2),
         minutesEnd: this.props.eventToEdit.end.substring(3, 5),
+        selectedSubject: this.props.eventToEdit.subject,
         info: "Editar evento",
       });
     } else {
-      
       var classroom = this.state.classroom;
       classroom.push(this.state.nameClass);
-      
+
       this.setState({
         info: "Novo evento",
         classroom: classroom,
@@ -163,7 +163,7 @@ export default class CreateEvent extends Component {
     } else if (d > 31 || m > 12 || y !== 20) {
       this.setState({ infoWarning_: "*Informe uma data válida" });
       el[0].style.display = "block";
-    } else if(!this.state.classroom.includes(this.state.nameClass)){
+    } else if (!this.state.classroom.includes(this.state.nameClass)) {
       this.setState({ infoWarning_: "*Informe a turma correspondente" });
       el[0].style.display = "block";
     } else {
@@ -303,15 +303,17 @@ export default class CreateEvent extends Component {
               onChange={this.handleChange}
               defaultValue={this.state.date}
             />
-            {!this.props.editEvent ? <div className="classroom">
-              <h1>Turma(s)</h1>
-              <MultipleSelect
-                name="classroom"
-                onChange={this.handleChange}
-                onMultipleChange={this.handleMultipleChange}
-                value={this.state.classroom}
-              />
-            </div> : null}
+            {!this.props.editEvent ? (
+              <div className="classroom">
+                <h1>Turma(s)</h1>
+                <MultipleSelect
+                  name="classroom"
+                  onChange={this.handleChange}
+                  onMultipleChange={this.handleMultipleChange}
+                  value={this.state.classroom}
+                />
+              </div>
+            ) : null}
           </div>
           <div className="keyWords">
             <div className="warningNotifyHour">
