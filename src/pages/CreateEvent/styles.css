@@ -163,11 +163,18 @@
   margin-left: 170px;
 }
 
-.date {
+.date-classroom {
   margin-top: 170px;
+  margin-bottom: 130px;
 }
 
-.date input {
+.date-classroom h1{
+  position: absolute;
+}
+
+.date-classroom input {
+  position: absolute;
+  margin-top: 50px;
   width: 400px;
   height: 51px;
   background: #ffffff;
@@ -180,6 +187,27 @@
   line-height: 43px;
   color: #043f5f;
   padding: 20px;
+}
+
+.date-classroom .classroom {
+  position: absolute;
+  margin-left: 450px;
+  width: 35%;
+  height: 0px;
+}
+
+.date-classroom .classroom .MuiInputBase-input{
+  padding-top: 20px;
+  margin-top: 50px;
+  height: 21px;
+}
+
+.date-classroom .classroom .MuiSvgIcon-root {
+  margin-top: 25px;
+}
+
+.keyWords {
+  margin-top: 300px;
 }
 
 .keyWords h1 {
@@ -363,5 +391,8 @@
   }
   .newEvent .description {
     width: 100%;
+  }
+  .date-classroom .classroom {
+    width: 40%;
   }
 }

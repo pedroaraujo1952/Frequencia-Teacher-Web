@@ -5,6 +5,7 @@ import MaskedInput from "react-text-mask";
 import * as Event from "../../controllers/EventController";
 
 import Select from "../../components/Select/Select";
+import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";
 import Loading from "../../components/Loading/Loading";
 
 import Logo from "../../assets/Logok.png";
@@ -24,6 +25,7 @@ export default class CreateEvent extends Component {
       subjects: this.props.subjects,
       selectedSubject: "",
       link: "",
+      classroom: [],
       date: "",
       description: "",
       hourBegin: "",
@@ -58,8 +60,13 @@ export default class CreateEvent extends Component {
         info: "Editar evento",
       });
     } else {
+      
+      var classroom = this.state.classroom;
+      classroom.push(this.state.nameClass);
+      
       this.setState({
         info: "Novo evento",
+        classroom: classroom,
       });
     }
   };
@@ -156,9 +163,11 @@ export default class CreateEvent extends Component {
     } else if (d > 31 || m > 12 || y !== 20) {
       this.setState({ infoWarning_: "*Informe uma data válida" });
       el[0].style.display = "block";
+    } else if(!this.state.classroom.includes(this.state.nameClass)){
+      this.setState({ infoWarning_: "*Informe a turma correspondente" });
+      el[0].style.display = "block";
     } else {
       el[0].style.display = "none";
-
       this.sendEvent();
     }
   };
@@ -244,7 +253,7 @@ export default class CreateEvent extends Component {
             </div>
           </div>
           <div className="subject">
-            <h1>Matéria</h1>
+            <h1>Disciplina</h1>
             <Select
               name="selectedSubject"
               value={this.state.selectedSubject}
@@ -286,7 +295,7 @@ export default class CreateEvent extends Component {
             />
             <h2 name="min">min</h2>
           </div>
-          <div className="date">
+          <div className="date-classroom">
             <h1>Data</h1>
             <MaskedInput
               name="date"
@@ -294,6 +303,15 @@ export default class CreateEvent extends Component {
               onChange={this.handleChange}
               defaultValue={this.state.date}
             />
+            {!this.props.editEvent ? <div className="classroom">
+              <h1>Turma(s)</h1>
+              <MultipleSelect
+                name="classroom"
+                onChange={this.handleChange}
+                onMultipleChange={this.handleMultipleChange}
+                value={this.state.classroom}
+              />
+            </div> : null}
           </div>
           <div className="keyWords">
             <div className="warningNotifyHour">

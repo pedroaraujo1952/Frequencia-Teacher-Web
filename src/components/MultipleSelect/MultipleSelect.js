@@ -5,7 +5,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
 
-import subjects from "../../models/Subject";
+import subjects from "../../Models/Subject";
+import classrooms from "../../Models/Classroom";
 import { Checkbox, ListItemText } from "@material-ui/core";
 
 const BootstrapInput = withStyles((theme) => ({
@@ -46,12 +47,20 @@ export default function MultipleSelect({ onChange, value, name }) {
           renderValue={(selected) => selected.join(", ")}
           input={<BootstrapInput />}
         >
-          {subjects.map((subject) => (
-            <MenuItem key={subject.name} value={subject.name}>
-              <Checkbox checked={value.indexOf(subject.name) > -1} />
-              <ListItemText primary={subject.label} />
-            </MenuItem>
-          ))}
+          {name === "subject" ? 
+            subjects.map((subject) => (
+              <MenuItem key={subject.name} value={subject.name}>
+                <Checkbox checked={value.indexOf(subject.name) > -1} />
+                <ListItemText primary={subject.label} />
+              </MenuItem>
+            )) : 
+            classrooms.map((classroom) => (
+              <MenuItem key={classroom.name} value={classroom.name}>
+                <Checkbox checked={value.indexOf(classroom.name) > -1} />
+                <ListItemText primary={classroom.label} />
+              </MenuItem>
+            ))
+          }
         </Select>
       </FormControl>
     </div>

@@ -10,43 +10,46 @@ export async function createEvent(state) {
   return new Promise(async (resolve, reject) => {
     try {
       var uid = fire.auth().currentUser.uid;
-
-      var data = {
-        title: state.name,
-        subject: state.selectedSubject,
-        link: state.link.includes("https://")
-          ? state.link
-          : "https://" + state.link,
-        begin: state.hourBegin + "h" + state.minutesBegin,
-        date: state.date,
-        description: state.description,
-        end: state.hourEnd + "h" + state.minutesEnd,
-        keys: {
-          key1: {
-            key: state.keyWord[0],
-            time: state.notifTime[0],
+      
+      state.classroom.forEach(async classroom => {
+        var data = {
+          title: state.name,
+          subject: state.selectedSubject,
+          link: state.link.includes("https://")
+            ? state.link
+            : "https://" + state.link,
+          begin: state.hourBegin + "h" + state.minutesBegin,
+          date: state.date,
+          description: state.description,
+          end: state.hourEnd + "h" + state.minutesEnd,
+          keys: {
+            key1: {
+              key: state.keyWord[0],
+              time: state.notifTime[0],
+            },
+            key2: {
+              key: state.keyWord[1],
+              time: state.notifTime[1],
+            },
+            key3: {
+              key: state.keyWord[2],
+              time: state.notifTime[2],
+            },
           },
-          key2: {
-            key: state.keyWord[1],
-            time: state.notifTime[1],
-          },
-          key3: {
-            key: state.keyWord[2],
-            time: state.notifTime[2],
-          },
-        },
-        students: await Student.getStudents(state.nameClass),
-      };
-
-      await database
-        .ref(`professores/${uid}/events/${state.nameClass}`)
-        .push(data)
-        .then(() => {
-          Notif.sendNotification(state.nameClass, data, "create").then(
-            () => resolve(true),
-            (error) => reject(error)
-          );
-        });
+          students: await Student.getStudents(classroom),
+        };
+  
+        await database
+          .ref(`professores/${uid}/events/${classroom}`)
+          .push(data)
+          .then(() => {
+            Notif.sendNotification(state.nameClass, data, "create").then(
+              () => resolve(true),
+              (error) => reject(error)
+            );
+          });  
+      });
+      
     } catch (error) {
       reject(error);
     }
