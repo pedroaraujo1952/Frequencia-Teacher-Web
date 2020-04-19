@@ -5,8 +5,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
 
-import subjects from "../../models/Subject";
-import classrooms from "../../models/Classroom";
+import subjects from "../../Models/Subject";
+import classrooms from "../../Models/Classroom";
 import { Checkbox, ListItemText } from "@material-ui/core";
 
 const BootstrapInput = withStyles((theme) => ({

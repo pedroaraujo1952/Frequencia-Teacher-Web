@@ -120,7 +120,7 @@ export async function updateEvent(state) {
 
       database
         .ref(`professores/${uid}/events/${state.nameClass}/${state.id}`)
-        .set(data)
+        .update(data)
         .then(() => {
           Notif.sendNotification(state.nameClass, data, "update").then(
             () => resolve(true),
