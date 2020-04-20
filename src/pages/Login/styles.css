@@ -45,6 +45,7 @@ form input {
   padding: 20px;
   border-radius: 10px;
   border: none;
+  
 }
 
 form .link {
@@ -85,7 +86,7 @@ form button {
   float: right;
 }
 
-@media only screen and (max-width: 1366px) {
+@media only screen and (min-width: 801px) and (max-width: 1366px) {
   form .logo img {
     min-height: 150px;
     min-width: 150px;
@@ -115,6 +116,7 @@ form button {
 
   form .link {
     font-size: 13px;
+    
   }
 
   form button {
@@ -126,3 +128,63 @@ form button {
     font-size: 14px;
   }
 }
+
+@media only screen and (max-width: 800px){
+  
+
+  .loginScreen form div {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .loginScreen .logo{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #043f5f;
+  }
+  
+  .loginScreen .logo img{
+    max-height: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    min-width: 100px;
+  }
+  .loginScreen form {
+    width: 80%;
+  }
+  .loginScreen form .logo h1 {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+  .loginScreen form .logo h4 {
+    font-size: 18px;
+  }
+
+
+  .loginScreen form .link{
+    font-size: 14px;
+  }
+
+  .loginScreen form button{
+    font-size: 18px;
+    height: 40px;
+  }
+
+  .loginScreen form input{
+      font-size: 14px;
+      height: 20px;
+  }
+
+  .loginScreen .infoIcon {
+    max-width: 40px;
+    max-height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    
+    margin: 15px;
+  }
+  
+}
+

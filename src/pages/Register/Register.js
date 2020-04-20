@@ -81,15 +81,6 @@ export default class Register extends Component {
             <img
               src={Back}
               alt="voltar"
-              style={{
-                border: "2px solid #043f5f",
-                borderRadius: "100%",
-                padding: "2px",
-                maxHeight: "60px",
-                minHeight: "60px",
-                maxWidth: "60px",
-                minWidth: "60px",
-              }}
               onClick={() =>
                 this.setState({
                   stats: true,

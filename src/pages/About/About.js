@@ -8,8 +8,8 @@ const About = () => (
   <div className="aboutUs">
     <Header info="Sobre nós" />
     <div className="body">
-      <div style={{ width: "400px" }}>
-        <div className="gerente" style={{ width: "400px" }}>
+      <div className="allGroups">
+        <div className="gerente">
           <h2>Gerente de Projeto</h2>
           <p>Klinsman Maia</p>
         </div>
@@ -21,7 +21,7 @@ const About = () => (
         </div>
       </div>
       <div>
-        <div className="devs" style={{ width: "400px" }}>
+        <div className="devs">
           <h2>Desenvolvedores</h2>
           <p>Arley Novais</p>
           <p>Ian Marcony</p>
