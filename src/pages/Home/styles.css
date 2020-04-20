@@ -247,3 +247,281 @@
 .Toastify__toast-body {
   margin: 10px;
 }
+
+@media (max-width: 1000px){
+
+  .homeHeader *{
+    width: 100%;
+  }
+
+  .createEvent{
+    width: 100%;
+    height: auto;
+  }
+
+  .createEvent button{
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: auto;
+    position: relative;
+    float: none;
+  }
+  .createEvent button h1{
+    font-size: 18px;
+
+  }
+  .homeFeed{
+    width: 100%;
+    position: relative;
+    top: 0;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    margin-top: 175px;
+  }
+
+  .homeFeed .rectanguleClass{
+    margin-left:  auto;
+    margin-right: auto;
+    margin: 25px auto;
+    width: 80%;
+    height: auto;
+    min-height: 0px;
+    padding: 0 10px 20px 10px;
+    
+  }
+
+  .rectanguleClass .nameClass{
+    width: 30%;
+    position: relative;
+    display: block;
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .rectanguleClass .nameClass h1{
+    width: 100%;
+    height: auto;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+
+  .rectanguleEvent .nameEvent,
+  .rectanguleEvent .dateEvent,
+  .rectanguleEvent .editEvent,
+  .rectanguleEvent .line,
+  .rectanguleEvent .descriptionEvent,
+  .rectanguleEvent .timeBeginEvent,
+  .rectanguleEvent .timeEndEvent,
+  .rectanguleEvent .keyWordEvent,
+  .rectanguleEvent .editEvent,
+  .rectanguleEvent .deleteEvent,
+  .rectanguleEvent .frequenceEvent{
+    padding: 0 7px 0 7px;
+    margin: 5px 0 5px 0;
+  }
+
+  .rectanguleEvent{
+    height: auto;
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+
+  }
+
+  .rectanguleEvent .nameEvent{
+    font-size: 11px;
+    display: inline-block;
+    position: relative;
+    height: auto;
+    width: 100%;
+  }
+
+  .rectanguleEvent .dateEvent{
+    height: auto;
+    width: auto;
+    font-size: 11px;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    line-height: normal;
+  }
+
+  .rectanguleEvent .line{
+    width: 100%;
+    padding: 0 7px 0 7px;
+    height: auto;
+    position: relative;
+  }
+
+  .rectanguleEvent .keyWordEvent,
+  .rectanguleEvent .timeEndEvent,
+  .rectanguleEvent .timeBeginEvent,
+  .rectanguleEvent .descriptionEvent
+  {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    font-size: 11px;
+  }
+
+  .rectanguleEvent .keyWordEvent h2,
+  .rectanguleEvent .descriptionEvent h2,
+  .rectanguleEvent .nameEvent h2{
+    width: 100%;
+    line-height: normal;
+    white-space: normal ;
+    word-wrap: break-word;
+  }
+
+  .rectanguleEvent *{
+    line-height: normal;
+  }
+
+  .rectanguleEvent .editEvent{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .rectanguleEvent .editEvent button{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    
+    margin: 0;
+    font-size: 11px;
+  }
+
+  .rectanguleEvent .editEvent h1{
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .rectanguleEvent .deleteEvent{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .rectanguleEvent .deleteEvent button{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    font-size: 11px;
+  }
+
+  .rectanguleEvent .deleteEvent h1{
+    font-size: 16px;
+
+    text-align: center;
+  }
+
+  .rectanguleEvent .frequenceEvent{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .rectanguleEvent .frequenceEvent button{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    font-size: 11px;
+  }
+
+  .rectanguleEvent .frequenceEvent h1{
+    font-size: 16px;
+    height: auto;
+    text-align: center;
+  }
+
+  /* PARTE DO HEADER */
+  .homeHeader{
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .homeHeader .backImage{
+    width: auto;
+  }
+
+  .homeHeader .backImage img{
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    min-width: 30px;
+    max-height: 30px;
+    min-height: 30px;
+  }
+
+  .homeHeader .logoImage,
+  .homeHeader .textoLogo,
+  .homeHeader .avatarImage{
+    width: auto;
+    margin: 0;
+  }
+
+  .homeHeader .logoImage img {
+    max-width: 70px;
+    min-width: 70px;
+    max-height: 70px;
+    min-height: 70px;
+    padding: 0px;
+  }
+
+  .homeHeader .textoLogo h1{
+    font-size: 27px;
+    margin: 0;
+  }
+
+  .homeHeader .avatarImage{
+    margin: 0 20px 0 0;
+  }
+
+  .homeHeader .avatarImage img{
+    max-width: 50px;
+    min-width: 50px;
+    max-height: 50px;
+    min-height: 50px;
+    margin: 0;
+  }
+
+
+
+  
+}

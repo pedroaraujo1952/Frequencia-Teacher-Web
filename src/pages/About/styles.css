@@ -17,6 +17,12 @@
   width: auto;
 }
 
+.aboutUs .gerente,
+.aboutUs .allGroups,
+.aboutUs .devs{
+  width: 400px;
+}
+
 .aboutUs .body {
   width: 800px;
   position: fixed;
@@ -35,4 +41,84 @@
 
 .aboutUs .designers {
   margin-top: 25%;
+}
+
+@media (max-width: 650px){
+
+  .aboutUs{
+    position: absolute;
+    width: 100%;
+  }
+
+  .aboutUs .body{
+    display: block;
+    align-items: normal;
+    justify-content: normal;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    transform: none;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .aboutUs .designers{
+    margin-top: 0px;
+  }
+
+  .aboutUs .logoImage img{
+    max-width: 70px;
+    min-width: 70px;
+    max-height: 70px;
+    min-height: 70px;
+  }
+
+  .aboutUs .backImage{
+    width: auto;
+  }
+
+  .aboutUs .backImage img{
+    max-width: 30px;
+    min-width: 30px;
+    max-height: 30px;
+    min-height: 30px;
+  }
+
+  .aboutUs .logoImage {
+    width: auto;
+    margin: 0;
+  }
+
+  .aboutUs .textoLogo h1{
+    font-size: 27px;
+    margin: 0;
+  }
+
+  .aboutUs .header{
+      position: relative;
+      width: 250px;
+      margin: 0 auto;
+      padding: 0;
+      height: auto;
+  }
+
+  .aboutUs .gerente,
+  .aboutUs .allGroups,
+  .aboutUs .devs{
+    width: 100%;
+  }
+
+  .aboutUs .body p{
+    font-size: 20px;
+  }
+  .aboutUs .body h2{
+    font-size: 27px;
+  }
+
+
+
+
+
 }

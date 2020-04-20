@@ -207,3 +207,138 @@ table td#second-child {
     padding-right: 55px;
   }
 }
+  @media (max-width: 800px){
+
+
+    .report .filter {
+      position: relative;
+      float: left;
+      margin-right: 0;
+      margin-left: 20px;
+    }  
+
+
+    .report header{
+      height: auto;
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+
+    .report header img{
+      max-height: 70px !important;
+      max-width: 70px !important;
+      min-width: 70px !important;
+      min-height: 70px !important;
+    }
+
+    .report header h1{
+      font-size: 27px !important;
+    }
+
+    .report .backImage img{
+      max-height: 30px !important;
+      max-width: 30px !important;
+      min-width: 30px !important;
+      min-height: 30px !important;
+    }
+
+    .report .tableHeader h2 {
+      padding-left: 20px;
+      font-size: 16px;
+      padding-right: 37px;
+    }
+
+    .report .tableHeader div {
+      padding-left: 0px;
+      width: auto;
+  }
+
+    .report .tableHeader h2#first {
+      /* margin-right: 10px; */
+      font-size: 14px;
+      padding-left: 0px;
+      padding-right: 15px;
+      margin: 0;
+      text-align: end;
+      width: auto;
+    }
+
+    .report .tableHeader h2#second {
+      /* margin-right: 20px; */
+      padding-left: 0px;
+      padding-right: 0px;
+      text-align: end;
+      padding-right: 15px;
+      font-size: 14px;
+      width: auto;
+      
+      
+  }
+  .report .tableHeader h2#third {
+    margin-right: 0;
+    font-size: 14px;
+    padding-left: 0px;
+    width: auto;
+    text-align: center;
+  }
+
+  .report table td:first-child {
+    width: 10%;
+    font-size: 14px !important;
+  }
+  .report table td#second-child {
+    width: auto ;
+    padding-right: 0px;
+    font-size: 14px;
+  }
+
+  .report table td:not(:first-child) {
+    width: auto;
+    font-size: 14px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 0;
+    padding-left: 6%;
+    
+  }
+
+  .report .vr{
+    opacity: 0;
+  }
+
+  .report table tr {
+    height: auto;
+    margin-top: 10px;
+  }
+
+  .report table td {
+    height: 65px;
+    padding-top: 0px;
+  }
+
+
+  .report .tableHeader h2{
+    padding-right: 0px;
+    padding-left: 10px;
+    width: auto;
+  }
+
+  .report .table {
+    height: 320px;
+    padding-left: 10px;
+  }
+
+  .report .tableHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .report .filter select {
+    font-size: 14px;
+    height: 70%;
+  }
+
+
+}
+

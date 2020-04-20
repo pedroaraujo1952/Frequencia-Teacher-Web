@@ -88,3 +88,30 @@
   justify-content: center;
   font-size: 22px;
 }
+
+@media only screen and (max-width: 800px){
+  .popUp{
+    width: 90%;
+    height: 70%;
+    font-size: 18px;
+  }
+
+  .popUp .body {
+    height: 100%;
+    padding: 0 20px;
+    margin: auto;
+    position: static;
+  }
+
+  .popUp button{
+    font-size: 14px;
+  }
+  .popUp .header img#close-button {
+    height: 35px !important;
+    width: 35px !important;
+    float: right;
+    cursor: pointer;
+}
+
+  
+}

@@ -36,3 +36,95 @@
 .registerForm div {
   width: 100%;
 }
+
+.register .backImage img{
+
+  border: 2px solid #043f5f;
+  border-radius: 100%;
+  padding: 2px;
+  max-height: 60px;
+  min-height: 60px;
+  max-width: 60px;
+  min-width: 60px;
+
+}
+
+
+@media (max-width: 800px){
+  .register form{
+    width: 60%;
+    height: 100%;
+  }
+
+  .registerForm{
+    margin-top: 20px;
+
+  }
+
+  .register .logo h1{
+    font-size: 27px;
+  }
+
+  .register .logo img{
+    max-height: 50px;
+    min-height: 50px;
+    max-width: 50px;
+    min-width: 50px;
+  }
+
+  .register .backImage img{
+    max-height: "20px";
+    min-height: "20px";
+    max-width: "20px";
+    min-width: "20px";
+  }
+
+  .register .registerForm input{
+    height: 20px;
+    font-size: 14px;
+  }
+
+  .register .registerForm p{
+    font-size: 14px;
+  }
+
+  .register .registerForm{
+    position: absolute;
+
+    
+  }
+
+  .register .registerForm button{
+    height: auto;
+    width: auto;
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .register .backImage img{
+    max-height: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    min-width: 30px;
+    margin-top: 20px;
+  }
+
+  /* PARTE DO HEADER */
+  .homeHeader{
+    width: 100%;
+    margin: 0;
+  }
+  .homeHeader .backImage{
+    width: auto;
+  }
+  .homeHeader .backImage img{
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    min-width: 30px;
+    max-height: 30px;
+    min-height: 30px;
+  }
+
+}

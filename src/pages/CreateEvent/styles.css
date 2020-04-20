@@ -350,7 +350,7 @@
 .warning {
   height: 0px;
   position: absolute;
-  margin-top: 15px;
+  margin-top: 30px;
   margin-left: 250px;
   display: none;
 }
@@ -395,4 +395,306 @@
   .date-classroom .classroom {
     width: 40%;
   }
+}
+
+@media (max-width: 700px){
+  .newEvent .description {
+    width: 100%;
+    height: auto !important;
+  }
+  .newEventBody .logoImage{
+    width: 100%;
+    padding: 0 !important;
+    margin:  10px !important;
+  }
+  .newEventBody .logoImage img{
+    padding: 0 !important ;
+    margin: 0 !important;
+    max-width: 100px;
+    max-height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+  }
+
+  .newEvent .title{
+    display: inline-block;
+    justify-content: normal;
+    align-items: normal;
+    width: 100%;
+    height: auto;
+  }
+
+  .newEvent .subject{
+    margin: 0;
+  }
+
+  .newEvent input{
+    width: 100%;
+    margin: 0;
+  }
+  
+  .newEvent .timeBegin input,
+  .newEvent .timeEnd input{
+    position: relative;
+  }
+  .timeBegin input[name="hourBegin"],
+  .timeEnd input[name="hourEnd"] {
+    width: 60px;
+    padding: 5px 0 5px 0 !important;
+    margin: 0;
+  }
+  .timeBegin input[name="minutesBegin"],
+  .timeEnd input[name="minutesEnd"] {
+    width: 60px;
+    margin-left: 30px;
+    font-size: 18px;
+    height: auto;
+    padding: 5px 0 5px 0 !important;
+  }
+
+  .timeBegin h2[name="h"],
+  .timeEnd h2[name="h"]  {
+    position: absolute;
+    margin-left: 1px;
+    margin-top: -3px;
+    width: auto;
+  }
+
+  .timeBegin h2[name="min"],
+  .timeEnd h2[name="min"] {
+    position: absolute;
+    margin-left: 1px;
+    margin-top: -3px;
+    width: auto;
+}
+
+  .newEvent .timeBegin h2,
+  .newEvent .timeEnd h2{
+    display: inline-block;
+  }
+
+  .newEvent .date-classroom h1,
+  .newEvent .timeEnd h1,
+  .newEvent .keyWords h1{
+    position: relative;
+  }
+
+  .newEventBody .date-classroom input{
+    position: relative;
+  }
+
+  .newEvent .keyWords input[name="notifyHour"] {
+    position: relative;
+    width: 80%;
+    margin: 10px 0 0 0;
+    font-size: 18px !important;
+    line-height: normal !important;
+    height: auto;
+}
+
+  .newEvent .keyWords h2[name="button"] {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    padding: 0;
+    width: 20%;
+    margin: 0;
+    font-size: 50px;
+    color: #043f5f;
+    top: 8px;
+  }
+  .newEvent .keyWords .warningNotifyHour{
+    position: relative;
+    display: inline-block !important;
+    margin: 0;
+    margin-top: 40px;
+  }
+
+  .keyWords h1 {
+    margin-top: 0;
+    width: 100% !important;
+  }
+
+  .words{
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .words h2 {
+    font-size: 24px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .newEvent .description h1{
+    width: 100%;
+  }
+  .newEvent .keyWords .warningNotifyHour h2[name="msgWarning"] {
+    position: relative;
+    display: block;
+    color: red;
+    font-size:18px;
+  }
+
+.keyWords input[name="word"] {
+  position: relative;
+  width: 100%;
+}
+
+.newEvent .buttonGroup {
+  height: 64px;
+  width: 100%;
+  display: inline-block;
+}
+
+.saveButton button {
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+.saveButton button h2,
+.cancelButton button h2{
+  font-size: 18px;
+  height: auto;
+  padding: 7px 0;
+}
+.cancelButton button {
+  width: 100%;
+  padding: 0;
+  height: auto;
+}
+.newEvent h1 {
+  width: 100%;
+}
+
+.MuiFormControl-root {
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.date-classroom .classroom {
+  position: relative;
+  margin-left: 0;
+  width: 100%;
+  height: auto;
+}
+.date-classroom .classroom div{
+  height: 0px;
+}
+
+.PrivateSwitchBase-input-124 {
+  width: 100% !important;
+}
+
+.MuiList-root {
+  padding: 0;
+  margin: 0;
+}
+
+.MuiList-root  * {
+  padding: 0;
+  margin: 0;
+}
+
+.MuiIconButton-label {
+  width: 50% !important;
+  display: flex;
+  align-items: inherit;
+  justify-content: inherit;
+}
+
+  .newEvent{
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .linkMeeting,
+  .title_,
+  .newEvent .timeBegin,
+  .newEvent .timeEnd,
+  .newEvent .date-classroom,
+  .newEvent .keyWords{
+    width: 100%;
+    position: relative;
+    margin: 0;
+    display: inline-block;
+    height: auto;
+  }
+
+  .newEvent h2{
+    font-size: 18px;
+  }
+
+  .newEvent h1,
+  .newEvent input{
+    font-size: 18px !important;
+    height: auto;
+    padding: 10px 10px 10px 10px;
+    line-height: normal;
+    white-space: nowrap !important;
+  }
+
+  .newEvent .WithStyles\(ForwardRef\(InputBase\)\)-input-31 {
+    font-size: 18px !important;
+    height: auto;
+    padding: 10px 10px 10px 10px;
+  }
+
+  .newEvent .description textarea {
+    font-size: 18px;
+    height: auto;
+  }
+
+  .newEvent{
+    position: relative;
+    top:0;
+    left: 0;
+  }
+
+  .warning {
+    height: auto;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-left: 0px;
+  }
+
+
+  .warning h2[name="msgWarning"] {
+    color: red;
+    font-size: 18px;
+  }
+
+  .cancelButton, .saveButton {
+    width: auto;
+    height: auto;
+    margin: 5px 0;
+  }
+
+  .date-classroom input {
+    font-size: 18px;
+  }
+  .WithStyles\(ForwardRef\(InputBase\)\)-input-64 {
+    padding: 11px 26px 10px 12px;
+    position: relative;
+    font-size: 18px !important;
+    width: 200px !important;
+    transition: border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  .date-classroom .classroom .MuiInputBase-input {
+    padding-top: 20px;
+    margin-top: 50px;
+    width: 100% !important;
+    height: auto;
+  }
+.date-classroom .classroom div {
+  height: 0px;
+  width: 100% !important;
+}
+
 }
