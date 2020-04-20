@@ -3,7 +3,7 @@ import * as firebase from "firebase/app";
 import { fire, database } from "../config/firebaseConfig";
 
 import Error from "../errors/user.error";
-import Teacher from "../Models/Teacher";
+import Teacher from "../models/Teacher";
 
 export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
   return new Promise((resolve, reject) => {
