@@ -43,7 +43,7 @@ export async function createEvent(state) {
           .ref(`professores/${uid}/events/${classroom}`)
           .push(data)
           .then(() => {
-            Notif.sendNotification(state.nameClass, data, "create").then(
+            Notif.sendNotification(classroom, data, "create").then(
               () => resolve(true),
               (error) => reject(error)
             );
