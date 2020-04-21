@@ -584,26 +584,9 @@
   height: 0px;
 }
 
-.PrivateSwitchBase-input-124 {
-  width: 100% !important;
-}
 
-.MuiList-root {
-  padding: 0;
-  margin: 0;
-}
 
-.MuiList-root  * {
-  padding: 0;
-  margin: 0;
-}
 
-.MuiIconButton-label {
-  width: 50% !important;
-  display: flex;
-  align-items: inherit;
-  justify-content: inherit;
-}
 
   .newEvent{
     width: 80%;
@@ -688,7 +671,7 @@
   }
   .date-classroom .classroom .MuiInputBase-input {
     padding-top: 20px;
-    margin-top: 50px;
+    margin-top: 0px;
     width: 100% !important;
     height: auto;
   }
@@ -696,5 +679,18 @@
   height: 0px;
   width: 100% !important;
 }
+
+.date-classroom .classroom .MuiSvgIcon-root {
+  margin-top: 0px;
+}
+
+  .newEvent .date-classroom h1 {
+    position: relative;
+    margin-bottom:17px;
+  }
+
+  .newEvent .date-classroom input[name="date"] {
+    margin-top: -15px !important;
+  }
 
 }

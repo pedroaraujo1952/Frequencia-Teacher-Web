@@ -255,12 +255,12 @@ table td#second-child {
 
     .report .tableHeader h2#first {
       /* margin-right: 10px; */
-      font-size: 14px;
+      font-size: 12px;
       padding-left: 0px;
       padding-right: 15px;
       margin: 0;
       text-align: end;
-      width: auto;
+      width: 75px;
     }
 
     .report .tableHeader h2#second {
@@ -269,16 +269,16 @@ table td#second-child {
       padding-right: 0px;
       text-align: end;
       padding-right: 15px;
-      font-size: 14px;
-      width: auto;
+      font-size: 12px;
+      width: 75px;
       
       
   }
   .report .tableHeader h2#third {
     margin-right: 0;
-    font-size: 14px;
+    font-size: 12px;
     padding-left: 0px;
-    width: auto;
+    width: 80px;
     text-align: center;
   }
 
@@ -308,11 +308,13 @@ table td#second-child {
 
   .report table tr {
     height: auto;
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 
+
   .report table td {
-    height: 65px;
+    height: 90px;
     padding-top: 0px;
   }
 
