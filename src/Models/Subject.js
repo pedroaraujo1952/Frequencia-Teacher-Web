@@ -20,16 +20,24 @@ const subject = [
     label: "Automação, Pneumática e Hidráulica",
   },
   {
-    name: "CLP",
-    label: "Controles Lógicos Programáveis",
+    name: "APS",
+    label: "APS",
   },
   {
     name: "Arte",
     label: "Arte",
   },
   {
+    name: "PPBD",
+    label: "Banco de Dados",
+  },
+  {
     name: "Biologia",
     label: "Biologia",
+  },
+  {
+    name: "CLP",
+    label: "Controles Lógicos Programáveis",
   },
   {
     name: "Ed. Física",
@@ -40,8 +48,24 @@ const subject = [
     label: "Eletricidade I",
   },
   {
+    name: "Eletricidade II",
+    label: "Eletricidade II",
+  },
+  {
+    name: "Eletrônica II",
+    label: "Eletrônica II",
+  },
+  {
+    name: "E. Digital",
+    label: "E. Digital",
+  },
+  {
     name: "E. Industrial",
     label: "E. Industrial",
+  },
+  {
+    name: "E. de Potência",
+    label: "E. de Potência",
   },
   {
     name: "Filosofia",
@@ -60,6 +84,10 @@ const subject = [
     label: "História",
   },
   {
+    name: "IMC",
+    label: "Instalação e Manutenção de Computadores",
+  },
+  {
     name: "L. Inglesa",
     label: "L. Inglesa",
   },
@@ -70,6 +98,10 @@ const subject = [
   {
     name: "LTP",
     label: "LTP",
+  },
+  {
+    name: "LPII",
+    label: "LP II",
   },
   {
     name: "LPIII",
@@ -96,8 +128,16 @@ const subject = [
     label: "Microcontroladores",
   },
   {
+    name: "ONST",
+    label: "ONST",
+  },
+  {
     name: "Sociologia",
     label: "Sociologia",
+  },
+  {
+    name: "Tec. Industriais",
+    label: "Tec. Industriais",
   },
   {
     name: "UX",

@@ -16,6 +16,8 @@ export async function createEvent(state) {
           subject: state.selectedSubject,
           link: state.link.includes("https://")
             ? state.link
+            : state.link.includes("http://")
+            ? state.link.replace("http://", "https://")
             : "https://" + state.link,
           begin: state.hourBegin + "h" + state.minutesBegin,
           date: state.date,
@@ -117,6 +119,8 @@ export async function updateEvent(state) {
         subject: state.selectedSubject,
         link: state.link.includes("https://")
           ? state.link
+          : state.link.includes("http://")
+          ? state.link.replace("http://", "https://")
           : "https://" + state.link,
         begin: state.hourBegin + "h" + state.minutesBegin,
         date: state.date,
