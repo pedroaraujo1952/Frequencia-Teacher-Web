@@ -3,7 +3,6 @@ import { fire, database } from "../config/firebaseConfig";
 import { formatDate, compareDates } from "../utils/FormatDate";
 
 import * as Student from "./StudentsController";
-// import * as User from "./UserController";
 import * as Notif from "./NotificationController";
 
 export async function createEvent(state) {
@@ -63,9 +62,18 @@ export async function deleteEvent(event, className) {
       database
         .ref(`professores/${uid}/events/${className}/${event.id}`)
         .remove()
-        .then(() => {
+        .then(async () => {
           const { date } = event;
           const fullDate = formatDate();
+
+          await database
+            .ref(`professores/${uid}/events/${className}`)
+            .once("value", (snap) => {
+              if (snap.val() === null) {
+                database.ref(`professores/${uid}/events/${className}`).set("");
+              }
+            });
+
           if (!compareDates(fullDate, date)) {
             Notif.sendNotification(className, event, "delete").then(
               () => resolve(true),
