@@ -3,30 +3,742 @@ const teacher = (name, subject, email) => ({
   subject: subject,
   email: email,
   events: {
-    "1AI": "",
-    "1BI": "",
-    "1CI": "",
-    "1AM": "",
-    "1BM": "",
-    "1CM": "",
-    "1AE": "",
-    "1BE": "",
-    "2AI": "",
-    "2BI": "",
-    "2CI": "",
-    "2AM": "",
-    "2BM": "",
-    "2CM": "",
-    "2AE": "",
-    "2BE": "",
-    "3AI": "",
-    "3BI": "",
-    "3CI": "",
-    "3AM": "",
-    "3BM": "",
-    "3CM": "",
-    "3AE": "",
-    "3BE": "",
+    "1AI": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "1BI": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "1CI": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "1AM": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "1BM": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "1CM": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "1AE": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "1BE": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3AI": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3BI": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3CI": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3AM": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3BM": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3CM": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3AE": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
+    "3BE": {
+      evento0: {
+        begin: " ",
+        date: " ",
+        description: " ",
+        end: " ",
+        keys: {
+          key1: {
+            key: "",
+            time: "",
+          },
+          key2: {
+            key: "",
+            time: "",
+          },
+          key3: {
+            key: "",
+            time: "",
+          },
+        },
+        link: "",
+        students: {
+          student0: {
+            checkin: "",
+            checkout: "",
+            keys: {
+              key1: {
+                key: "",
+                time: "",
+              },
+              key2: {
+                key: "",
+                time: "",
+              },
+              key3: {
+                key: "",
+                time: "",
+              },
+            },
+            name: "",
+          },
+        },
+        subject: "",
+        title: " ",
+      },
+    },
   },
 });
 

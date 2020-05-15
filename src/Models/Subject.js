@@ -132,6 +132,10 @@ const subject = [
     label: "ONST",
   },
   {
+    name: "Química",
+    label: "Química",
+  },
+  {
     name: "Sociologia",
     label: "Sociologia",
   },
