@@ -7,7 +7,15 @@ import Teacher from "../models/Teacher";
 
 export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
   return new Promise((resolve, reject) => {
-    if (!email.includes("@fmm.org")) {
+    var numbers = 0;
+
+    for(var i=0; i<email.length;i++){
+      if(!isNaN(parseInt(email[i],))){
+        numbers += 1;
+      }
+    }
+    
+    if (!email.includes("@fmm.org") || numbers === 6) {
       const error = {
         code: "auth/unauthorized-domain",
       };
@@ -23,7 +31,7 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
           const uid = fire.auth().currentUser.uid;
 
           database
-            .ref(`professores/${uid}`)
+            .ref(`teachers/${uid}`)
             .set(user)
             .then(() => {
               updateUserName(name).then(
@@ -57,7 +65,7 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
 
 export async function getSubject(uid) {
   return new Promise((resolve, reject) => {
-    database.ref(`professores/${uid}/subject`).once("value", (snap) => {
+    database.ref(`teachers/${uid}/subject`).once("value", (snap) => {
       resolve(snap.val());
     });
   });
