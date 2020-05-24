@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
 import { database } from "../../config/firebaseConfig";
-import * as User from "../../controllers/UserController";
-
 import { isLogged } from "../../services/auth";
+
+import Loading from "../../components/Loading/Loading";
+
 import * as Students from "../../controllers/StudentsController";
 
 import Logo from "../../assets/Logok.png";
@@ -18,7 +19,9 @@ export default class Report extends Component {
     this.state = {
       students: [],
       event: {},
+      keyCount: 0,
 
+      loading: false,
       goHome: false,
     };
   }
@@ -26,16 +29,25 @@ export default class Report extends Component {
   componentDidMount() {
     isLogged();
     this.getData(
-      this.props.location.state.classroom,
-      this.props.location.state.id
+      this.props.location.state.event.id
     );
   }
 
-  getData = async (classroom, eventName) => {
-    var user = await User.getUser();
+  getKeyCount() {
+    var { keyCount } = this.state;
 
+    if (this.props.location.state.event.keys.key1.key !== "") keyCount += 1;
+    if (this.props.location.state.event.keys.key2.key !== "") keyCount += 1;
+    if (this.props.location.state.event.keys.key3.key !== "") keyCount += 1;
+
+    this.setState({ keyCount })
+  }
+
+  getData = async (eventName) => {
+    this.setState({ loading: true })
+    
     var eventRef = database.ref(
-      `professores/${user.uid}/events/${classroom}/${eventName}`
+      `frequency/${eventName}`
     );
 
     await eventRef.on("value", (snap) => {
@@ -43,7 +55,7 @@ export default class Report extends Component {
       var event = {};
       event = snap.val();
 
-      snap.child("students").forEach((element) => {
+      snap.forEach((element) => {
         const studentObject = element.val();
         const student = {
           name: studentObject["name"],
@@ -57,7 +69,7 @@ export default class Report extends Component {
               : studentObject["checkout"],
           key: Students.validateKey(element.child("keys")),
           checkinStatus: Students.validateTime(
-            event["begin"],
+            this.props.location.state.event.begin,
             studentObject["checkin"]
           ),
         };
@@ -77,14 +89,16 @@ export default class Report extends Component {
 
       students.sort(compare);
 
-      this.setState({ students, event });
+      this.getKeyCount();
+
+      this.setState({ students, event, loading: false });
     });
   };
 
   handleAbsent = async () => {
     await this.getData(
-      this.props.location.state.classroom,
-      this.props.location.state.id
+      this.props.location.state.event.classroom,
+      this.props.location.state.event.id
     );
     const { students } = this.state;
     var newStudents = [];
@@ -100,8 +114,8 @@ export default class Report extends Component {
 
   handleLate = async () => {
     await this.getData(
-      this.props.location.state.classroom,
-      this.props.location.state.id
+      this.props.location.state.event.classroom,
+      this.props.location.state.event.id
     );
     const { students } = this.state;
     var newStudents = [];
@@ -127,8 +141,8 @@ export default class Report extends Component {
       this.handleLate();
     } else {
       this.getData(
-        this.props.location.state.classroom,
-        this.props.location.state.id
+        this.props.location.state.event.classroom,
+        this.props.location.state.event.id
       );
     }
   };
@@ -145,6 +159,7 @@ export default class Report extends Component {
 
     return (
       <div className="report">
+        <Loading loading={this.state.loading} />
         <header>
           <div className="backImage" style={{ marginTop: "0 " }}>
             <img
@@ -218,13 +233,13 @@ export default class Report extends Component {
                         </td>
                       )}
                       {student["key"] !== 0 ||
-                      this.props.location.state.keyCount === 0 ? (
+                      this.state.keyCount === 0 ? (
                         <td>
-                          {student["key"]}/{this.props.location.state.keyCount}
+                          {student["key"]}/{this.state.keyCount}
                         </td>
                       ) : (
                         <td style={{ color: "#ff0000" }}>
-                          {student["key"]}/{this.props.location.state.keyCount}
+                          {student["key"]}/{this.state.keyCount}
                         </td>
                       )}
                     </tr>

@@ -19,7 +19,7 @@ export default class CreateEvent extends Component {
     super(props);
     cont_keys = 0;
     this.state = {
-      nameClass: this.props.nameClass,
+      nameClass: "",
       backHome: false,
       name: "",
       subjects: this.props.subjects,
@@ -50,7 +50,6 @@ export default class CreateEvent extends Component {
         name: this.props.eventToEdit.title,
         date: this.props.eventToEdit.date,
         description: this.props.eventToEdit.description,
-        students: this.props.eventToEdit.students,
         key: this.props.eventToEdit.keys,
         link: this.props.eventToEdit.link,
         hourBegin: this.props.eventToEdit.begin.substring(0, 2),
@@ -61,12 +60,8 @@ export default class CreateEvent extends Component {
         info: "Editar evento",
       });
     } else {
-      var classroom = this.state.classroom;
-      classroom.push(this.state.nameClass);
-
       this.setState({
         info: "Novo evento",
-        classroom: classroom,
       });
     }
   };
@@ -162,9 +157,6 @@ export default class CreateEvent extends Component {
       el[0].style.display = "block";
     } else if (d > 31 || m > 12 || y !== 20) {
       this.setState({ infoWarning_: "*Informe uma data válida" });
-      el[0].style.display = "block";
-    } else if (!this.state.classroom.includes(this.state.nameClass)) {
-      this.setState({ infoWarning_: "*Informe a turma correspondente" });
       el[0].style.display = "block";
     } else {
       el[0].style.display = "none";

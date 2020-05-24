@@ -37,10 +37,37 @@ export function validateTime(eventInit, studentTime) {
   return false;
 }
 
+export async function getSelectedStudents(snapshot, students) {
+  return new Promise((resolve, reject) => {
+    snapshot.forEach(student => {
+        students[student.key] = {
+          name: student.val().name,
+          checkin: '',
+          checkout: '',
+          keys: {
+            key1: '',
+            key2: '',
+            key3: '',
+          }
+        };
+      }
+    );
+    resolve(students);
+  });
+}
+
 export async function getStudents(className) {
   return new Promise((resolve, reject) => {
-    database.ref(`salas/${className}`).once("value", snap => {
-      resolve(snap.val());
-    });
+    try {
+      var students = {};
+
+      database.ref(`students`).orderByChild("classroom").equalTo(className).on("value", async snap => {
+        students = await getSelectedStudents(snap, students);
+      });
+
+      resolve(students);
+    } catch (e) {
+      reject(e);
+    }
   });
 }

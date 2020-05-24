@@ -1,81 +1,77 @@
-import { fire, database } from "../config/firebaseConfig";
+import { fire } from "../config/firebaseConfig";
 
-export async function getClasses(snapshot) {
+import * as User from "./UserController";
+
+export async function getSelectedEvents(snapshot, events, date, subjects) {
   return new Promise((resolve, reject) => {
-    var classroom = [];
-    snapshot.forEach(nameClass => {
-      var className = {
-        name: nameClass.key,
-        events: []
-      };
+    snapshot.forEach(async event => {
+      const value = event.val();
 
-      nameClass.forEach(event => {
-        if(event.key !== 'evento0') {
-          let keyCount = 0;
-          for (var i = 1; i <= 3; i++) {
-            if (event.val().keys[`key${i}`].key) {
-              keyCount++;
+      const user_uid = await User.getUid();
+
+      if (value.teacherUID === user_uid) {
+        var formatedKeys = value.keys.key1.key;
+        formatedKeys += (', ' + value.keys.key2.key) ? value.keys.key2.key : '';
+        formatedKeys += (', ' + value.keys.key3.key) ? value.keys.key3.key : '';
+
+        events.push({
+          title: value.name,
+          date,
+          description: value.description,
+          begin: value.begin,
+          end: value.end,
+          formatedKeys,
+          link: value.link,
+          subject: value.subject,
+          teacherUID: value.teacherUID,
+          id: event.key,
+          classroom: value.classroom,
+          keys: {
+            key1: {
+              key: value.keys.key1.key
+            },
+            key2: {
+              key: value.keys.key2.key
+            },
+            key3: {
+              key: value.keys.key3.key
             }
           }
-
-          const keys = event.val().keys;
-          let formatedKeys = "";
-          switch (keyCount) {
-            case 1:
-              formatedKeys = keys["key1"].key;
-              break;
-
-            case 2:
-              formatedKeys = `${keys["key1"].key}, ${keys["key2"].key}`;
-              break;
-
-            case 3:
-              formatedKeys = `${keys["key1"].key}, ${keys["key2"].key}, ${keys["key3"].key}`;
-              break;
-
-            default:
-              formatedKeys = "Nenhuma palavra-passe";
-              break;
-          }
-
-          const EVENT = {
-            id: event.key,
-            begin: event.val().begin,
-            date: event.val().date,
-            description: event.val().description,
-            end: event.val().end,
-            keys: keys,
-            formatedKeys: formatedKeys,
-            keyCount: keyCount,
-            students: event.val().students,
-            title: event.val().title,
-            subject: event.val().subject,
-            link: event.val().link
-          };
-          className.events.push(EVENT);
-        }
-      });
-      classroom.push(className);
-    
+        })
+      }
     });
-    resolve(classroom);
+
+    resolve(events);
   });
 }
 
-export async function loadClasses() {
-  const uid = fire.auth().currentUser.uid;
-
+export async function loadClassroomEvents({classes, classroom, date, subjects}) {
+  var formated_date = date.split('/').join('-');
+  
   return new Promise((resolve, reject) => {
     try {
-      const classRef = database.ref("professores/" + uid + "/events");
+      var ref = fire.database().ref("events");
 
-      classRef.on("value", snap => {
-        getClasses(snap).then(res => {
-          resolve(res);
-        });
+      classroom.map(async classroom_ => {
+
+        const alreadySearched = classes.length > 0 ? 
+          classes.find((cur) => cur.name === classroom_) : false;
+
+        if (!alreadySearched) {
+          var events = [];
+
+          ref.child(formated_date).orderByChild("classroom").equalTo(classroom_).on("value", async (snap) => {
+            classes.push({
+              name: classroom_,
+              events: await getSelectedEvents(snap, events, date, subjects),
+            });
+          });
+        }
       });
+
+      resolve(classes);
     } catch (e) {
-      reject(e);
+        reject(e);
     }
   });
 }

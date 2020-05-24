@@ -12,15 +12,15 @@ export async function createEvent(state) {
 
       state.classroom.forEach(async (classroom) => {
         var data = {
-          title: state.name,
+          name: state.name,
           subject: state.selectedSubject,
+          classroom,
           link: state.link.includes("https://")
             ? state.link
             : state.link.includes("http://")
             ? state.link.replace("http://", "https://")
             : "https://" + state.link,
           begin: state.hourBegin + "h" + state.minutesBegin,
-          date: state.date,
           description: state.description,
           end: state.hourEnd + "h" + state.minutesEnd,
           keys: {
@@ -37,13 +37,19 @@ export async function createEvent(state) {
               time: state.notifTime[2],
             },
           },
-          students: await Student.getStudents(classroom),
+          teacherUID: uid,
         };
 
+        var students = await Student.getStudents(classroom); 
+
         await database
-          .ref(`professores/${uid}/events/${classroom}`)
+          .ref(`events/${state.date.split('/').join('-')}`)
           .push(data)
-          .then(() => {
+          .then(async (snap) => {
+            await database
+            .ref(`frequency/${snap.key}`)
+            .set(students);
+
             Notif.sendNotification(classroom, data, "create").then(
               () => resolve(true),
               (error) => reject(error)
@@ -58,34 +64,26 @@ export async function createEvent(state) {
 
 export async function deleteEvent(event, className) {
   return new Promise((resolve, reject) => {
-    var uid = fire.auth().currentUser.uid;
+    database
+      .ref(`events/${event.date.split('/').join('-')}/${event.id}`)
+      .remove()
+      .then(async () => {
+        const { date } = event;
+        const fullDate = formatDate();
 
-    if (event.id !== "evento0") {
-      database
-        .ref(`professores/${uid}/events/${className}/${event.id}`)
-        .remove()
-        .then(async () => {
-          const { date } = event;
-          const fullDate = formatDate();
+        await database
+          .ref(`frequency/${event.id}`)
+          .remove()
 
-          await database
-            .ref(`professores/${uid}/events/${className}`)
-            .once("value", (snap) => {
-              if (snap.val() === null) {
-                database.ref(`professores/${uid}/events/${className}`).set("");
-              }
-            });
-
-          if (!compareDates(fullDate, date)) {
-            Notif.sendNotification(className, event, "delete").then(
-              () => resolve(true),
-              (error) => reject(error)
-            );
-          }
-        });
+        if (!compareDates(fullDate, date)) {
+          Notif.sendNotification(className, event, "delete").then(
+            () => resolve(true),
+            (error) => reject(error)
+          );
+        }
+      });
 
       resolve(true);
-    }
   });
 }
 
@@ -112,8 +110,6 @@ export async function updateEvent(state) {
   }
   return new Promise(async (resolve, reject) => {
     try {
-      var uid = fire.auth().currentUser.uid;
-
       var data = {
         title: state.name,
         subject: state.selectedSubject,
@@ -127,11 +123,10 @@ export async function updateEvent(state) {
         description: state.description,
         end: state.hourEnd + "h" + state.minutesEnd,
         keys: state.key,
-        students: state.students,
       };
 
       database
-        .ref(`professores/${uid}/events/${state.nameClass}/${state.id}`)
+        .ref(`events/${state.date.split('/').join('-')}/${state.id}`)
         .update(data)
         .then(() => {
           Notif.sendNotification(state.nameClass, data, "update").then(

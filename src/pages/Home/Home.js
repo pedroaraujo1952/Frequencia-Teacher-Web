@@ -12,6 +12,9 @@ import * as Class from "../../controllers/ClassController";
 import * as Event from "../../controllers/EventController";
 import * as User from "../../controllers/UserController";
 
+import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";
+import MaskedInput from "react-text-mask";
+
 import Avatar from "../../assets/profile-user.png";
 
 import "./styles.css";
@@ -25,7 +28,6 @@ class Events {
     timeBegin_,
     timeEnd_,
     keyWord_,
-    students_,
     key_
   ) {
     this.name = name_;
@@ -34,7 +36,6 @@ class Events {
     this.timeBegin = timeBegin_;
     this.timeEnd = timeEnd_;
     this.keyWord = keyWord_;
-    this.students = students_;
     this.key = key_;
   }
 }
@@ -52,11 +53,13 @@ export default class Home extends React.Component {
     this.state = {
       goLogin: false,
       username: "",
-      subjects: "",
+      subjects: [],
       avatar: Avatar,
       avatarURL: null,
+      classroom: [],
 
       edit: false,
+      date: "",
 
       email: "",
       emailError: "",
@@ -73,7 +76,6 @@ export default class Home extends React.Component {
   componentDidMount() {
     try {
       editEvent = false;
-      this.loadClasses();
       this.loadSubject();
     } catch (e) {
       fire.auth().signOut();
@@ -81,18 +83,27 @@ export default class Home extends React.Component {
     }
   }
 
+  handleClick = async (ev) => {
+    ev.preventDefault();
+
+    if (this.state.classroom !== [] && this.state.date !== "") {
+      await this.searchClassroomEvents();
+    }
+  }
+
+  searchClassroomEvents = async () => {
+    await this.setState({ loading: true, classes: [] });
+
+    await Class.loadClassroomEvents(this.state).then((classes) => {
+      this.setState({ classes, loading: false });
+    })
+  }
+
   loadSubject = async () => {
-    const uid = await fire.auth().currentUser.uid;
-    const subjects = await User.getSubject(uid);
-
-    this.setState({ subjects });
-  };
-
-  loadClasses = async () => {
     this.setState({ loading: true });
-    Class.loadClasses().then(
-      (classroom) => {
-        this.setState({ classes: classroom, loading: false });
+    User.getSubject().then(
+      (subjects) => {
+        this.setState({subjects, loading: false});
       },
       (error) => {
         window.location.replace("/");
@@ -144,6 +155,35 @@ export default class Home extends React.Component {
                     draggable: true,
                   }) | localStorage.removeItem("EventEdited")
                 : null}
+              <div className="classroom-filter">
+                <div className="createEvent">
+                    <button
+                      onClick={(ev) => {
+                        ev.preventDefault();
+                        this.setState({ new_event: true });
+                      }}
+                    >
+                      <h1>+ Criar evento</h1>
+                    </button>
+                </div>
+                <div className="filter-inputs">
+                  <MultipleSelect
+                    name="classroom"
+                    onChange={this.handleChange}
+                    onMultipleChange={this.handleMultipleChange}
+                    value={this.state.classroom}
+                  />      
+                  <MaskedInput
+                    name="date"
+                    mask={[/[0-9]/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/]}
+                    onChange={this.handleChange}
+                    defaultValue={this.state.date}
+                  />
+                  <button onClick={this.handleClick}>
+                    <h1>Buscar</h1>
+                  </button>
+                </div>
+              </div>
               {this.state.classes.map((c, index) => (
                 <div className="rectanguleClass" key={index}>
                   <div className="nameClass">
@@ -190,6 +230,7 @@ export default class Home extends React.Component {
                               ev.preventDefault();
 
                               await Event.deleteEvent(e, c.name).then(() => {
+                                console.log(this.state.classes)
                                 const { classes } = this.state;
                                 classes[index].events.splice(ind, 1);
                                 this.setState({ classes });
@@ -199,6 +240,7 @@ export default class Home extends React.Component {
                                   pauseOnHover: true,
                                   draggable: true,
                                 });
+                                console.log(this.state.classes)
                               });
                             }}
                           >
@@ -211,9 +253,7 @@ export default class Home extends React.Component {
                               ev.preventDefault();
 
                               const reportState = {
-                                classroom: c.name,
-                                id: e.id,
-                                keyCount: e.keyCount,
+                                event: e,
                               };
 
                               this.setState({ reportState });
@@ -224,17 +264,6 @@ export default class Home extends React.Component {
                         </div>
                       </div>
                     ))}
-                  </div>
-                  <div className="createEvent">
-                    <button
-                      onClick={(ev) => {
-                        ev.preventDefault();
-                        new_event_class = c.name;
-                        this.setState({ new_event: true });
-                      }}
-                    >
-                      <h1>+ Criar evento</h1>
-                    </button>
                   </div>
                 </div>
               ))}

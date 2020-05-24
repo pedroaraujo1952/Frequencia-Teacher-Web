@@ -63,11 +63,17 @@ export async function createUser({ name, subject, email, pswd, pswdConfirm }) {
   });
 }
 
-export async function getSubject(uid) {
+export async function getSubject() {
+  const uid = fire.auth().currentUser.uid;
+
   return new Promise((resolve, reject) => {
-    database.ref(`teachers/${uid}/subject`).once("value", (snap) => {
-      resolve(snap.val());
-    });
+    try {
+      database.ref(`teachers/${uid}/subject`).once("value", (snap) => {
+        resolve(snap.val());
+      });
+    } catch (e) {
+      reject(e);
+    }
   });
 }
 
@@ -89,6 +95,12 @@ export async function getUser() {
     } else {
       reject({});
     }
+  });
+}
+
+export async function getUid() {
+  return new Promise((resolve, reject) => {
+    resolve(fire.auth().currentUser.uid);
   });
 }
 

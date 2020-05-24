@@ -2,7 +2,7 @@
   width: 35%;
   height: auto;
   position: absolute;
-  top: 15%;
+  top: 20%;
   z-index: 1;
   left: 12%;
 }
@@ -18,8 +18,14 @@
   margin-bottom: 100px;
 }
 
+.events {
+  padding-bottom: 10px;
+}
+
 .createEvent {
+  position: absolute;
   height: 100px;
+  width: 210%;
 }
 
 .nameClass h1 {
@@ -39,8 +45,6 @@
 .createEvent button {
   width: 344px;
   height: 60px;
-  left: 1022px;
-  top: 205px;
   background: #2e8fb0;
   border-radius: 10px;
 
@@ -246,6 +250,65 @@
 
 .Toastify__toast-body {
   margin: 10px;
+}
+
+.filter-inputs {
+  background: #e1e7dd;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+
+  padding: 20px;
+
+  text-align: center;
+}
+.filter-inputs .MuiFormControl-root {
+  display: inline-block;
+}
+
+.filter-inputs .MuiInputBase-root {
+  width: 344px;
+  font-size: 24px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #043f5f;
+  font-style: normal;
+}
+
+.filter-inputs input[name="date"] {
+  margin-top: 25px;
+  width: 344px;
+  height: 49px;
+  background: #ffffff;
+  border: 0px;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 43px;
+  color: #043f5f;
+  padding: 10px;
+  
+  text-align: center;
+}
+
+.filter-inputs button {
+  margin-top: 25px;
+  display: block;
+  width: 344px;
+  height: 60px;
+  background: #2e8fb0;
+  border-radius: 10px;
+
+  display: inline-block;
+}
+
+.filter-inputs button h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 48px;
+  color: #ffffff;
 }
 
 @media (max-width: 1000px){
