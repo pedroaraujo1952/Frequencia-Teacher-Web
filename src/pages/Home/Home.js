@@ -13,6 +13,7 @@ import * as Event from "../../controllers/EventController";
 import * as User from "../../controllers/UserController";
 
 import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";
+import Dialog from "../../components/Dialog/index";
 import MaskedInput from "react-text-mask";
 
 import Avatar from "../../assets/profile-user.png";
@@ -70,6 +71,10 @@ export default class Home extends React.Component {
       classes: [],
       new_event: false,
       reportState: null,
+
+      checkSearch: false,
+      showResult: false,
+      checkDeleteEvent: [false, null, -1, -1],
     };
   }
 
@@ -83,20 +88,12 @@ export default class Home extends React.Component {
     }
   }
 
-  handleClick = async (ev) => {
-    ev.preventDefault();
-
-    if (this.state.classroom !== [] && this.state.date !== "") {
-      await this.searchClassroomEvents();
-    }
-  }
-
   searchClassroomEvents = async () => {
-    await this.setState({ loading: true, classes: [] });
+    await this.setState({ loading: true, classes: [], showResult: true });
 
     await Class.loadClassroomEvents(this.state).then((classes) => {
-      this.setState({ classes, loading: false });
-    })
+      this.setState({ classes, loading: false, checkSearch: true, showResult: false });
+    });
   }
 
   loadSubject = async () => {
@@ -167,106 +164,164 @@ export default class Home extends React.Component {
                     </button>
                 </div>
                 <div className="filter-inputs">
+                  <h1>Consulta de eventos</h1>
+                  <h2>Selecione a(s) turma(s)</h2>
                   <MultipleSelect
                     name="classroom"
                     onChange={this.handleChange}
                     onMultipleChange={this.handleMultipleChange}
                     value={this.state.classroom}
-                  />      
+                  />
+                  <h2>Selecione a data</h2>     
                   <MaskedInput
                     name="date"
                     mask={[/[0-9]/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/]}
                     onChange={this.handleChange}
                     defaultValue={this.state.date}
                   />
-                  <button onClick={this.handleClick}>
+                  <button onClick={async (ev) => {
+                    ev.preventDefault();
+                    
+                    if (this.state.classroom !== [] && this.state.date !== "") {
+                      await this.searchClassroomEvents();
+                    }
+                  }}>
                     <h1>Buscar</h1>
                   </button>
                 </div>
               </div>
-              {this.state.classes.map((c, index) => (
-                <div className="rectanguleClass" key={index}>
-                  <div className="nameClass">
-                    <h1>{c.name}</h1>
+
+              <Dialog
+                open={this.state.checkSearch}
+                onClose={() => {
+                  this.setState({ checkSearch: false, classes: [] })
+                }}
+                onChange={this.handleChange}
+                onClickCancel={(ev) => {
+                  ev.preventDefault();
+                  this.setState({ checkSearch: false, classes: [] })
+                }}
+                onClickOk={(ev) => {
+                  ev.preventDefault();
+                  this.setState({ checkSearch: false, showResult: true })
+                }}
+                message="Deseja realizar essa consulta?"
+              />
+
+              <Dialog
+                open={this.state.checkDeleteEvent[0]}
+                onClose={() => {
+                  this.setState({ checkDeleteEvent: [false, null, -1, -1] })
+                }}
+                onChange={this.handleChange}
+                onClickCancel={(ev) => {
+                  ev.preventDefault();
+                  this.setState({ checkDeleteEvent: [false, null, -1, -1] })
+                }}
+                onClickOk={async (ev) => {
+                  ev.preventDefault();
+                  
+                  await Event.deleteEvent(this.state.checkDeleteEvent[1], 
+                    this.state.checkDeleteEvent[1].classroom).then(() => {
+                    var { classes } = this.state;
+
+                    if (classes[this.state.checkDeleteEvent[2]].events.length === 1) {
+                        if(classes.length === 1) {
+                          classes = [];
+                        } else {
+                          delete classes[this.state.checkDeleteEvent[2]];
+                        }  
+                    } else {
+                      delete classes[this.state.checkDeleteEvent[2]][this.state.checkDeleteEvent[3]];
+                    } 
+
+                    classes = classes.filter(function(el) { return el !== null; });
+                    
+                    this.setState({ classes, checkDeleteEvent: [false, null, -1, -1] });
+                    
+                    toast.error("Evento deletado com sucesso", {
+                      autoClose: 3500,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                    });
+                  });
+                }}
+                message="Deseja excluir esse evento?"
+              />
+
+              {this.state.showResult ? 
+                this.state.classes.map((c, index) => (
+                  <div className="rectanguleClass" key={index}>
+                    <div className="nameClass">
+                      <h1>{c.name}</h1>
+                    </div>
+                    <div className="events">
+                      {c.events.map((e, ind) => (
+                        <div className="rectanguleEvent" key={ind}>
+                          <div className="nameEvent">
+                            <h2>{e.title}</h2>
+                          </div>
+                          <div className="dateEvent">
+                            <h2>{e.date}</h2>
+                          </div>
+                          <div className="line" />
+                          <div className="descriptionEvent">
+                            <h2>Descrição: {e.description}</h2>
+                          </div>
+                          <div className="timeBeginEvent">
+                            <h2>Início: {e.begin}</h2>
+                          </div>
+                          <div className="timeEndEvent">
+                            <h2>Fim: {e.end}</h2>
+                          </div>
+                          <div className="keyWordEvent">
+                            <h2>Palavra-passe: {e.formatedKeys}</h2>
+                          </div>
+                          <div className="editEvent">
+                            <button
+                              onClick={(ev) => {
+                                ev.preventDefault();
+                                this.setState({ new_event: true });
+                                new_event_class = c.name;
+                                editEvent = true;
+                                eventToEdit = e;
+                              }}
+                            >
+                              <h1>Editar evento</h1>
+                            </button>
+                          </div>
+                          <div className="deleteEvent">
+                            <button
+                              onClick={async (ev) => {
+                                ev.preventDefault();
+                                this.setState({ checkDeleteEvent: [true, e, index, ind] });
+                              }}
+                            >
+                              <h1>Excluir evento</h1>
+                            </button>
+                          </div>
+                          <div className="frequenceEvent">
+                            <button
+                              onClick={(ev) => {
+                                ev.preventDefault();
+
+                                const reportState = {
+                                  event: e,
+                                };
+
+                                this.setState({ reportState });
+                              }}
+                            >
+                              <h1>Frequência</h1>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="events">
-                    {c.events.map((e, ind) => (
-                      <div className="rectanguleEvent" key={ind}>
-                        <div className="nameEvent">
-                          <h2>{e.title}</h2>
-                        </div>
-                        <div className="dateEvent">
-                          <h2>{e.date}</h2>
-                        </div>
-                        <div className="line" />
-                        <div className="descriptionEvent">
-                          <h2>Descrição: {e.description}</h2>
-                        </div>
-                        <div className="timeBeginEvent">
-                          <h2>Início: {e.begin}</h2>
-                        </div>
-                        <div className="timeEndEvent">
-                          <h2>Fim: {e.end}</h2>
-                        </div>
-                        <div className="keyWordEvent">
-                          <h2>Palavra-passe: {e.formatedKeys}</h2>
-                        </div>
-                        <div className="editEvent">
-                          <button
-                            onClick={(ev) => {
-                              ev.preventDefault();
-                              this.setState({ new_event: true });
-                              new_event_class = c.name;
-                              editEvent = true;
-                              eventToEdit = e;
-                            }}
-                          >
-                            <h1>Editar evento</h1>
-                          </button>
-                        </div>
-                        <div className="deleteEvent">
-                          <button
-                            onClick={async (ev) => {
-                              ev.preventDefault();
-
-                              await Event.deleteEvent(e, c.name).then(() => {
-                                console.log(this.state.classes)
-                                const { classes } = this.state;
-                                classes[index].events.splice(ind, 1);
-                                this.setState({ classes });
-                                toast.error("Evento deletado com sucesso", {
-                                  autoClose: 3500,
-                                  closeOnClick: true,
-                                  pauseOnHover: true,
-                                  draggable: true,
-                                });
-                                console.log(this.state.classes)
-                              });
-                            }}
-                          >
-                            <h1>Excluir evento</h1>
-                          </button>
-                        </div>
-                        <div className="frequenceEvent">
-                          <button
-                            onClick={(ev) => {
-                              ev.preventDefault();
-
-                              const reportState = {
-                                event: e,
-                              };
-
-                              this.setState({ reportState });
-                            }}
-                          >
-                            <h1>Frequência</h1>
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                ))
+              : null}
             </div>
           </div>
         )}

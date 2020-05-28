@@ -261,6 +261,25 @@
 
   text-align: center;
 }
+
+.filter-inputs h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 48px;
+  color: #043f5f;
+}
+
+.filter-inputs h2 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 48px;
+  color: #043f5f;
+}
+
 .filter-inputs .MuiFormControl-root {
   display: inline-block;
 }
@@ -269,12 +288,10 @@
   width: 344px;
   font-size: 24px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #043f5f;
   font-style: normal;
 }
 
 .filter-inputs input[name="date"] {
-  margin-top: 25px;
   width: 344px;
   height: 49px;
   background: #ffffff;
@@ -282,10 +299,7 @@
   border-radius: 8px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-style: normal;
-  font-weight: 600;
   font-size: 24px;
-  line-height: 43px;
-  color: #043f5f;
   padding: 10px;
   
   text-align: center;
@@ -300,6 +314,10 @@
   border-radius: 10px;
 
   display: inline-block;
+}
+
+.filter-inputs button:hover {
+  cursor: pointer;
 }
 
 .filter-inputs button h1 {
