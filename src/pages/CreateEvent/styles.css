@@ -316,7 +316,8 @@
 }
 
 .saveButton button h2 {
-  font-family: Segoe UI;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 36px;
@@ -339,7 +340,8 @@
 }
 
 .cancelButton button h2 {
-  font-family: Segoe UI;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 36px;

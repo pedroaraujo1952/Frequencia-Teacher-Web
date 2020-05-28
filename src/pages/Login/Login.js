@@ -158,8 +158,9 @@ export default class Login extends Component {
               </NavLink>
             </div>
           </div>
-
-          <button onClick={this.handleClick}>Entrar</button>
+          <div className="button-form">
+            <button onClick={this.handleClick}>Entrar</button>
+          </div>
         </form>
       </div>
     );

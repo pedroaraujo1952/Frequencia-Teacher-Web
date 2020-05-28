@@ -204,6 +204,7 @@ export default class Home extends React.Component {
                 onClickOk={(ev) => {
                   ev.preventDefault();
                   this.setState({ checkSearch: false, showResult: true })
+                  console.log(this.state.classes)
                 }}
                 message="Deseja realizar essa consulta?"
               />
@@ -220,22 +221,20 @@ export default class Home extends React.Component {
                 }}
                 onClickOk={async (ev) => {
                   ev.preventDefault();
-                  
+
                   await Event.deleteEvent(this.state.checkDeleteEvent[1], 
                     this.state.checkDeleteEvent[1].classroom).then(() => {
                     var { classes } = this.state;
 
-                    if (classes[this.state.checkDeleteEvent[2]].events.length === 1) {
-                        if(classes.length === 1) {
-                          classes = [];
-                        } else {
-                          delete classes[this.state.checkDeleteEvent[2]];
-                        }  
-                    } else {
-                      delete classes[this.state.checkDeleteEvent[2]][this.state.checkDeleteEvent[3]];
-                    } 
-
-                    classes = classes.filter(function(el) { return el !== null; });
+                    if (classes[this.state.checkDeleteEvent[2]].events.length === 1) {                      
+                      classes[this.state.checkDeleteEvent[2]].events
+                        .splice(this.state.checkDeleteEvent[3], 1);
+                        
+                      delete classes[this.state.checkDeleteEvent[2]];
+                    } else {                      
+                      classes[this.state.checkDeleteEvent[2]].events
+                        .splice(this.state.checkDeleteEvent[3], 1);
+                    }
                     
                     this.setState({ classes, checkDeleteEvent: [false, null, -1, -1] });
                     
@@ -246,6 +245,7 @@ export default class Home extends React.Component {
                       draggable: true,
                     });
                   });
+                  
                 }}
                 message="Deseja excluir esse evento?"
               />

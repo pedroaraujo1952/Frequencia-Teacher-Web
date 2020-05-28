@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "fmm-check-student"
+    "default": "fmm-check-student",
+    "frequencia-dev": "frequencia-dev"
   },
   "targets": {
     "fmm-check-student": {
