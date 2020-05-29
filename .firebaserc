@@ -1,15 +1,5 @@
 {
   "projects": {
-    "default": "fmm-check-student",
-    "frequencia-dev": "frequencia-dev"
-  },
-  "targets": {
-    "fmm-check-student": {
-      "hosting": {
-        "web": [
-          "frequencia"
-        ]
-      }
-    }
+    "default": "frequencia-dev"
   }
 }
