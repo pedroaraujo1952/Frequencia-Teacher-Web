@@ -1,6 +1,6 @@
 import { fire } from "../config/firebaseConfig";
 
-import * as User from "./UserController";
+import * as User from "./UsersController";
 
 export async function getSelectedEvents(snapshot, events, date) {
   return new Promise((resolve, reject) => {

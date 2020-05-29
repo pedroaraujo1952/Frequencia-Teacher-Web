@@ -5,7 +5,6 @@ import Logo from "../../assets/Logok.png";
 import "./styles.css";
 
 export default class Header extends Component {
-
   constructor(props){
     super(props);
     this.state = {

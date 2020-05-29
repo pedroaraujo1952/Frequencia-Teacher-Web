@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router";
 import MaskedInput from "react-text-mask";
 
-import * as Event from "../../controllers/EventController";
+import * as Event from "../../controllers/EventsController";
 
 import Select from "../../components/Select/Select";
 import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";

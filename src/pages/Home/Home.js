@@ -2,18 +2,18 @@ import * as React from "react";
 import { Redirect } from "react-router";
 
 import { fire } from "../../config/firebaseConfig";
-import Header from "../../components/HomeHeader/Header";
+import Header from "../../components/HomeHeader/HomeHeader";
 import Loading from "../../components/Loading/Loading";
 import CreateEvent from "../CreateEvent/CreateEvent";
 
 import { toast } from "react-toastify";
 
-import * as Class from "../../controllers/ClassController";
-import * as Event from "../../controllers/EventController";
-import * as User from "../../controllers/UserController";
+import * as Class from "../../controllers/ClassroomsController";
+import * as Event from "../../controllers/EventsController";
+import * as User from "../../controllers/UsersController";
 
 import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";
-import Dialog from "../../components/Dialog/index";
+import Dialog from "../../components/Dialog/Dialog";
 import MaskedInput from "react-text-mask";
 
 import Avatar from "../../assets/profile-user.png";

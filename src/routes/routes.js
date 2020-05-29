@@ -7,7 +7,7 @@ import Register from "../pages/Register/Register";
 import Profile from "../pages/Profile/Profile";
 import Report from "../pages/Report/Report";
 import About from "../pages/About/About";
-import Error404 from "../errors/Error404/404";
+import Error404 from "../errors/Error404/Error404";
 
 const Routes = () => (
   <BrowserRouter>

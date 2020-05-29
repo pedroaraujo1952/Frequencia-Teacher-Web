@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 import Loading from "../../components/Loading/Loading";
-import ForgotPassword from "../../components/ForgotPassword/Forgot";
+import ForgotPassword from "../../components/ForgotPassword/ForgotPassword";
 
-import * as User from "../../controllers/UserController";
+import * as User from "../../controllers/UsersController";
 
 import Logo from "../../assets/Logok.png";
 import Info from "../../assets/info.png";

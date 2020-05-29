@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 
-import * as User from "../../controllers/UserController";
+import * as User from "../../controllers/UsersController";
 
 import Loading from "../../components/Loading/Loading";
 import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";

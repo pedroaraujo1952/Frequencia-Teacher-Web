@@ -4,10 +4,10 @@ import { fire } from "../../config/firebaseConfig";
 import { isLogged } from "../../services/auth";
 import Error from "../../errors/user.error";
 
-import Header from "../../components/UserHeader/Header";
+import Header from "../../components/UserHeader/UserHeader";
 import Loading from "../../components/Loading/Loading";
 
-import * as User from "../../controllers/UserController";
+import * as User from "../../controllers/UsersController";
 
 import Avatar from "../../assets/profile-user.png";
 

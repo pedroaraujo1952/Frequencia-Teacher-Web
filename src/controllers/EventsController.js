@@ -3,7 +3,7 @@ import { fire, database } from "../config/firebaseConfig";
 import { formatDate, compareDates } from "../utils/FormatDate";
 
 import * as Student from "./StudentsController";
-import * as Notif from "./NotificationController";
+import * as Notif from "./NotificationsController";
 
 export async function createEvent(state) {
   return new Promise(async (resolve, reject) => {
