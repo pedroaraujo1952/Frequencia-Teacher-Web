@@ -47,7 +47,7 @@ export default class Report extends Component {
     this.setState({ loading: true })
     
     var eventRef = database.ref(
-      `frequency/${eventName}`
+      `frequency/${this.props.location.state.event.classroom}/${eventName}`
     );
 
     await eventRef.on("value", (snap) => {

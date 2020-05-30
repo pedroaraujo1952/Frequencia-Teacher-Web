@@ -204,7 +204,6 @@ export default class Home extends React.Component {
                 onClickOk={(ev) => {
                   ev.preventDefault();
                   this.setState({ checkSearch: false, showResult: true })
-                  console.log(this.state.classes)
                 }}
                 message="Deseja realizar essa consulta?"
               />

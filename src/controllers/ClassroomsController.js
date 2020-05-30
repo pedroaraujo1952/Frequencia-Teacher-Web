@@ -2,12 +2,10 @@ import { fire } from "../config/firebaseConfig";
 
 import * as User from "./UsersController";
 
-export async function getSelectedEvents(snapshot, events, date) {
+export async function getSelectedEvents(snapshot, events, date, user_uid) {
   return new Promise((resolve, reject) => {
     snapshot.forEach(async event => {
       const value = event.val();
-
-      const user_uid = await User.getUid();
 
       if (value.teacherUID === user_uid) {
         var formatedKeys = value.keys.key1.key;
@@ -59,11 +57,17 @@ export async function loadClassroomEvents({classroom, date, subjects, classes}) 
 
         if (!alreadySearched) {
           var events = [];
+          
+          const user_uid = await User.getUid();
 
-          ref.child(formated_date).orderByChild("classroom").equalTo(classroom_).on("value", async (snap) => {
+          ref.child(formated_date)
+            .child(classroom_)
+            .orderByChild("teacherUID")
+            .equalTo(user_uid)
+            .on("value", async (snap) => {
             classes.push({
               name: classroom_,
-              events: await getSelectedEvents(snap, events, date),
+              events: await getSelectedEvents(snap, events, date, user_uid),
             });
           });
         }

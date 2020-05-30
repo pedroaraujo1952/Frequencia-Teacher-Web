@@ -43,11 +43,11 @@ export async function createEvent(state) {
         var students = await Student.getStudents(classroom); 
 
         await database
-          .ref(`events/${state.date.split('/').join('-')}`)
+          .ref(`events/${state.date.split('/').join('-')}/${classroom}`)
           .push(data)
           .then(async (snap) => {
             await database
-            .ref(`frequency/${snap.key}`)
+            .ref(`frequency/${classroom}/${snap.key}`)
             .set(students);
 
             Notif.sendNotification(classroom, data, "create").then(
@@ -65,14 +65,14 @@ export async function createEvent(state) {
 export async function deleteEvent(event, className) {
   return new Promise((resolve, reject) => {
     database
-      .ref(`events/${event.date.split('/').join('-')}/${event.id}`)
+      .ref(`events/${event.date.split('/').join('-')}/${className}/${event.id}`)
       .remove()
       .then(async () => {
         const { date } = event;
         const fullDate = formatDate();
 
         await database
-          .ref(`frequency/${event.id}`)
+          .ref(`frequency/${className}/${event.id}`)
           .remove()
 
         if (!compareDates(fullDate, date)) {
@@ -126,7 +126,7 @@ export async function updateEvent(state) {
       };
 
       database
-        .ref(`events/${state.date.split('/').join('-')}/${state.id}`)
+        .ref(`events/${state.date.split('/').join('-')}/${state.nameClass}/${state.id}`)
         .update(data)
         .then(() => {
           Notif.sendNotification(state.nameClass, data, "update").then(
