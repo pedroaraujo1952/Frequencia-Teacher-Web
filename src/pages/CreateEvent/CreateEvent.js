@@ -193,7 +193,7 @@ export default class CreateEvent extends Component {
       minutesEnd: await this.handleFixTime(this.state.minutesEnd),
       loading: true,
     });
-    await Event.updateEvent(this.state).then(
+    await Event.updateEvent(this.state, this.props.nameClass).then(
       () => {},
       (error) => this.setState({ backHome: true })
     );

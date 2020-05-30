@@ -87,28 +87,9 @@ export async function deleteEvent(event, className) {
   });
 }
 
-export async function updateEvent(state) {
-  var keysAfter = 0;
-  if (state.keyWord[0] !== "") keysAfter++;
-  if (state.keyWord[1] !== "") keysAfter++;
-  if (state.keyWord[2] !== "") keysAfter++;
-  if (keysAfter !== 0) {
-    state.key = {
-      key1: {
-        key: state.keyWord[0],
-        time: state.notifTime[0],
-      },
-      key2: {
-        key: state.keyWord[1],
-        time: state.notifTime[1],
-      },
-      key3: {
-        key: state.keyWord[2],
-        time: state.notifTime[2],
-      },
-    };
-  }
+export async function updateEvent(state, className) {
   return new Promise(async (resolve, reject) => {
+    console.log(state)
     try {
       var data = {
         title: state.name,
@@ -122,14 +103,27 @@ export async function updateEvent(state) {
         date: state.date,
         description: state.description,
         end: state.hourEnd + "h" + state.minutesEnd,
-        keys: state.key,
+        keys: {
+          key1: {
+            key: state.keyWord[0],
+            time: state.notifTime[0],
+          },
+          key2: {
+            key: state.keyWord[1],
+            time: state.notifTime[1],
+          },
+          key3: {
+            key: state.keyWord[2],
+            time: state.notifTime[2],
+          },
+        },
       };
 
       database
-        .ref(`events/${state.date.split('/').join('-')}/${state.nameClass}/${state.id}`)
+        .ref(`events/${state.date.split('/').join('-')}/${className}/${state.id}`)
         .update(data)
         .then(() => {
-          Notif.sendNotification(state.nameClass, data, "update").then(
+          Notif.sendNotification(className, data, "update").then(
             () => resolve(true),
             (error) => reject(error)
           );
