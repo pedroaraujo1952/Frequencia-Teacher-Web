@@ -2,48 +2,44 @@ import { fire } from "../config/firebaseConfig";
 
 import * as User from "./UsersController";
 
-export async function getSelectedEvents(snapshot, events, date, user_uid) {
-  return new Promise((resolve, reject) => {
-    snapshot.forEach(async event => {
-      const value = event.val();
+export function getSelectedEvents(event, date, user_uid) {
+  const value = event.val();
 
-      if (value.teacherUID === user_uid) {
-        var formatedKeys = value.keys.key1.key;
-        formatedKeys += value.keys.key2.key  ? (', ' + value.keys.key2.key) : '';
-        formatedKeys += value.keys.key3.key ? (', ' + value.keys.key3.key) : '';
+  if (value.teacherUID === user_uid) {
+    var formatedKeys = value.keys.key1.key;
+    formatedKeys += value.keys.key2.key  ? (', ' + value.keys.key2.key) : '';
+    formatedKeys += value.keys.key3.key ? (', ' + value.keys.key3.key) : '';
 
-        events.push({
-          title: value.name,
-          date,
-          description: value.description,
-          begin: value.begin,
-          end: value.end,
-          formatedKeys,
-          link: value.link,
-          subject: value.subject,
-          teacherUID: value.teacherUID,
-          id: event.key,
-          classroom: value.classroom,
-          keys: {
-            key1: {
-              key: value.keys.key1.key
-            },
-            key2: {
-              key: value.keys.key2.key
-            },
-            key3: {
-              key: value.keys.key3.key
-            }
-          }
-        })
+    var new_event = {
+      title: value.name,
+      date,
+      description: value.description,
+      begin: value.begin,
+      end: value.end,
+      formatedKeys,
+      link: value.link,
+      subject: value.subject,
+      teacherUID: value.teacherUID,
+      id: event.key,
+      classroom: value.classroom,
+      keys: {
+        key1: {
+          key: value.keys.key1.key
+        },
+        key2: {
+          key: value.keys.key2.key
+        },
+        key3: {
+          key: value.keys.key3.key
+        }
       }
-    });
+    }
 
-    resolve(events);
-  });
+    return new_event;
+  }
 }
 
-export async function loadClassroomEvents({classroom, date, subjects, classes}) {
+export async function loadClassroomEvents({classroom, date, classes}) {
   var formated_date = date.split('/').join('-');
   
   return new Promise((resolve, reject) => {
@@ -64,11 +60,14 @@ export async function loadClassroomEvents({classroom, date, subjects, classes}) 
             .child(classroom_)
             .orderByChild("teacherUID")
             .equalTo(user_uid)
-            .on("value", async (snap) => {
-            classes.push({
-              name: classroom_,
-              events: await getSelectedEvents(snap, events, date, user_uid),
-            });
+            .on("value", (snap) => {
+              snap.forEach((event) => {
+                events.push(getSelectedEvents(event, date, user_uid))
+              })
+              classes.push({
+                name: classroom_,
+                events,
+              });
           });
         }
       });

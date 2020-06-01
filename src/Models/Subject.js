@@ -76,6 +76,10 @@ const subject = [
     label: "Física",
   },
   {
+    name: "FP",
+    label: "FP",
+  },
+  {
     name: "Geografia",
     label: "Geografia",
   },
@@ -114,10 +118,6 @@ const subject = [
   {
     name: "Matemática",
     label: "Matemática",
-  },
-  {
-    name: "Mobile",
-    label: "Mobile",
   },
   {
     name: "Mobile",

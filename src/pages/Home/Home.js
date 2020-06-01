@@ -14,6 +14,7 @@ import * as User from "../../controllers/UsersController";
 
 import MultipleSelect from "../../components/MultipleSelect/MultipleSelect";
 import Dialog from "../../components/Dialog/Dialog";
+import DialogFillFields from "../../components/DialogFillFields/DialogFillFields";
 import MaskedInput from "react-text-mask";
 
 import Avatar from "../../assets/profile-user.png";
@@ -74,6 +75,7 @@ export default class Home extends React.Component {
 
       checkSearch: false,
       showResult: false,
+      fillFields: false,
       checkDeleteEvent: [false, null, -1, -1],
     };
   }
@@ -88,14 +90,15 @@ export default class Home extends React.Component {
     }
   }
 
-  searchClassroomEvents = async () => {
+  searchClassroomEvents = async (option) => {
     await this.setState({ loading: true, classes: [], showResult: true });
 
     await Class.loadClassroomEvents(this.state).then((classes) => {
-      this.setState({ classes, loading: false, checkSearch: true, showResult: false });
+      if (option === 1) this.setState({ classes, loading: false, checkSearch: true, showResult: false });
+      else if (option === 2) this.setState({ classes, loading: false });
     });
   }
-
+  
   loadSubject = async () => {
     this.setState({ loading: true });
     User.getSubject().then(
@@ -182,14 +185,29 @@ export default class Home extends React.Component {
                   <button onClick={async (ev) => {
                     ev.preventDefault();
                     
-                    if (this.state.classroom !== [] && this.state.date !== "") {
-                      await this.searchClassroomEvents();
+                    if (this.state.classroom.length !== 0 && this.state.date !== "") {
+                      await this.searchClassroomEvents(1);
+                    } else {
+                      this.setState({ fillFields: true })
                     }
                   }}>
                     <h1>Buscar</h1>
                   </button>
                 </div>
               </div>
+
+              <DialogFillFields
+                open={this.state.fillFields}
+                onClose={() => {
+                  this.setState({ fillFields: false })
+                }}
+                onChange={this.handleChange}
+                onClickOk={(ev) => {
+                  ev.preventDefault();
+                  this.setState({ fillFields: false })
+                }}
+                message="Preencha todos os campos para realizar a consulta"
+              />
 
               <Dialog
                 open={this.state.checkSearch}
@@ -222,20 +240,9 @@ export default class Home extends React.Component {
                   ev.preventDefault();
 
                   await Event.deleteEvent(this.state.checkDeleteEvent[1], 
-                    this.state.checkDeleteEvent[1].classroom).then(() => {
-                    var { classes } = this.state;
-
-                    if (classes[this.state.checkDeleteEvent[2]].events.length === 1) {                      
-                      classes[this.state.checkDeleteEvent[2]].events
-                        .splice(this.state.checkDeleteEvent[3], 1);
-                        
-                      delete classes[this.state.checkDeleteEvent[2]];
-                    } else {                      
-                      classes[this.state.checkDeleteEvent[2]].events
-                        .splice(this.state.checkDeleteEvent[3], 1);
-                    }
-                    
-                    this.setState({ classes, checkDeleteEvent: [false, null, -1, -1] });
+                    this.state.checkDeleteEvent[1].classroom).then(async () => {
+                    await this.searchClassroomEvents(2);
+                    this.setState({ checkDeleteEvent: [false, null, -1, -1] });
                     
                     toast.error("Evento deletado com sucesso", {
                       autoClose: 3500,

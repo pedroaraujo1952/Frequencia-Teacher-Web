@@ -61,7 +61,9 @@ export async function getStudents(className) {
     try {
       var students = {};
 
-      database.ref(`students`).orderByChild("classroom").equalTo(className).on("value", async snap => {
+      database.ref(`students`)
+        .child(className)  
+        .on("value", async snap => {
         students = await getSelectedStudents(snap, students);
       });
 
